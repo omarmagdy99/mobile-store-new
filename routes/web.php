@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
-Route::group(['middleware'=>'auth'],function(){
 
-    Route::get('/home', function () {
+Auth::routes();
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/', function () {
         return view('home');
     });
-    Route::get('/sales',function(){
+    Route::get('/sales', function () {
         return view('pages.sales');
     });
     Route::get('/brands', function () {
@@ -36,11 +37,9 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/products/add', function () {
         return view('pages.products.AddProducts');
     });
-    
-    
-    Route::get('/{page}', 'AdminController@index');
-    
-    
-    
-});
+    Route::get('/employees', function () {
+        return view('employees');
+    });
 
+    Route::get('/{page}', 'AdminController@index');
+});
