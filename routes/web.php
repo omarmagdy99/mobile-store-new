@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::group(['middleware'=>'auth'],function(){
 
-    Route::get('/index', function () {
-        return view('index');
+    Route::get('/home', function () {
+        return view('home');
     });
     Route::get('/sales',function(){
         return view('pages.sales');
