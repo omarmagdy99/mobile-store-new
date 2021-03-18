@@ -37,8 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/products/add', function () {
         return view('pages.products.AddProducts');
     });
-    Route::get('/employees', function () {
-        return view('employees');
+    Route::get('/addUsers', function () {
+        return view('pages.user.addUsers');
     });
 
     Route::get('/{page}', 'AdminController@index');

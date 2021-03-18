@@ -12,8 +12,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الرئيسية</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ إضافة
-                    منتج</span>
+                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Add User</span>
             </div>
         </div>
     </div>
@@ -25,7 +24,7 @@
         <div class=" col-md-12 col-sm-12">
             <div class="card  box-shadow-0">
                 <div class="card-header">
-                    <h2 class="card-title mb-1">إضافة منتج</h2>
+                    <h2 class="card-title mb-1">Add User</h2>
                 </div>
                 <div class="card-body pt-0">
                     <form class="form-horizontal">
@@ -33,41 +32,35 @@
 
 
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="inputName" placeholder="باركود">
+                                <input type="text" class="form-control" id="inputName" placeholder="First Name">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="inputName" placeholder="الأسم">
+                                <input type="text" class="form-control" id="inputName" placeholder="Last Name">
+                            </div>
+							<div class="form-group col-md-12">
+								<input type="email" class="form-control" id="inputName" placeholder="Email ">
+							</div>
+                            <div class="form-group col-md-6">
+                                <input type="password" class="form-control" id="inputName" placeholder="Password">
                             </div>
                             <div class="form-group col-md-6">
-                                <p class="mg-b-10">الفئات</p>
-                                <select name="somename" class="form-control SlectBox" onclick="console.log($(this).val())"
-                                    onchange="console.log('change is firing')">
-                                    <!--placeholder-->
-                                    <option disabled selected> إختارالفئة</option>
-                                    <option title="Volvo is a car" value="volvo">Volvo</option>
-                                </select>
+                                <input type="password" class="form-control" id="inputName" placeholder="Confirm Password">
                             </div>
                             <div class="form-group col-md-6">
-                                <p class="mg-b-10">الاقسام</p>
-                                <select name="somename" class="form-control SlectBox" onclick="console.log($(this).val())"
-                                    onchange="console.log('change is firing')">
-                                    <!--placeholder-->
-                                    <option disabled selected> إختارالقسم</option>
-                                    <option title="Volvo is a car" value="volvo">Volvo</option>
-                                </select>
+                                <input type="text" class="form-control" id="inputName" placeholder="Phone-1">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="inputName" placeholder="سعر البيع ">
+                                <input type="text" class="form-control" id="inputName" placeholder="Phone-2">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="inputName" placeholder="سعر الشراء">
+                                <input type="text" class="form-control" id="inputName" placeholder="National ID">
                             </div>
-                            <div class="form-group col-md-12">
-                                <input type="text" class="form-control" id="inputName" placeholder="الكمية">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" id="inputName" placeholder="Address">
                             </div>
                             <div class="form-group col-md-12">
                                 <div class="col-12 mt-4 ">
-                                    <label for="">صورة المنتج</label><br>
+                                    <label for="">Image</label><br>
                                     <input type="file" class="dropify" data-height="200"
                                         accept="image/x-png,image/gif,image/jpeg" name="pic" />
                                 </div>
@@ -75,8 +68,8 @@
 
                             <div class="form-group mb-0 mt-3 justify-content-end">
                                 <div>
-                                    <button type="submit" class="btn btn-primary">إضافة</button>
-                                    <a href="/products" class="btn btn-secondary">إلغاء</a>
+                                    <button type="submit" class="btn btn-primary">Add</button>
+                                    <a href="/products" class="btn btn-secondary">Cancel</a>
                                 </div>
                             </div>
 

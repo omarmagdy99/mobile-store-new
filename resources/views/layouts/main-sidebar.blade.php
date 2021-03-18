@@ -54,7 +54,7 @@
 						<ul class="slide-menu">
 							<li><a class="slide-item" href="{{ url('/' . $page='') }}">Users List</a></li>
 							<li><a class="slide-item" href="{{ url('/' . $page='') }}">Users Permissions</a></li>
-							<li><a class="slide-item" href="{{ url('/' . $page='') }}">Add New User</a></li>
+							<li><a class="slide-item" href="{{ url('/' . $page='addUsers') }}">Add New User</a></li>
 	
 						</ul>
 					</li>
