@@ -19,8 +19,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الرئيسية</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    الفئات</span>
+                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    Brands</span>
             </div>
         </div>
     </div>
@@ -33,28 +33,26 @@
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">اضافة فئه</h4>
-                        <i class="mdi mdi-dots-horizontal text-gray"></i>
-                    </div>
-
+             
                     <div class="row row-sm">
-                        <div class="col-sm-6 col-md-4 col-xl-3">
+                        <div class="col-md-4 ">
                             <a class="modal-effect btn btn-outline-primary btn-block wd-40p" data-effect="effect-scale"
-                                data-toggle="modal" href="#modaldemo8">أضافة فئه</a>
+                                data-toggle="modal" href="#modaldemo8">Add Brand</a>
                         </div>
-
-
-
                     </div>
+                    <div class="mt-3">
+                        <h4 class="card-title mg-b-0">Brands List</h4>
+                       
+                    </div>
+
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" class="table key-buttons text-md-nowrap text-right">
+                            <table id="example" class="table key-buttons text-md-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>اسم الفئة</th>
-                                        <th>العمليات</th>
+                                        <th class="wd-5p border-bottom-0">#</th>
+                                        <th class="wd-20p border-bottom-0">Brand Name</th>
+                                        <th class="wd-5p border-bottom-0">Operations</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,7 +60,7 @@
 
                                     <tr>
                                         <td>1</td>
-                                        <td>Harry</td>
+                                        <td>OPPO</td>
                                         <td>
 
                                             <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"

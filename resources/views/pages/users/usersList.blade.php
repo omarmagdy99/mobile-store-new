@@ -14,7 +14,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Products</span>
+                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Users List</span>
             </div>
         </div>
     </div>
@@ -27,22 +27,22 @@
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
-                    <a class="btn btn-outline-primary btn-block wd-15p" href="products/add">Add Product</a>
+                    
                     <div class="mt-3">
-                        <h4 class="card-title mg-b-0">Product List</h4>
+                        <h4 class="card-title mg-b-0">Users List</h4>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example" class="table key-buttons text-md-nowrap ">
-                            <thead>
+                            <thead >
                                 <tr>
                                     <th class="wd-5p border-bottom-0">#</th>
-                                    <th class="wd-5p border-bottom-0">Barcode</th>
-                                    <th class="wd-15p border-bottom-0">Name</th>
-                                    <th class="wd-10p border-bottom-0">Sale Price</th>
-                                    <th class="wd-10p border-bottom-0">Purchase Price</th>
-                                    <th class="wd-10p border-bottom-0">Quantity</th>
+                                   
+                                    <th class="wd-10p border-bottom-0">Name</th>
+                                    <th class="wd-10p border-bottom-0">Email</th>
+                                    <th class="wd-10p border-bottom-0">Phone</th>
+                                    <th class="wd-10p border-bottom-0">National ID</th>
                                     <th class="wd-20p border-bottom-0">Image</th>
                                     <th class="wd-10p border-bottom-0">Operations</th>
                                 </tr>
@@ -52,12 +52,56 @@
 
                                 <tr>
                                     <td>1</td>
-                                    <td>Harry</td>
-                                    <td>Carr</td>
-                                    <td>Tec</td>
-                                    <td>11/02/87</td>
-                                    <td>$86,000</td>
-                                    <td>h.ca</td>
+                                    <td>Harry Hesahm</td>
+                                  
+                                    <td>abdallahhesham@gmail.com</td>
+                                    <td>01157203813<br>01157203831</td>
+                                    <td>11111111111111</td>
+                                    <td>h.ca.............</td>
+                                    <td>
+
+                                        <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
+                                            data-toggle="modal" href="#exampleModal2" title="تعديل"><i
+                                                class="las la-pen fa-2x"></i></a>
+
+                                        <a class="modal-effect btn btn-sm btn-danger " data-effect="effect-scale"
+                                            data-toggle="modal" href="#modaldemo3" title="حذف"><i class="las la-trash fa-2x"></i>
+                                        </a>
+
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Harry Hesahm</td>
+                                  
+                                    <td>abdallahhesham@gmail.com</td>
+                                    <td>01157203813<br>01157203831</td>
+                                    <td>11111111111111</td>
+                                    <td>h.ca.............</td>
+                                    <td>
+
+                                        <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
+                                            data-toggle="modal" href="#exampleModal2" title="تعديل"><i
+                                                class="las la-pen fa-2x"></i></a>
+
+                                        <a class="modal-effect btn btn-sm btn-danger " data-effect="effect-scale"
+                                            data-toggle="modal" href="#modaldemo3" title="حذف"><i class="las la-trash fa-2x"></i>
+                                        </a>
+
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Harry Hesahm</td>
+                                  
+                                    <td>abdallahhesham@gmail.com</td>
+                                    <td>01157203813<br>01157203831</td>
+                                    <td>11111111111111</td>
+                                    <td>h.ca.............</td>
                                     <td>
 
                                         <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"

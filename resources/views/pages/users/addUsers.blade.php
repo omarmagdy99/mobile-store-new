@@ -12,7 +12,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Add User</span>
+                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Add New User</span>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
         <div class=" col-md-12 col-sm-12">
             <div class="card  box-shadow-0">
                 <div class="card-header">
-                    <h2 class="card-title mb-1">Add User</h2>
+                    <h2 class="card-title mb-1">Add New User</h2>
                 </div>
                 <div class="card-body pt-0">
                     <form class="form-horizontal">
@@ -59,14 +59,27 @@
                                 <input type="text" class="form-control" id="inputName" placeholder="Address">
                             </div>
                             <div class="form-group col-md-12">
-                                <div class="col-12 mt-4 ">
+                                <div class="">
+                                    <label for="">Gender</label><br>
+                                    <div class="d-flex">
+                                        <label class="rdiobox mr-3"><input name="rdio" type="radio" value="male">
+                                            <span>Male</span>
+                                        </label>
+                                        <label class="rdiobox"><input name="rdio" type="radio" value="female">
+                                            <span>Female</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div class="">
                                     <label for="">Image</label><br>
                                     <input type="file" class="dropify" data-height="200"
                                         accept="image/x-png,image/gif,image/jpeg" name="pic" />
                                 </div>
                             </div>
 
-                            <div class="form-group mb-0 mt-3 justify-content-end">
+                            <div class="form-group mb-0 mt-3 justify-content-end col-md-12">
                                 <div>
                                     <button type="submit" class="btn btn-primary">Add</button>
                                     <a href="/products" class="btn btn-secondary">Cancel</a>
