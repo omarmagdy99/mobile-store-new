@@ -82,7 +82,7 @@
                             <div class="form-group mb-0 mt-3 justify-content-end col-md-12">
                                 <div>
                                     <button type="submit" class="btn btn-primary">Add</button>
-                                    <a href="/products" class="btn btn-secondary">Cancel</a>
+                                    <a href="/usersList" class="btn btn-secondary">Cancel</a>
                                 </div>
                             </div>
 

@@ -11,16 +11,13 @@
     <link href="{{ URL::asset('assets/plugins/multislider/multislider.css') }}" rel="stylesheet">
     <!--- Select2 css -->
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
-
-
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    Brands</span>
+                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Brands</span>
             </div>
         </div>
     </div>
@@ -33,7 +30,6 @@
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
-             
                     <div class="row row-sm">
                         <div class="col-md-4 ">
                             <a class="modal-effect btn btn-outline-primary btn-block wd-40p" data-effect="effect-scale"
@@ -42,78 +38,76 @@
                     </div>
                     <div class="mt-3">
                         <h4 class="card-title mg-b-0">Brands List</h4>
-                       
                     </div>
-
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="example" class="table key-buttons text-md-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th class="wd-5p border-bottom-0">#</th>
-                                        <th class="wd-20p border-bottom-0">Brand Name</th>
-                                        <th class="wd-5p border-bottom-0">Operations</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-
-                                    <tr>
-                                        <td>1</td>
-                                        <td>OPPO</td>
-                                        <td>
-
-                                            <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
-                                                data-toggle="modal" href="#exampleModal2" title="تعديل"><i
-                                                    class="las la-pen fa-2x"></i></a>
-
-                                            <a class="modal-effect btn btn-sm btn-danger " data-effect="effect-scale"
-                                                data-toggle="modal" href="#modaldemo3" title="حذف"><i
-                                                    class="las la-trash fa-2x"></i>
-                                            </a>
-
-                                        </td>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example" class="table key-buttons text-md-nowrap ">
+                            <thead>
+                                <tr>
+                                    <th class="wd-5p border-bottom-0">#</th>
+                                    <th class="wd-15p border-bottom-0">Name</th>
+                                    <th class="wd-5p border-bottom-0">Operation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
 
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Harry</td>
+                                    <td>
+
+                                        <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
+                                            data-toggle="modal" href="#exampleModal2" title="Update"><i
+                                                class="las la-pen fa-2x"></i></a>
+
+                                        <a class="modal-effect btn btn-sm btn-danger " data-effect="effect-scale"
+                                            data-toggle="modal" href="#modaldemo3" title="Delete"><i class="las la-trash fa-2x"></i>
+                                        </a>
+
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <!--/div-->
-
-
         </div>
-        <!-- row closed -->
+        <!--/div-->
+
+
+    </div>
+    <!-- row closed -->
     </div>
     <!-- Container closed -->
     </div>
-    </div>
-
-		<!-- Modal effects -->
+    		<!-- Modal effects -->
 		<div class="modal" id="modaldemo8">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content modal-content-demo">
 					
 					<div class="modal-header">
-						<h6 class="modal-title">إضافة منتج</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+						<h6 class="modal-title">Add Brand</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
 					</div>
 					<form action="">
 						<div class="modal-body">
-							<input type="text" class="form-control" id="inputName" placeholder="إسم الفئة">
+							<div class="form-group">
+                                <input type="text" class="form-control" id="inputName" placeholder="Name">
+                            </div>
 						</div>
 						<div class="modal-footer">
-							<button class="btn ripple btn-primary" type="submit">إضافة</button>
-							<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">إلغاء</button>
+							<button class="btn ripple btn-primary" type="submit">Add</button>
+							<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 		<!-- End Modal effects-->
-
+	
 @endsection
 @section('js')
     <!-- Internal Data tables -->
@@ -135,8 +129,6 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
-    <!-- Internal Modal js-->
-    <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
-
-
+ <!-- Internal Modal js-->
+ <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
 @endsection

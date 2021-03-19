@@ -20,10 +20,10 @@ Route::group(['middleware' => 'auth'], function () {
         return view('home');
     });
     Route::get('/sales', function () {
-        return view('pages.sales');
+        return view('pages.Invoices.sales');
     });
     Route::get('/purchases', function () {
-        return view('pages.purchases');
+        return view('pages.Invoices.purchases');
     });
     Route::get('/customers', function () {
         return view('pages.customers.customers');
@@ -35,10 +35,10 @@ Route::group(['middleware' => 'auth'], function () {
         return view('pages.products.AddProducts');
     });
     Route::get('/brands', function () {
-        return view('pages.brands');
+        return view('pages.BrandsAndCategories.brands');
     });
     Route::get('/categories', function () {
-        return view('pages.categories');
+        return view('pages.BrandsAndCategories.categories');
     });
     Route::get('/addUsers', function () {
         return view('pages.users.addUsers');

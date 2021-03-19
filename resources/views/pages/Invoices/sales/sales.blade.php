@@ -7,17 +7,14 @@
     <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
-    <!---Internal  Multislider css-->
-    <link href="{{ URL::asset('assets/plugins/multislider/multislider.css') }}" rel="stylesheet">
-    <!--- Select2 css -->
-    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Customers</span>
+                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Sales</span>
             </div>
         </div>
     </div>
@@ -30,14 +27,9 @@
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
-                    <div class="row row-sm">
-                        <div class="col-md-4 ">
-                            <a class="modal-effect btn btn-outline-primary btn-block wd-40p" data-effect="effect-scale"
-                                data-toggle="modal" href="#modaldemo8">Add Customer</a>
-                        </div>
-                    </div>
+                    <a class="btn btn-outline-primary btn-block wd-15p" href="products/add">Add sales Invoice</a>
                     <div class="mt-3">
-                        <h4 class="card-title mg-b-0">Customers List</h4>
+                        <h4 class="card-title mg-b-0">Sales Invoice List</h4>
                     </div>
                 </div>
                 <div class="card-body">
@@ -46,9 +38,13 @@
                             <thead>
                                 <tr>
                                     <th class="wd-5p border-bottom-0">#</th>
+                                    <th class="wd-5p border-bottom-0">Barcode</th>
                                     <th class="wd-15p border-bottom-0">Name</th>
-                                    <th class="wd-15p border-bottom-0">Phone</th>
-                                    <th class="wd-5p border-bottom-0">Operation</th>
+                                    <th class="wd-10p border-bottom-0">Sale Price</th>
+                                    <th class="wd-10p border-bottom-0">Purchase Price</th>
+                                    <th class="wd-10p border-bottom-0">Quantity</th>
+                                    <th class="wd-20p border-bottom-0">Image</th>
+                                    <th class="wd-10p border-bottom-0">Operations</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,7 +53,11 @@
                                 <tr>
                                     <td>1</td>
                                     <td>Harry</td>
-                                    <td>0123456</td>
+                                    <td>Carr</td>
+                                    <td>Tec</td>
+                                    <td>11/02/87</td>
+                                    <td>$86,000</td>
+                                    <td>h.ca</td>
                                     <td>
 
                                         <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
@@ -86,32 +86,6 @@
     </div>
     <!-- Container closed -->
     </div>
-    		<!-- Modal effects -->
-		<div class="modal" id="modaldemo8">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content modal-content-demo">
-					
-					<div class="modal-header">
-						<h6 class="modal-title">Add Customer</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-					</div>
-					<form action="">
-						<div class="modal-body">
-							<div class="form-group">
-                                <input type="text" class="form-control" id="inputName" placeholder="Name">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="inputPhone" placeholder="Phone">
-                            </div>
-						</div>
-						<div class="modal-footer">
-							<button class="btn ripple btn-primary" type="submit">Add</button>
-							<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<!-- End Modal effects-->
 	
 @endsection
 @section('js')
@@ -134,6 +108,5 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
- <!-- Internal Modal js-->
- <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
+
 @endsection
