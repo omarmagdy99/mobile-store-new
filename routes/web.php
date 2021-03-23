@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,15 +29,43 @@ Auth::routes();
     Route::get('/customers', function () {
         return view('pages.customers.customers');
     });
-    Route::get('/suppliers', function () {
-        return view('pages.suppliers.suppliers');
-    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Route::resource('/suppliers','SupplierController');
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     Route::resource('/products','ProductController');
     Route::get('/addProducts','ProductController@brand_cat' );
-    // Route::get('/brands', function () {
-    //     return view('pages.BrandsAndCategories.brands');
-    // });
+
     Route::resource('/brands', 'BrandController');
     Route::resource('/categories', 'CategoryController');
     

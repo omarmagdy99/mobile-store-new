@@ -27,6 +27,30 @@
 @section('content')
     <!-- row -->
     <div class="row">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger mg-b-0" role="alert">
+                        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Oh snap!</strong> {{ $error }}
+                    </div>
+                @endforeach
+
+            </div>
+        @endif
+
+        @if (session('add'))
+            <div class="alert alert-success" role="alert">
+                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Well done!</strong> {{ session('add') }}
+            </div>
+
+        @endif
         <!--div-->
         <div class="col-xl-12">
             <div class="card mg-b-20">
@@ -48,36 +72,36 @@
                                 <tr>
                                     <th class="wd-5p border-bottom-0">#</th>
                                     <th class="wd-10p border-bottom-0">Name</th>
-                                    <th class="wd-15p border-bottom-0">Phone</th>
+                                    <th class="wd-10p border-bottom-0">Phone</th>
                                     <th class="wd-10p border-bottom-0">Company Name</th>
-                                    <th class="wd-15p border-bottom-0">National ID</th>
+
                                     <th class="wd-5p border-bottom-0">Operation</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $i = 1; ?>
+                                @foreach ($suppliers_data as $supplier_data)
 
+                                    <tr>
+                                        <td><?php echo $i++; ?></td>
+                                        <td>{{ $supplier_data->f_name }} {{ $supplier_data->l_name }}</td>
+                                        <td>{{ $supplier_data->phone }}<br>{{ $supplier_data->s_phone }}</td>
+                                        <td>{{ $supplier_data->company_name }}</td>
 
-                                <tr>
-                                    <td>1</td>
-                                    <td>Harry</td>
-                                    <td>0123456</td>
-                                    <td>0123456</td>
-                                    <td>0123456</td>
-                                    <td>
+                                        <td>
 
-                                        <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
-                                            data-toggle="modal" href="#modaldemo6" title="تعديل"><i
-                                                class="las la-pen fa-2x"></i></a>
+                                            <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
+                                                data-toggle="modal" href="#modaldemo6" title="Update"><i
+                                                    class="las la-pen fa-2x"></i></a>
 
-                                        <a class="modal-effect btn btn-sm btn-danger " data-effect="effect-scale"
-                                            data-toggle="modal" href="#modaldemo7" title="حذف"><i
-                                                class="las la-trash fa-2x"></i>
-                                        </a>
+                                            <a class="modal-effect btn btn-sm btn-danger " data-effect="effect-scale"
+                                                data-toggle="modal" href="#modaldemo7" title="Delete"><i
+                                                    class="las la-trash fa-2x"></i>
+                                            </a>
 
-                                    </td>
-
-
-                                </tr>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -101,7 +125,8 @@
                     <h6 class="modal-title">Add Supplier</h6><button aria-label="Close" class="close" data-dismiss="modal"
                         type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <form action="">
+                <form action="{{ route('suppliers.store') }}" method="POST" autocomplete="off">
+                    {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group" method="post" action="">
                             <input type="text" class="form-control" name="f_name" id="" placeholder="First Name">
@@ -117,9 +142,6 @@
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="s_phone" id="" placeholder="Phone 2">
-                        </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control" name="national_id" id="" placeholder="National ID">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -140,28 +162,25 @@
                     <h6 class="modal-title text-info">Update Supplier</h6><button aria-label="Close" class="close"
                         data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <form action="" method="POST">
+                <form action="" method="POST" autocomplete="off">
                     {{ csrf_field() }}
                     {{ method_field('') }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="" id="" placeholder="First Name">
-                            <input type="hidden" class="form-control" name="" id="" placeholder="">
+                            <input type="text" class="form-control" name="f_name" id="" placeholder="First Name">
+                            <input type="hidden" class="form-control" name="id" id="" placeholder="id">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="" id="" placeholder="Last Name">
+                            <input type="text" class="form-control" name="l_name" id="" placeholder="Last Name">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="" id="" placeholder="Company Name">
+                            <input type="text" class="form-control" name="company_name" id="" placeholder="Company Name">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="" id="" placeholder="Phone">
+                            <input type="text" class="form-control" name="phone" id="" placeholder="Phone">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="" id="" placeholder="Phone 2">
-                        </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control" name="" id="" placeholder="Company Name">
+                            <input type="text" class="form-control" name="s_phone" id="" placeholder="Phone 2">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -189,10 +208,10 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <input type="text" disabled class="form-control" name="" id="" placeholder="Name">
-                            <input type="text" class="form-control" name="" id="" placeholder="id">
+                            <input type="text" disabled class="form-control" name="" id="" placeholder="id">
                         </div>
                         <div class="form-group">
-                            <input type="number" class="form-control" name="" id="" placeholder="Company Name">
+                            <input type="number" disabled class="form-control" name="" id="" placeholder="Company Name">
                         </div>
                     </div>
                     <div class="modal-footer">

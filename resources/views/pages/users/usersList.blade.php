@@ -97,10 +97,11 @@
 
                                             <a class="modal-effect btn btn-sm btn-danger btn_delete"
                                                 data-effect="effect-slide-in-bottom" data-toggle="modal" href="#modaldemo7"
-                                                data-user_lname="{{ $item->l_name }}" data-user_name="{{ $item->email }}"
-                                                data-user_fname="{{ $item->f_name }}" data-user_pic="{{ $item->image }}"
-                                                data-id="{{ $item->id }}" title="Delete"><i
-                                                    class="las la-trash fa-2x"></i>
+                                                data-user_lname="{{ $item->l_name }}"
+                                                data-user_name="{{ $item->email }}"
+                                                data-user_fname="{{ $item->f_name }}"
+                                                data-user_pic="{{ $item->image }}" data-id="{{ $item->id }}"
+                                                title="Delete"><i class="las la-trash fa-2x"></i>
                                             </a>
 
                                         </td>
@@ -169,8 +170,6 @@
             $('#u_user_name').val($user_name);
             $('#u_name').val($user_fname + ' ' + $user_lname);
             $('#u_user_pic').val($user_pic);
-
-
         });
 
     </script>
