@@ -28,6 +28,10 @@ Auth::routes();
     Route::get('/customers', function () {
         return view('pages.customers.customers');
     });
+    Route::get('/suppliers', function () {
+        return view('pages.suppliers.suppliers');
+    });
+ 
     Route::resource('/products','ProductController');
     Route::get('/addProducts','ProductController@brand_cat' );
     // Route::get('/brands', function () {
