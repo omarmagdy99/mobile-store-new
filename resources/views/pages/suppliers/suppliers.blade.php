@@ -137,7 +137,7 @@
             <div class="modal-content modal-content-demo">
 
                 <div class="modal-header">
-                    <h6 class="modal-title text-info">Update </h6><button aria-label="Close" class="close"
+                    <h6 class="modal-title text-info">Update Supplier</h6><button aria-label="Close" class="close"
                         data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <form action="" method="POST">
@@ -179,7 +179,7 @@
             <div class="modal-content modal-content-demo">
 
                 <div class="modal-header">
-                    <h6 class="modal-title text-danger">Delete </h6><button aria-label="Close" class="close"
+                    <h6 class="modal-title text-danger">Delete Supplier</h6><button aria-label="Close" class="close"
                         data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <form action="" method="POST">
@@ -190,6 +190,9 @@
                         <div class="form-group">
                             <input type="text" disabled class="form-control" name="" id="" placeholder="Name">
                             <input type="text" class="form-control" name="" id="" placeholder="id">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="" id="" placeholder="Company Name">
                         </div>
                     </div>
                     <div class="modal-footer">

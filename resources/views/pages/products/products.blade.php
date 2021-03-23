@@ -14,45 +14,46 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Products</span>
+                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    Products</span>
             </div>
         </div>
     </div>
     <!-- breadcrumb -->
 @endsection
 @section('content')
-<!-- row -->
+    <!-- row -->
 
-@if ($errors->any())
-<script>
-    window.location = '/addProducts';
-    
-</script>
-@endif
-@if (session()->has('add'))
-<div class="alert alert-success" role="alert">
-    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    <strong>Well done!</strong> {{ session()->get('add') }}
-</div>
+    @if ($errors->any())
+        <script>
+            window.location = '/addProducts';
+
+        </script>
+    @endif
+    @if (session()->has('add'))
+        <div class="alert alert-success" role="alert">
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Well done!</strong> {{ session()->get('add') }}
+        </div>
 
 
-@endif
-@if (session()->has('delete'))
+    @endif
+    @if (session()->has('delete'))
 
-<div class="alert alert-danger" role="alert">
-    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    <strong>Well done!</strong> {{ session()->get('delete') }}
-</div>
+        <div class="alert alert-danger" role="alert">
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Well done!</strong> {{ session()->get('delete') }}
+        </div>
 
-@endif
-<div class="row">
-        
-        
-           
+    @endif
+    <div class="row">
+
+
+
         <!--div-->
         <div class="col-xl-12">
             <div class="card mg-b-20">
@@ -79,30 +80,34 @@
                             <tbody>
                                 @foreach ($product_data as $item)
 
-                                <tr>
-                                
-                                    <td>{{$item->barcode}}</td>
-                                    <td>{{$item->product_name}}</td>
-                                    <td>{{$item->sale_price}}</td>
-                                    <td>{{$item->purchase_price}}</td>
-                                    <td>{{$item->quantity}}</td>
-                                    <td>
-                                        <img src="storage/{{$item->image}}" alt="product Image" width="100">    
-                                    </td>
-                                    <td>
+                                    <tr>
 
-                                        <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
-                                            data-toggle="modal" href="#exampleModal2" title="تعديل"><i
-                                                class="las la-pen fa-2x"></i></a>
+                                        <td>{{ $item->barcode }}</td>
+                                        <td>{{ $item->product_name }}</td>
+                                        <td>{{ $item->sale_price }}</td>
+                                        <td>{{ $item->purchase_price }}</td>
+                                        <td>{{ $item->quantity }}</td>
+                                        <td>
+                                            <img src="storage/{{ $item->image }}" alt="product Image" width="100">
+                                        </td>
+                                        <td>
 
-                                                <a class="modal-effect btn btn-sm btn-danger btn_delete" data-effect="effect-slide-in-bottom"
-                                                data-toggle="modal" href="#modaldemo7" data-product_name="{{$item->product_name}}" data-product_barcode="{{$item->barcode}}" data-product_pic="{{$item->image}}" data-id="{{$item->id}}" title="Delete"><i class="las la-trash fa-2x"></i>
+                                            <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
+                                                data-toggle="modal" href="#exampleModal2" title="تعديل"><i
+                                                    class="las la-pen fa-2x"></i></a>
+
+                                            <a class="modal-effect btn btn-sm btn-danger btn_delete"
+                                                data-effect="effect-slide-in-bottom" data-toggle="modal" href="#modaldemo7"
+                                                data-product_name="{{ $item->product_name }}"
+                                                data-product_barcode="{{ $item->barcode }}"
+                                                data-product_pic="{{ $item->image }}" data-id="{{ $item->id }}"
+                                                title="Delete"><i class="las la-trash fa-2x"></i>
                                             </a>
 
-                                    </td>
+                                        </td>
 
 
-                                </tr>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -118,55 +123,57 @@
     </div>
     <!-- Container closed -->
     </div>
-            {{-- model delete --}}
-		<div class="modal" id="modaldemo7">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content modal-content-demo">
-					
-					<div class="modal-header">
-						<h6 class="modal-title text-danger">Delete brand</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-					</div>
-					<form action="products/destroy" method="POST">
-                        {{ csrf_field() }}
+    {{-- model delete --}}
+    <div class="modal" id="modaldemo7">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
 
-                    {{method_field('delete')}}
-						<div class="modal-body">
-							<div class="form-group">
-                                <input type="hidden" class="form-control" name="product_id" id="d_product_id" placeholder="Name">
-                                <input type="text" disabled class="form-control"  id="d_product_barcode" placeholder="barcode">
-                            </div>
-							<div class="form-group">
-                                <input type="text" disabled class="form-control"  id="d_product_name" placeholder="Name">
-                                <input type="hidden"  class="form-control" name="pic"  id="d_product_pic" placeholder="Name">
-                            </div>
-						</div>
-						<div class="modal-footer">
-							<button class="btn ripple btn-primary bg-danger" type="submit">Delete</button>
-							<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+                <div class="modal-header">
+                    <h6 class="modal-title text-danger">Delete brand</h6><button aria-label="Close" class="close"
+                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="products/destroy" method="POST">
+                    {{ csrf_field() }}
 
-	
+                    {{ method_field('delete') }}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="product_id" id="d_product_id"
+                                placeholder="Name">
+                            <input type="text" disabled class="form-control" id="d_product_barcode" placeholder="barcode">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" disabled class="form-control" id="d_product_name" placeholder="Name">
+                            <input type="hidden" class="form-control" name="pic" id="d_product_pic" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn ripple btn-primary bg-danger" type="submit">Delete</button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
 @endsection
 @section('js')
-<script>
-    $('.btn_delete').click(function () { 
-        $product_name=$(this).data('product_name');
-        $product_barcode=$(this).data('product_barcode');
-        $product_pic=$(this).data('product_pic');
-        $id=$(this).data('id');
-        $('#d_product_id').val($id);
-        $('#d_product_name').val($product_name);
-        $('#d_product_barcode').val($product_barcode);
-        $('#d_product_pic').val($product_pic);
+    <script>
+        $('.btn_delete').click(function() {
+            $product_name = $(this).data('product_name');
+            $product_barcode = $(this).data('product_barcode');
+            $product_pic = $(this).data('product_pic');
+            $id = $(this).data('id');
+            $('#d_product_id').val($id);
+            $('#d_product_name').val($product_name);
+            $('#d_product_barcode').val($product_barcode);
+            $('#d_product_pic').val($product_pic);
 
-        
-    });
-    
-</script>
+
+        });
+
+    </script>
 
     <!-- Internal Data tables -->
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
@@ -187,8 +194,8 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
-     <!-- Internal Modal js-->
- <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
+    <!-- Internal Modal js-->
+    <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
 
 
 @endsection

@@ -34,7 +34,7 @@
 
         </div>
     @endif
-   
+
 
     <!-- row -->
     <div class="row">
@@ -61,7 +61,8 @@
                                     <!--placeholder-->
                                     <option disabled selected>Choose Category</option>
                                     @foreach ($category_data as $cat)
-                                        <option title="Volvo is a car" value="{{ $cat->id }}">{{ $cat->category_name }}
+                                        <option title="Volvo is a car" value="{{ $cat->id }}">
+                                            {{ $cat->category_name }}
                                         </option>
 
                                     @endforeach

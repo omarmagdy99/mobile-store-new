@@ -12,33 +12,34 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Add New User</span>
+                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Add New
+                    User</span>
             </div>
         </div>
     </div>
     <!-- breadcrumb -->
 @endsection
 @section('content')
-@if ($errors->any())
-@foreach ($errors->all() as $item)
-    
-<div class="alert alert-danger" role="alert">
-    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    <strong>Opps!</strong> {{ $item }}
-</div>
-@endforeach
+    @if ($errors->any())
+        @foreach ($errors->all() as $item)
 
-@endif
-@if (session()->has('add'))
-<script>
-    window.location = '/usersList';
-    
-</script>
+            <div class="alert alert-danger" role="alert">
+                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Opps!</strong> {{ $item }}
+            </div>
+        @endforeach
+
+    @endif
+    @if (session()->has('add'))
+        <script>
+            window.location = '/usersList';
+
+        </script>
 
 
-@endif
+    @endif
     <!-- row -->
     <div class="row">
         <div class=" col-md-12 col-sm-12">
@@ -47,7 +48,8 @@
                     <h2 class="card-title mb-1">Add New User</h2>
                 </div>
                 <div class="card-body pt-0">
-                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{route('usersList.store')}}">
+                    <form class="form-horizontal" enctype="multipart/form-data" method="POST"
+                        action="{{ route('usersList.store') }}">
                         {{ csrf_field() }}
                         <div class="row">
 
@@ -58,26 +60,27 @@
                             <div class="form-group col-md-6">
                                 <input type="text" class="form-control" name="l_name" placeholder="Last Name">
                             </div>
-							<div class="form-group col-md-12">
-								<input type="email" class="form-control" name="email" placeholder="Email ">
-							</div>
-                            <div class="form-group col-md-6">
-                                <input type="password" class="form-control"  name="password" placeholder="Password">
+                            <div class="form-group col-md-12">
+                                <input type="email" class="form-control" name="email" placeholder="Email ">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="password" class="form-control"  name="password_confirmation" placeholder="Confirm Password">
+                                <input type="password" class="form-control" name="password" placeholder="Password">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="phone" placeholder="Phone-1">
+                                <input type="password" class="form-control" name="password_confirmation"
+                                    placeholder="Confirm Password">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="s_phone" placeholder="Phone-2">
+                                <input type="text" class="form-control" name="phone" placeholder="Phone">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" name="s_phone" placeholder="Phone 2">
                             </div>
                             <div class="form-group col-md-6">
                                 <input type="text" class="form-control" name="national_id" placeholder="National ID">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control"  name="address" placeholder="Address">
+                                <input type="text" class="form-control" name="address" placeholder="Address">
                             </div>
                             <div class="form-group col-md-6">
                                 <div class="">
@@ -97,10 +100,10 @@
                                     <label for="">Permission</label><br>
                                     <div class="d-flex">
                                         <label class="rdiobox mr-3"><input name="permission" type="radio" value="admin">
-                                            <span>admin</span>
+                                            <span>Admin</span>
                                         </label>
                                         <label class="rdiobox"><input name="permission" type="radio" value="user">
-                                            <span>user</span>
+                                            <span>User</span>
                                         </label>
                                     </div>
                                 </div>
