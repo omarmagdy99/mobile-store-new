@@ -21,6 +21,33 @@
     <!-- breadcrumb -->
 @endsection
 @section('content')
+@if ($errors->any())
+<script>
+    window.location = '/addUsers';
+    
+</script>
+@endif
+@if (session()->has('add'))
+<div class="alert alert-success" role="alert">
+    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Well done!</strong> {{ session()->get('add') }}
+</div>
+
+
+@endif
+@if (session()->has('delete'))
+
+<div class="alert alert-danger" role="alert">
+    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Well done!</strong> {{ session()->get('delete') }}
+</div>
+
+@endif
+
     <!-- row -->
     <div class="row">
         <!--div-->
@@ -48,74 +75,34 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-
+                                @php $i=1; @endphp
+                                @foreach($user_data as $item)
+                                
                                 <tr>
-                                    <td>1</td>
-                                    <td>Harry Hesahm</td>
+                                    <td>@php echo $i++; @endphp</td>
+                                    <td>{{$item->f_name}} {{$item->l_name}}</td>
                                   
-                                    <td>abdallahhesham@gmail.com</td>
-                                    <td>01157203813<br>01157203831</td>
-                                    <td>11111111111111</td>
-                                    <td>h.ca.............</td>
+                                    <td>{{$item->email}}</td>
+                                    <td>{{$item->phone}}<br>{{$item->s_phone}}</td>
+                                    <td>{{$item->national_id}}</td>
+                                    <td>
+                                        <img src="storage/{{$item->image}}" width="100" alt="">
+                                    </td>
                                     <td>
 
                                         <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
                                             data-toggle="modal" href="#exampleModal2" title="تعديل"><i
                                                 class="las la-pen fa-2x"></i></a>
 
-                                        <a class="modal-effect btn btn-sm btn-danger " data-effect="effect-scale"
-                                            data-toggle="modal" href="#modaldemo3" title="حذف"><i class="las la-trash fa-2x"></i>
-                                        </a>
+                                                <a class="modal-effect btn btn-sm btn-danger btn_delete" data-effect="effect-slide-in-bottom"
+                                                data-toggle="modal" href="#modaldemo7" data-user_lname="{{$item->l_name}}" data-user_name="{{$item->email}}" data-user_fname="{{$item->f_name}}" data-user_pic="{{$item->image}}" data-id="{{$item->id}}" title="Delete"><i class="las la-trash fa-2x"></i>
+                                            </a>
 
                                     </td>
 
 
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Harry Hesahm</td>
-                                  
-                                    <td>abdallahhesham@gmail.com</td>
-                                    <td>01157203813<br>01157203831</td>
-                                    <td>11111111111111</td>
-                                    <td>h.ca.............</td>
-                                    <td>
-
-                                        <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
-                                            data-toggle="modal" href="#exampleModal2" title="تعديل"><i
-                                                class="las la-pen fa-2x"></i></a>
-
-                                        <a class="modal-effect btn btn-sm btn-danger " data-effect="effect-scale"
-                                            data-toggle="modal" href="#modaldemo3" title="حذف"><i class="las la-trash fa-2x"></i>
-                                        </a>
-
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Harry Hesahm</td>
-                                  
-                                    <td>abdallahhesham@gmail.com</td>
-                                    <td>01157203813<br>01157203831</td>
-                                    <td>11111111111111</td>
-                                    <td>h.ca.............</td>
-                                    <td>
-
-                                        <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
-                                            data-toggle="modal" href="#exampleModal2" title="تعديل"><i
-                                                class="las la-pen fa-2x"></i></a>
-
-                                        <a class="modal-effect btn btn-sm btn-danger " data-effect="effect-scale"
-                                            data-toggle="modal" href="#modaldemo3" title="حذف"><i class="las la-trash fa-2x"></i>
-                                        </a>
-
-                                    </td>
-
-
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -130,9 +117,62 @@
     </div>
     <!-- Container closed -->
     </div>
+    <div class="modal" id="modaldemo7">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+                
+                <div class="modal-header">
+                    <h6 class="modal-title text-danger">Delete user</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="usersList/destroy" method="POST">
+                    {{ csrf_field() }}
+
+                {{method_field('delete')}}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" disabled class="form-control"  id="u_user_name" placeholder="email">
+                            <input type="hidden" class="form-control" name="user_id" id="u_user_id" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" disabled class="form-control"  id="u_name" placeholder="Name">
+                            <input type="hidden"  class="form-control" name="pic"  id="u_user_pic" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn ripple btn-primary bg-danger" type="submit">Delete</button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
 	
 @endsection
 @section('js')
+@section('js')
+<script>
+    $('.btn_delete').click(function () { 
+        $user_name=$(this).data('user_name');
+        $user_lname=$(this).data('user_lname');
+        $user_fname=$(this).data('user_fname');
+        $user_pic=$(this).data('user_pic');
+        $id=$(this).data('id');
+        $('#u_user_id').val($id);
+        $('#u_user_name').val($user_name);
+        $('#u_name').val($user_fname +' '+ $user_lname);
+        $('#u_user_pic').val($user_pic);
+
+        
+    });
+    
+</script>
+
+     <!-- Internal Modal js-->
+
+ <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
+
     <!-- Internal Data tables -->
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
