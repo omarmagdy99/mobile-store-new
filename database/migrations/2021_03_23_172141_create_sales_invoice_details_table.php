@@ -15,12 +15,12 @@ class CreateSalesInvoiceDetailsTable extends Migration
     {
         Schema::create('sales_invoice_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('salesInvoice_id');
+            $table->unsignedBigInteger('sales_invoice_id');
             $table->unsignedBigInteger('product_id');
             $table->integer('price');
             $table->integer('qunatity');
             $table->timestamps();
-            $table->foreign('salesInvoice_id')->references('id')->on('sales_invoices')->onDelete('cascade');
+            $table->foreign('sales_invoice_id')->references('id')->on('sales_invoices')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
