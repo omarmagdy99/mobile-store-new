@@ -39,9 +39,7 @@ Auth::routes();
     Route::get('/addUsers', function () {
         return view('pages.users.addUsers');
     });
-    Route::get('/usersList', function () {
-        return view('pages.users.usersList');
-    });
+    Route::resource('/usersList', 'Auth\RegisterController');
 
 
     Route::get('/{page}', 'AdminController@index');

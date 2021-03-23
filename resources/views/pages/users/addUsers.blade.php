@@ -19,6 +19,26 @@
     <!-- breadcrumb -->
 @endsection
 @section('content')
+@if ($errors->any())
+@foreach ($errors->all() as $item)
+    
+<div class="alert alert-danger" role="alert">
+    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Opps!</strong> {{ $item }}
+</div>
+@endforeach
+
+@endif
+@if (session()->has('add'))
+<script>
+    window.location = '/usersList';
+    
+</script>
+
+
+@endif
     <!-- row -->
     <div class="row">
         <div class=" col-md-12 col-sm-12">
@@ -27,46 +47,60 @@
                     <h2 class="card-title mb-1">Add New User</h2>
                 </div>
                 <div class="card-body pt-0">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{route('usersList.store')}}">
+                        {{ csrf_field() }}
                         <div class="row">
 
 
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="inputName" placeholder="First Name">
+                                <input type="text" class="form-control" name="f_name" placeholder="First Name">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="inputName" placeholder="Last Name">
+                                <input type="text" class="form-control" name="l_name" placeholder="Last Name">
                             </div>
 							<div class="form-group col-md-12">
-								<input type="email" class="form-control" id="inputName" placeholder="Email ">
+								<input type="email" class="form-control" name="email" placeholder="Email ">
 							</div>
                             <div class="form-group col-md-6">
-                                <input type="password" class="form-control" id="inputName" placeholder="Password">
+                                <input type="password" class="form-control"  name="password" placeholder="Password">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="password" class="form-control" id="inputName" placeholder="Confirm Password">
+                                <input type="password" class="form-control"  name="password_confirmation" placeholder="Confirm Password">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="inputName" placeholder="Phone-1">
+                                <input type="text" class="form-control" name="phone" placeholder="Phone-1">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="inputName" placeholder="Phone-2">
+                                <input type="text" class="form-control" name="s_phone" placeholder="Phone-2">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="inputName" placeholder="National ID">
+                                <input type="text" class="form-control" name="national_id" placeholder="National ID">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="inputName" placeholder="Address">
+                                <input type="text" class="form-control"  name="address" placeholder="Address">
                             </div>
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-6">
                                 <div class="">
                                     <label for="">Gender</label><br>
                                     <div class="d-flex">
-                                        <label class="rdiobox mr-3"><input name="rdio" type="radio" value="male">
+                                        <label class="rdiobox mr-3"><input name="gender" type="radio" value="male">
                                             <span>Male</span>
                                         </label>
-                                        <label class="rdiobox"><input name="rdio" type="radio" value="female">
+                                        <label class="rdiobox"><input name="gender" type="radio" value="female">
                                             <span>Female</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="">
+                                    <label for="">Permission</label><br>
+                                    <div class="d-flex">
+                                        <label class="rdiobox mr-3"><input name="permission" type="radio" value="admin">
+                                            <span>admin</span>
+                                        </label>
+                                        <label class="rdiobox"><input name="permission" type="radio" value="user">
+                                            <span>user</span>
                                         </label>
                                     </div>
                                 </div>
