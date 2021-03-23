@@ -17,13 +17,57 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Categories</span>
+                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    Categories</span>
             </div>
         </div>
     </div>
     <!-- breadcrumb -->
 @endsection
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger mg-b-0" role="alert">
+                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Oh snap!</strong> {{ $error }}
+                </div>
+            @endforeach
+
+        </div>
+    @endif
+    @if (session('add'))
+        <div class="alert alert-success" role="alert">
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Well done!</strong> {{ session('add') }}
+        </div>
+
+    @endif
+    @if (session('delete'))
+        <div class="alert alert-danger" role="alert">
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Well done!</strong> {{ session('delete') }}
+        </div>
+
+    @endif
+
+    @if (session('update'))
+        <div class="alert alert-info" role="alert">
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Well done!</strong> {{ session('update') }}
+        </div>
+
+    @endif
+
     <!-- row -->
     <div class="row">
         <!--div-->
@@ -51,25 +95,33 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $i = 0; ?>
+                                @foreach ($category_data as $item)
+
+                                    <?php $i++; ?>
+
+                                    <tr>
+
+                                        <td><?php echo $i; ?></td>
+                                        <td>{{ $item->category_name }}</td>
+                                        <td>
+
+                                            <a class="modal-effect btn btn-sm btn-info btn_update"
+                                                data-effect="effect-scale" data-toggle="modal" href="#modaldemo6"
+                                                data-category_name="{{ $item->category_name }}" data-id="{{ $item->id }}"
+                                                title="Update"><i class="las la-pen fa-2x"></i></a>
+
+                                            <a class="modal-effect btn btn-sm btn-danger btn_delete"
+                                                data-effect="effect-slide-in-bottom" data-toggle="modal" href="#modaldemo7"
+                                                data-category_name="{{ $item->category_name }}" data-id="{{ $item->id }}"
+                                                title="Delete"><i class="las la-trash fa-2x"></i>
+                                            </a>
+
+                                        </td>
 
 
-                                <tr>
-                                    <td>1</td>
-                                    <td>Harry</td>
-                                    <td>
-
-                                        <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
-                                            data-toggle="modal" href="#exampleModal2" title="Update"><i
-                                                class="las la-pen fa-2x"></i></a>
-
-                                        <a class="modal-effect btn btn-sm btn-danger " data-effect="effect-scale"
-                                            data-toggle="modal" href="#modaldemo3" title="Delete"><i class="las la-trash fa-2x"></i>
-                                        </a>
-
-                                    </td>
-
-
-                                </tr>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -84,32 +136,107 @@
     </div>
     <!-- Container closed -->
     </div>
-    		<!-- Modal effects -->
-		<div class="modal" id="modaldemo8">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content modal-content-demo">
-					
-					<div class="modal-header">
-						<h6 class="modal-title">Add Category</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-					</div>
-					<form action="">
-						<div class="modal-body">
-							<div class="form-group">
-                                <input type="text" class="form-control" id="inputName" placeholder="Name">
-                            </div>
-						</div>
-						<div class="modal-footer">
-							<button class="btn ripple btn-primary" type="submit">Add</button>
-							<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<!-- End Modal effects-->
-	
+    <!-- Modal effects -->
+    <div class="modal" id="modaldemo8">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+
+                <div class="modal-header">
+                    <h6 class="modal-title">Add category</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                        type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="{{ route('categories.store') }}" method="POST">
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="category_name" id="inputName" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn ripple btn-primary" type="submit">Add</button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- model delete --}}
+    <div class="modal" id="modaldemo7">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+
+                <div class="modal-header">
+                    <h6 class="modal-title text-danger">Delete category</h6><button aria-label="Close" class="close"
+                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="categories/destroy" method="POST">
+                    {{ csrf_field() }}
+
+                    {{ method_field('delete') }}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" disabled class="form-control" name="category_name" id="d_category_name"
+                                placeholder="Name">
+                            <input type="hidden" class="form-control" name="category_id" id="d_category_id" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn ripple btn-primary bg-danger" type="submit">Delete</button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- model Update --}}
+    <div class="modal" id="modaldemo6">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+
+                <div class="modal-header">
+                    <h6 class="modal-title text-info">Update category</h6><button aria-label="Close" class="close"
+                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="categories/update" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('PUT') }}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="category_name" id="u_category_name" placeholder="Name">
+                            <input type="hidden" class="form-control" name="category_id" id="u_category_id" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn ripple btn-primary bg-info" type="submit">Update</button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal effects-->
+
 @endsection
 @section('js')
+    <script>
+        $('.btn_delete').click(function() {
+            $category_name = $(this).data('category_name');
+            $id = $(this).data('id');
+            $('#d_category_id').val($id);
+            $('#d_category_name').val($category_name);
+
+
+        });
+        $('.btn_update').click(function() {
+            $category_name = $(this).data('category_name');
+            $id = $(this).data('id');
+            $('#u_category_id').val($id);
+            $('#u_category_name').val($category_name);
+
+
+        });
+
+    </script>
     <!-- Internal Data tables -->
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
@@ -129,6 +256,6 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
- <!-- Internal Modal js-->
- <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
+    <!-- Internal Modal js-->
+    <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
 @endsection

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-Route::group(['middleware' => 'auth'], function () {
+// Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', function () {
         return view('home');
@@ -28,18 +28,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/customers', function () {
         return view('pages.customers.customers');
     });
-    Route::get('/products', function () {
-        return view('pages.products.products');
-    });
-    Route::get('/products/add', function () {
-        return view('pages.products.AddProducts');
-    });
-    Route::get('/brands', function () {
-        return view('pages.BrandsAndCategories.brands');
-    });
-    Route::get('/categories', function () {
-        return view('pages.BrandsAndCategories.categories');
-    });
+    Route::resource('/products','ProductController');
+    Route::get('/addProducts','ProductController@brand_cat' );
+    // Route::get('/brands', function () {
+    //     return view('pages.BrandsAndCategories.brands');
+    // });
+    Route::resource('/brands', 'BrandController');
+    Route::resource('/categories', 'CategoryController');
+    
     Route::get('/addUsers', function () {
         return view('pages.users.addUsers');
     });
@@ -49,4 +45,4 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('/{page}', 'AdminController@index');
-});
+// });
