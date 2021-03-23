@@ -108,13 +108,15 @@
 
                                             <a class="modal-effect btn btn-sm btn-info btn_update"
                                                 data-effect="effect-scale" data-toggle="modal" href="#modaldemo6"
-                                                data-category_name="{{ $item->category_name }}" data-id="{{ $item->id }}"
-                                                title="Update"><i class="las la-pen fa-2x"></i></a>
+                                                data-category_name="{{ $item->category_name }}"
+                                                data-id="{{ $item->id }}" title="Update"><i
+                                                    class="las la-pen fa-2x"></i></a>
 
                                             <a class="modal-effect btn btn-sm btn-danger btn_delete"
                                                 data-effect="effect-slide-in-bottom" data-toggle="modal" href="#modaldemo7"
-                                                data-category_name="{{ $item->category_name }}" data-id="{{ $item->id }}"
-                                                title="Delete"><i class="las la-trash fa-2x"></i>
+                                                data-category_name="{{ $item->category_name }}"
+                                                data-id="{{ $item->id }}" title="Delete"><i
+                                                    class="las la-trash fa-2x"></i>
                                             </a>
 
                                         </td>
@@ -177,7 +179,8 @@
                         <div class="form-group">
                             <input type="text" disabled class="form-control" name="category_name" id="d_category_name"
                                 placeholder="Name">
-                            <input type="hidden" class="form-control" name="category_id" id="d_category_id" placeholder="Name">
+                            <input type="hidden" class="form-control" name="category_id" id="d_category_id"
+                                placeholder="Name">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -202,8 +205,10 @@
                     {{ method_field('PUT') }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="category_name" id="u_category_name" placeholder="Name">
-                            <input type="hidden" class="form-control" name="category_id" id="u_category_id" placeholder="Name">
+                            <input type="text" class="form-control" name="category_name" id="u_category_name"
+                                placeholder="Name">
+                            <input type="hidden" class="form-control" name="category_id" id="u_category_id"
+                                placeholder="Name">
                         </div>
                     </div>
                     <div class="modal-footer">
