@@ -47,9 +47,9 @@
                             <thead>
                                 <tr>
                                     <th class="wd-5p border-bottom-0">#</th>
-                                    <th class="wd-15p border-bottom-0">Name</th>
+                                    <th class="wd-10p border-bottom-0">Name</th>
                                     <th class="wd-15p border-bottom-0">Phone</th>
-                                    <th class="wd-15p border-bottom-0">Company Name</th>
+                                    <th class="wd-10p border-bottom-0">Company Name</th>
                                     <th class="wd-15p border-bottom-0">National ID</th>
                                     <th class="wd-5p border-bottom-0">Operation</th>
                                 </tr>
@@ -103,7 +103,7 @@
                 </div>
                 <form action="">
                     <div class="modal-body">
-                        <div class="form-group">
+                        <div class="form-group" method="post" action="">
                             <input type="text" class="form-control" name="f_name" id="" placeholder="First Name">
                         </div>
                         <div class="form-group">
