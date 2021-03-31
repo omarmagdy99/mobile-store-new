@@ -110,8 +110,8 @@
                                     <td>{{$item->phone}}</td>
                                     <td>
 
-                                        <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
-                                            data-toggle="modal" href="#exampleModal2" title="تعديل"><i
+                                        <a class="modal-effect btn btn-sm btn-info btn_update" data-effect="effect-scale"
+                                            data-toggle="modal" href="#exampleModal2" title="تعديل" data-c_id="{{$item->id}}" data-c_name="{{$item->name}}" data-c_phone="{{$item->phone}}"><i
                                                 class="las la-pen fa-2x"></i></a>
 
                                         <a class="modal-effect btn btn-sm btn-danger btn_delete" data-effect="effect-scale"
@@ -137,8 +137,9 @@
     <!-- row closed -->
     </div>
     <!-- Container closed -->
+
     </div>
-    		<!-- Modal effects -->
+    		<!-- Modal add -->
 		<div class="modal" id="modaldemo8">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content modal-content-demo">
@@ -150,10 +151,11 @@
                         {{ csrf_field() }}
 						<div class="modal-body">
 							<div class="form-group">
-                                <input type="text" class="form-control" name="name" placeholder="Name">
+                                <label for="">Name</label>
+                                <input type="text"  class="form-control"   name="name" placeholder="Name">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="phone" placeholder="Phone">
+                                <input type="text" class="form-control" name="phone"  placeholder="Phone">
                             </div>
 						</div>
 						<div class="modal-footer">
@@ -164,7 +166,37 @@
 				</div>
 			</div>
 		</div>
-		<!-- End Modal effects-->
+		<!-- End Modal add-->
+    		<!-- Modal update -->
+		<div class="modal" id="exampleModal2">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content modal-content-demo">
+					
+					<div class="modal-header">
+						<h6 class="modal-title">Add Customer</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+					</div>
+					<form action="/customers/update" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
+						<div class="modal-body">
+							<div class="form-group">
+                                <label for="">Name</label>
+                                <input type="text"  class="form-control"  id="c_uname" name="name" placeholder="Name">
+                                <input type="hidden"  class="form-control" name="id" id="c_uid" placeholder="id">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="phone" id="c_uphone" placeholder="Phone">
+                            </div>
+						</div>
+						<div class="modal-footer">
+							<button class="btn ripple btn-primary" type="submit">Update</button>
+							<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- End Modal update-->
 	    {{-- model delete --}}
         <div class="modal" id="modaldemo7">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -194,7 +226,7 @@
                 </div>
             </div>
         </div>
-    
+        {{-- end model delete --}}
 @endsection
 
 @section('js')
@@ -204,6 +236,14 @@
             $id = $(this).data('c_id');
             $('#c_id').val($id);
             $('#c_name').val($c_name);
+        });
+     $('.btn_update').click(function() {
+            $c_uname = $(this).data('c_name');
+            $c_uphome = $(this).data('c_phone');
+            $u_id = $(this).data('c_id');
+            $('#c_uid').val($u_id);
+            $('#c_uname').val($c_uname);
+            $('#c_uphone').val($c_uphome);
         });
 </script>
 <!-- Internal Data tables -->

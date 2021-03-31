@@ -78,9 +78,20 @@ class CustomerController extends Controller
      * @param  \App\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, customer $customer)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'id'=>['required'],
+            'name'=>['required'],
+            'phone'=>['required','max:14'],
+        ]);
+        $customer_data=customer::where('id',$request->id);
+            $customer_data->update([
+                'name'=>$request->name,
+                'phone'=>$request->phone,
+            ]);
+            session()->flash('update','updated successfully');
+        return redirect('/customers');
     }
 
     /**
