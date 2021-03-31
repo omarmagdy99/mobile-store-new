@@ -26,9 +26,7 @@ Auth::routes();
     Route::get('/purchases', function () {
         return view('pages.Invoices.purchases');
     });
-    Route::get('/customers', function () {
-        return view('pages.customers.customers');
-    });
+  
 
 
 
@@ -46,6 +44,7 @@ Auth::routes();
 
 
  Route::resource('/suppliers','SupplierController');
+ Route::resource('/customers','CustomerController');
  
 
 

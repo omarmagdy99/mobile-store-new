@@ -26,6 +26,49 @@
 @section('content')
     <!-- row -->
     <div class="row">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger mg-b-0" role="alert">
+                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Oh snap!</strong> {{ $error }}
+                </div>
+            @endforeach
+
+        </div>
+    @endif
+
+    @if (session('add'))
+        <div class="alert alert-success" role="alert">
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Well done!</strong> {{ session('add') }}
+        </div>
+
+    @endif
+    @if (session('update'))
+        <div class="alert alert-info" role="alert">
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Well done!</strong> {{ session('update') }}
+        </div>
+
+    @endif
+    @if (session('delete'))
+        <div class="alert alert-danger" role="alert">
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Well done!</strong> {{ session('delete') }}
+        </div>
+
+    @endif
+
         <!--div-->
         <div class="col-xl-12">
             <div class="card mg-b-20">
@@ -52,26 +95,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-
+                                @php
+                                  $i=1;  
+                                @endphp
+                                @foreach ($customer_data as $item)
+                                    
                                 <tr>
-                                    <td>1</td>
-                                    <td>Harry</td>
-                                    <td>0123456</td>
+                                    <td>
+                                        @php
+                                            echo $i++;
+                                        @endphp
+                                    </td>
+                                    <td>{{$item->name}}</td>
+                                    <td>{{$item->phone}}</td>
                                     <td>
 
                                         <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
                                             data-toggle="modal" href="#exampleModal2" title="تعديل"><i
                                                 class="las la-pen fa-2x"></i></a>
 
-                                        <a class="modal-effect btn btn-sm btn-danger " data-effect="effect-scale"
-                                            data-toggle="modal" href="#modaldemo3" title="حذف"><i class="las la-trash fa-2x"></i>
+                                        <a class="modal-effect btn btn-sm btn-danger btn_delete" data-effect="effect-scale"
+                                            data-toggle="modal" href="#modaldemo7" title="حذف" data-c_id="{{$item->id}}" data-c_name="{{$item->name}}"><i class="las la-trash fa-2x"></i>
                                         </a>
 
                                     </td>
 
 
                                 </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -94,13 +146,14 @@
 					<div class="modal-header">
 						<h6 class="modal-title">Add Customer</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
 					</div>
-					<form action="">
+					<form action="{{route('customers.store')}}" method="POST">
+                        {{ csrf_field() }}
 						<div class="modal-body">
 							<div class="form-group">
-                                <input type="text" class="form-control" id="inputName" placeholder="Name">
+                                <input type="text" class="form-control" name="name" placeholder="Name">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="inputPhone" placeholder="Phone">
+                                <input type="text" class="form-control" name="phone" placeholder="Phone">
                             </div>
 						</div>
 						<div class="modal-footer">
@@ -112,10 +165,48 @@
 			</div>
 		</div>
 		<!-- End Modal effects-->
-	
+	    {{-- model delete --}}
+        <div class="modal" id="modaldemo7">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-content-demo">
+    
+                    <div class="modal-header">
+                        <h6 class="modal-title text-danger">Delete Supplier</h6><button aria-label="Close" class="close"
+                            data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <form action="customers/destroy" method="POST">
+                        {{ csrf_field() }}
+    
+                        {{ method_field('delete') }}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="">Name</label>
+                                <input type="text" disabled class="form-control"  id="c_name" placeholder="Name">
+                                <input type="hidden"  class="form-control" name="id" id="c_id" placeholder="id">
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn ripple btn-primary bg-danger" type="submit">Delete</button>
+                            <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
 @endsection
+
 @section('js')
-    <!-- Internal Data tables -->
+<script>
+     $('.btn_delete').click(function() {
+            $c_name = $(this).data('c_name');
+            $id = $(this).data('c_id');
+            $('#c_id').val($id);
+            $('#c_name').val($c_name);
+        });
+</script>
+<!-- Internal Data tables -->
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>

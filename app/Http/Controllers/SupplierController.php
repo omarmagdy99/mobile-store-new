@@ -83,9 +83,26 @@ class SupplierController extends Controller
      * @param  \App\supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, supplier $supplier)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'f_name'=> ['required'],
+            'l_name'=> ['required'],
+            'phone'=> ['required','max:11'],
+            's_phone'=> ['max:11'],
+            'company_name'=> ['required'],
+        ]);
+        $data=supplier::where('id',$request->id)->first();
+        $data->update([
+            'f_name' =>$request->f_name,
+            'l_name' =>$request->l_name,
+            'phone' =>$request->phone,
+            's_phone' =>$request->s_phone,
+            'company_name' =>$request->company_name,
+        ]);
+        session()->flash('update','Supplier updated Successfuly');
+        return redirect('/suppliers');
+
     }
 
     /**
@@ -94,8 +111,10 @@ class SupplierController extends Controller
      * @param  \App\supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function destroy(supplier $supplier)
+    public function destroy(Request $request)
     {
-        //
+        supplier::find($request->id)->delete();
+        session()->flash('delete','deleted successfully');
+        return redirect('suppliers');
     }
 }

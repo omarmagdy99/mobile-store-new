@@ -14,7 +14,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customer_data=customer::all();
+        return view('pages.customers.customers',compact('customer_data'));
     }
 
     /**
@@ -35,7 +36,17 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>['required','unique:customers'],
+            'phone'=>['required'],
+        ]);
+        
+        customer::create([
+            'name'=>$request->name,
+            'phone'=>$request->phone,
+        ]);
+            session()->flash('add','added successfully');
+            return redirect('/customers');
     }
 
     /**
@@ -78,8 +89,10 @@ class CustomerController extends Controller
      * @param  \App\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(customer $customer)
+    public function destroy(Request $request)
     {
-        //
+        customer::where('id',$request->id)->delete();
+        session()->flash('delete','deleted successfully');
+        return redirect('/customers');
     }
 }
