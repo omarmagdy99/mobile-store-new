@@ -14,8 +14,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customer_data=customer::all();
-        return view('pages.customers.customers',compact('customer_data'));
+        $customer_data = customer::all();
+        return view('pages.customers.customers', compact('customer_data'));
     }
 
     /**
@@ -37,16 +37,16 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>['required','unique:customers'],
-            'phone'=>['required'],
+            'name' => ['required', 'unique:customers'],
+            'phone' => ['required'],
         ]);
-        
+
         customer::create([
-            'name'=>$request->name,
-            'phone'=>$request->phone,
+            'name' => $request->name,
+            'phone' => $request->phone,
         ]);
-            session()->flash('add','added successfully');
-            return redirect('/customers');
+        session()->flash('add', 'added successfully');
+        return redirect('/customers');
     }
 
     /**
@@ -81,16 +81,16 @@ class CustomerController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'id'=>['required'],
-            'name'=>['required'],
-            'phone'=>['required','max:14'],
+            'id' => ['required'],
+            'name' => ['required'],
+            'phone' => ['required', 'max:14'],
         ]);
-        $customer_data=customer::where('id',$request->id);
-            $customer_data->update([
-                'name'=>$request->name,
-                'phone'=>$request->phone,
-            ]);
-            session()->flash('update','updated successfully');
+        $customer_data = customer::where('id', $request->id);
+        $customer_data->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+        ]);
+        session()->flash('update', 'updated successfully');
         return redirect('/customers');
     }
 
@@ -102,8 +102,8 @@ class CustomerController extends Controller
      */
     public function destroy(Request $request)
     {
-        customer::where('id',$request->id)->delete();
-        session()->flash('delete','deleted successfully');
+        customer::where('id', $request->id)->delete();
+        session()->flash('delete', 'deleted successfully');
         return redirect('/customers');
     }
 }
