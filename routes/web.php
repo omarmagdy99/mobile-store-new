@@ -21,10 +21,10 @@ Auth::routes();
         return view('home');
     });
     Route::get('/sales', function () {
-        return view('pages.Invoices.sales');
+        return view('pages.Invoices.sales.sales');
     });
     Route::get('/purchases', function () {
-        return view('pages.Invoices.purchases');
+        return view('pages.Invoices.purchases.purchases');
     });
   
 
