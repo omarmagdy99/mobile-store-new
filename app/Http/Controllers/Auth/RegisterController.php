@@ -72,15 +72,17 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
-    public function index(){
-        $user_data=User::all();
-        return view('pages.users.usersList',compact('user_data'));
+    public function index()
+    {
+        $user_data = User::all();
+        return view('pages.users.usersList', compact('user_data'));
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
-            'f_name'=>['string','required'],
-            'l_name'=>['string','required'],
-            'email'=>['required','unique:users','string', 'email', 'max:255'],
+            'f_name' => ['string', 'required'],
+            'l_name' => ['string', 'required'],
+            'email' => ['required', 'unique:users', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'confirmed'],
             'phone' => ['required'],
             'address' => ['required'],
@@ -88,28 +90,29 @@ class RegisterController extends Controller
             'pic' => ['required'],
             'gender' => ['required'],
             'permission' => ['required'],
-            
+
         ]);
         User::create([
-            'f_name'=>$request->f_name,
-            'l_name'=>$request->l_name,
-            'email'=>$request->email,
-            'password' =>$request->password,
+            'f_name' => $request->f_name,
+            'l_name' => $request->l_name,
+            'email' => $request->email,
+            'password' => $request->password,
             'phone' => $request->phone,
             's_phone' => $request->s_phone,
             'address' => $request->address,
             'national_id' => $request->national_id,
-            'image' =>$request->file('pic')->store('userImage','public') ,
-            'gender' =>$request->gender ,
-            'permission' =>$request->permission ,
+            'image' => $request->file('pic')->store('userImage', 'public'),
+            'gender' => $request->gender,
+            'permission' => $request->permission,
         ]);
-        session()->flash('add','user added successfully');
+        session()->flash('add', 'user added successfully');
         return redirect('/usersList');
     }
-    public function destroy( Request $request){
+    public function destroy(Request $request)
+    {
         User::find($request->user_id)->delete();
         Storage::delete(['public', $request->pic]);
-        session()->flash('delete','user deleted successfully');
+        session()->flash('delete', 'user deleted successfully');
         return redirect('usersList');
     }
 }

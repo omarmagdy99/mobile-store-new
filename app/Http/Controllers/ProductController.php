@@ -7,6 +7,7 @@ use App\category;
 use App\brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+
 class ProductController extends Controller
 {
     /**
@@ -16,13 +17,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product_data=product::all();
-        return view('pages.products.products',compact('product_data'));
+        $product_data = product::all();
+        return view('pages.products.products', compact('product_data'));
     }
-    public function brand_cat(){
-        $brand_data=brand::all();
-        $category_data=category::all();
-        return view('pages.products.AddProducts',['brand_data'=>$brand_data,'category_data'=>$category_data]);
+    public function brand_cat()
+    {
+        $brand_data = brand::all();
+        $category_data = category::all();
+        return view('pages.products.AddProducts', ['brand_data' => $brand_data, 'category_data' => $category_data]);
     }
 
     /**
@@ -44,27 +46,27 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'barcode'=>['required','unique:products'],
-            'product_name'=>['required'],
-            'brand_id'=>['required'],
-            'category_id'=>['required'],
-            'pic'=>['required'],
-            'purchase_price'=>['required'],
-            'sales_price'=>['required'],
-            'quantity'=>['required'],
+            'barcode' => ['required', 'unique:products'],
+            'product_name' => ['required'],
+            'brand_id' => ['required'],
+            'category_id' => ['required'],
+            'pic' => ['required'],
+            'purchase_price' => ['required'],
+            'sales_price' => ['required'],
+            'quantity' => ['required'],
 
         ]);
         product::create([
-            'barcode'=>$request->barcode,
-            'product_name'=>$request->product_name,
-            'brand_id'=>$request->brand_id,
-            'category_id'=>$request->category_id,
-            'image'=>$request->file('pic')->store('productName','public'),
-            'purchase_price'=>$request->purchase_price,
-            'sale_price'=>$request->sales_price,
-            'quantity'=>$request->quantity,
+            'barcode' => $request->barcode,
+            'product_name' => $request->product_name,
+            'brand_id' => $request->brand_id,
+            'category_id' => $request->category_id,
+            'image' => $request->file('pic')->store('productName', 'public'),
+            'purchase_price' => $request->purchase_price,
+            'sale_price' => $request->sales_price,
+            'quantity' => $request->quantity,
         ]);
-        session()->flash('add','added successfully');
+        session()->flash('add', 'added successfully');
         return redirect('/products');
     }
 
@@ -110,9 +112,9 @@ class ProductController extends Controller
      */
     public function destroy(Request $request)
     {
-        
-       product::find($request->product_id)->delete();
-        session()->flash('delete','deleted successfully');
+
+        product::find($request->product_id)->delete();
+        session()->flash('delete', 'deleted successfully');
         Storage::disk('public')->delete($request->pic);
         return redirect('/products');
     }

@@ -14,9 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category_data=category::all();
-        return view('pages.BrandsAndCategories.categories',compact('category_data'));
-
+        $category_data = category::all();
+        return view('pages.BrandsAndCategories.categories', compact('category_data'));
     }
 
     /**
@@ -38,13 +37,13 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_name'=>['required','unique:categories'],
+            'category_name' => ['required', 'unique:categories'],
 
         ]);
         category::create([
-            'category_name'=>$request->category_name,
+            'category_name' => $request->category_name,
         ]);
-        session()->flash('add','added successfully');
+        session()->flash('add', 'added successfully');
         return redirect('/categories');
     }
 
@@ -80,17 +79,17 @@ class CategoryController extends Controller
     public function update(Request $request)
 
     {
-       $id=$request->category_id;
-        $data=category::find($id);
+        $id = $request->category_id;
+        $data = category::find($id);
         $request->validate([
-            'category_name'=>['required','unique:categories'],
+            'category_name' => ['required', 'unique:categories'],
 
         ]);
         $data->update([
-            'category_name'=>$request->category_name,
+            'category_name' => $request->category_name,
         ]);
-        session()->flash('update','updated successfully');
-        return redirect('categories');    
+        session()->flash('update', 'updated successfully');
+        return redirect('categories');
     }
 
     /**
@@ -102,7 +101,7 @@ class CategoryController extends Controller
     public function destroy(Request $request)
     {
         category::find($request->category_id)->delete();
-        session()->flash('delete','deleted successfully');
+        session()->flash('delete', 'deleted successfully');
         return redirect('categories');
     }
 }
