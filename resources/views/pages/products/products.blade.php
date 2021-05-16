@@ -1,4 +1,4 @@
-@extends('layouts.master')
+a@extends('layouts.master')
 @section('css')
     <!-- Internal Data table css -->
     <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
@@ -92,9 +92,8 @@
                                         </td>
                                         <td>
 
-                                            <a class=" btn btn-sm btn-info " 
-                                                 href="/editProducts/{{ $item->barcode }}" title="تعديل"><i
-                                                    class="las la-pen fa-2x"></i></a>
+                                            <a class=" btn btn-sm btn-info " href="/editProducts/{{ $item->barcode }}"
+                                                title="تعديل"><i class="las la-pen fa-2x"></i></a>
 
                                             <a class="modal-effect btn btn-sm btn-danger btn_delete"
                                                 data-effect="effect-slide-in-bottom" data-toggle="modal" href="#modaldemo7"
