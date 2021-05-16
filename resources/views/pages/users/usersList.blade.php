@@ -7,6 +7,12 @@
     <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <!--Internal  Font Awesome -->
+    <link href="{{ URL::asset('assets/plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <!--Internal   Notify -->
+    <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
+    <!--Internal  treeview -->
+    <link href="{{ URL::asset('assets/plugins/treeview/treeview.css') }}" rel="stylesheet" type="text/css" />
 
 @endsection
 @section('page-header')
@@ -91,8 +97,7 @@
                                         </td>
                                         <td>
 
-                                            <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
-                                                data-toggle="modal" href="#exampleModal2" title="تعديل"><i
+                                            <a class=" btn btn-sm btn-info "  href="/updateUser/{{ $item->id }}" title="تعديل"><i
                                                     class="las la-pen fa-2x"></i></a>
 
                                             <a class="modal-effect btn btn-sm btn-danger btn_delete"
@@ -195,7 +200,26 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
+        <!--Internal  Notify js -->
+        <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
+        <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+    
+    
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
-
+    <script>
+          function not9() {
+            notif({
+                type: "info",
+                msg: "<b>update:</b>successfully",
+                position: "right"
+            });
+        }
+        @if (session()->has('edit'))
+            $(document).ready(function () {
+                        not9();
+                       
+            }); 
+     @endif
+    </script>
 @endsection

@@ -76,6 +76,7 @@ Route::get('/addUsers', function () {
 
 
 Route::resource('/usersList', 'Auth\RegisterController');
+Route::get('/updateUser/{id}', 'Auth\RegisterController@update_data');
 // ===============================================================
 
 
