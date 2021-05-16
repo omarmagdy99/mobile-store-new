@@ -17,69 +17,67 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 // Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/', function () {
-        return view('home');
-    });
-    Route::get('/sales', function () {
-        return view('pages.Invoices.sales.sales');
-    });
-    Route::get('/purchases', function () {
-        return view('pages.Invoices.purchases.purchases');
-    });
-    Route::get('/Addpurchases', function () {
-        return view('pages.Invoices.purchases.AddPurchases');
-    });
-  
+Route::get('/', function () {
+    return view('home');
+});
+// Sales Route 
+Route::get('/sales', function () {
+    return view('pages.Invoices.sales.sales');
+});
+// ===============================================================
+// Purchases Route 
+Route::get('/purchases', function () {
+    return view('pages.Invoices.purchases.purchases');
+});
 
+// Add Purchases Route 
 
-
-Route::resource('/suppliers', 'SupplierController');
-Route::resource('/customers', 'CustomerController');
-
-
+Route::get('/Addpurchases', function () {
+    return view('pages.Invoices.purchases.AddPurchases');
+});
 
 Route::resource('/addPurchaseInvoice', 'PurchasesInvoiceController');
+// ===============================================================
+// Suppliers Route 
+
+Route::resource('/suppliers', 'SupplierController');
+// ===============================================================
+// Customers Route 
+
+Route::resource('/customers', 'CustomerController');
+// ===============================================================
+// Products Route 
+
+Route::resource('/products', 'ProductController');
+
+// Add Products Route 
 
 
+Route::get('/addProducts', 'ProductController@brand_cat');
+// Update Product Route
+
+Route::get('/editProducts/{barcode}', 'ProductController@edit');
+// ===============================================================
+// Brands Route 
+
+Route::resource('/brands', 'BrandController');
+// ===============================================================
+// Categories Route 
+
+Route::resource('/categories', 'CategoryController');
+// ===============================================================
+// Add User Route 
 
 
+Route::get('/addUsers', function () {
+    return view('pages.users.addUsers');
+});
+// User List Route 
 
 
+Route::resource('/usersList', 'Auth\RegisterController');
+// ===============================================================
 
 
-
-
- Route::resource('/suppliers','SupplierController');
- Route::resource('/customers','CustomerController');
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Route::resource('/products','ProductController');
-    Route::get('/addProducts','ProductController@brand_cat' );
-    Route::get('/editProducts/{barcode}','ProductController@edit' );
-
-    Route::resource('/brands', 'BrandController');
-    Route::resource('/categories', 'CategoryController');
-    
-    Route::get('/addUsers', function () {
-        return view('pages.users.addUsers');
-    });
-    Route::resource('/usersList', 'Auth\RegisterController');
-
-
-    Route::get('/{page}', 'AdminController@index');
+Route::get('/{page}', 'AdminController@index');
 // });
