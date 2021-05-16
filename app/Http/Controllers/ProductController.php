@@ -104,7 +104,17 @@ class ProductController extends Controller
      */
     public function update(Request $request)
     {
-        
+        $request->validate([
+            'barcode' => ['required'],
+            'product_name' => ['required'],
+            'brand_id' => ['required'],
+            'category_id' => ['required'],
+            'pic' => ['required'],
+            'purchase_price' => ['required'],
+            'sales_price' => ['required'],
+            'quantity' => ['required'],
+
+        ]);
         $id = $request->id;
         $p_data = product::where('id', $id)->first();
         if($p_data->image!=$request->pic){
@@ -125,7 +135,7 @@ class ProductController extends Controller
             'quantity' => $request->quantity,
             'image' => $file,
         ]);
-        session()->flash('edit','edited sucessfuly');
+        session()->flash('edit', 'edited successfully');
         return redirect('/products');
        
     }

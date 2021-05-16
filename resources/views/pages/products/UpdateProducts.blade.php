@@ -22,7 +22,20 @@
 @section('content')
    
 
+@if ($errors->any())
+<div class="alert alert-danger">
 
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger mg-b-0" role="alert">
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Oh snap!</strong> {{ $error }}
+        </div>
+    @endforeach
+
+</div>
+@endif
 
     <!-- row -->
     <div class="row">
@@ -99,7 +112,7 @@
                             </div>
                             <div class="form-group col-md-12 ">
                                 <div class=" mt-4 ">
-                                    <a class="btn btn-info-gradient text-white hide_image">Change Image</a>
+                                    <a class="btn btn-info-gradient text-white hide_image" >Change Image</a>
                                 </div>
                             </div>
                             <div class="form-group mb-0 mt-3 justify-content-end col-md-12">
@@ -129,6 +142,9 @@
     <!--Internal Fileuploads js-->
     <script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
+    <!-- Internal Treeview js -->
+<script src="{{URL::asset('assets/plugins/treeview/treeview.js')}}"></script>
+
     <script>
         
         
@@ -151,5 +167,8 @@
            
        
         });
+       
+
+
     </script>
 @endsection

@@ -7,6 +7,12 @@
     <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <!--Internal  Font Awesome -->
+    <link href="{{ URL::asset('assets/plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <!--Internal   Notify -->
+    <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
+    <!--Internal  treeview -->
+    <link href="{{ URL::asset('assets/plugins/treeview/treeview.css') }}" rel="stylesheet" type="text/css" />
 
 @endsection
 @section('page-header')
@@ -24,12 +30,7 @@
 @section('content')
     <!-- row -->
 
-    @if ($errors->any())
-        <script>
-            window.location = '/addProducts';
-
-        </script>
-    @endif
+   
     @if (session()->has('add'))
         <div class="alert alert-success" role="alert">
             <button aria-label="Close" class="close" data-dismiss="alert" type="button">
@@ -92,9 +93,8 @@
                                         </td>
                                         <td>
 
-                                            <a class=" btn btn-sm btn-info " 
-                                                 href="/editProducts/{{ $item->barcode }}" title="تعديل"><i
-                                                    class="las la-pen fa-2x"></i></a>
+                                            <a class=" btn btn-sm btn-info " href="/editProducts/{{ $item->barcode }}"
+                                                title="تعديل"><i class="las la-pen fa-2x"></i></a>
 
                                             <a class="modal-effect btn btn-sm btn-danger btn_delete"
                                                 data-effect="effect-slide-in-bottom" data-toggle="modal" href="#modaldemo7"
@@ -159,6 +159,10 @@
 
 @endsection
 @section('js')
+    <!--Internal  Notify js -->
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+
     <script>
         $('.btn_delete').click(function() {
             $product_name = $(this).data('product_name');
@@ -173,8 +177,23 @@
 
         });
 
-    </script>
-
+        function not9() {
+            notif({
+                type: "info",
+                msg: "<b>update:</b>successfully",
+                position: "right"
+            });
+        }
+        @if (session()->has('edit'))
+            $(document).ready(function () {
+                        not9();
+                       
+            }); 
+     @endif
+        
+        </script>
+        
+ 
     <!-- Internal Data tables -->
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>

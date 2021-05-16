@@ -20,20 +20,20 @@
     <!-- breadcrumb -->
 @endsection
 @section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
+@if ($errors->any())
+<div class="alert alert-danger">
 
-            @foreach ($errors->all() as $error)
-                <div class="alert alert-danger mg-b-0" role="alert">
-                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <strong>Oh snap!</strong> {{ $error }}
-                </div>
-            @endforeach
-
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger mg-b-0" role="alert">
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Oh snap!</strong> {{ $error }}
         </div>
-    @endif
+    @endforeach
+
+</div>
+@endif
 
 
     <!-- row -->
