@@ -86,7 +86,7 @@
                                 <div class=" mt-4 ">
                                     <label for="">Product Image</label><br>
                                     <img src="{{URL('storage')}}/{{$product->image}}" alt="product Image"  width="100" name="pic">
-                                    <input type="hidden" name="pic" class="old_image" value="{{$product->image}}">
+                                    <input type="text" name="pic" class="old_image" value="{{$product->image}}">
                                 </div>
                             </div>
                             <div class="form-group col-md-12 input_image">

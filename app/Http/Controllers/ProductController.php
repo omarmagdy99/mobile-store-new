@@ -125,6 +125,7 @@ class ProductController extends Controller
             'quantity' => $request->quantity,
             'image' => $file,
         ]);
+        
         return redirect('/products');
        
     }
