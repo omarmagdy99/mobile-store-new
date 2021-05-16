@@ -65,7 +65,8 @@
                                                 class="las la-pen fa-2x"></i></a>
 
                                         <a class="modal-effect btn btn-sm btn-danger " data-effect="effect-scale"
-                                            data-toggle="modal" href="#modaldemo3" title="حذف"><i class="las la-trash fa-2x"></i>
+                                            data-toggle="modal" href="#modaldemo3" title="حذف"><i
+                                                class="las la-trash fa-2x"></i>
                                         </a>
 
                                     </td>
@@ -86,7 +87,7 @@
     </div>
     <!-- Container closed -->
     </div>
-	
+
 @endsection
 @section('js')
     <!-- Internal Data tables -->

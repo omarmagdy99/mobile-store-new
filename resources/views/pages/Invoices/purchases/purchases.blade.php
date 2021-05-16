@@ -15,7 +15,7 @@
         <div class="my-auto">
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    purchases</span>
+                    Purchases</span>
             </div>
         </div>
     </div>
@@ -52,15 +52,17 @@
     @endif
     <div class="row">
 
-
-
         <!--div-->
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
+<<<<<<< HEAD
                     <a class="btn btn-outline-primary btn-block wd-15p" href="Addpurchases">Add invoice</a>
+=======
+                    <a class="btn btn-outline-primary btn-block wd-15p" href="/addPurchaseInvoice">Add Invoice</a>
+>>>>>>> 7af557f9bb7e6b96e528da29ec481abb8c0341d5
                     <div class="mt-3">
-                        <h4 class="card-title mg-b-0">invoice purchases List</h4>
+                        <h4 class="card-title mg-b-0">Purchases Invoices List</h4>
                     </div>
                 </div>
                 <div class="card-body">
@@ -78,29 +80,28 @@
                             </thead>
                             <tbody>
 
-                                    <tr>
+                                <tr>
 
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
 
-                                            <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
-                                                data-toggle="modal" href="#exampleModal2" title="تعديل"><i
-                                                    class="las la-pen fa-2x"></i></a>
+                                        <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
+                                            data-toggle="modal" href="#exampleModal2" title="تعديل"><i
+                                                class="las la-pen fa-2x"></i></a>
 
-                                            <a class="modal-effect btn btn-sm btn-danger btn_delete"
-                                                data-effect="effect-slide-in-bottom" data-toggle="modal" href="#modaldemo7"
-                                               
-                                                title="Delete"><i class="las la-trash fa-2x"></i>
-                                            </a>
+                                        <a class="modal-effect btn btn-sm btn-danger btn_delete"
+                                            data-effect="effect-slide-in-bottom" data-toggle="modal" href="#modaldemo7"
+                                            title="Delete"><i class="las la-trash fa-2x"></i>
+                                        </a>
 
-                                        </td>
+                                    </td>
 
 
-                                    </tr>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -121,8 +122,8 @@
             <div class="modal-content modal-content-demo">
 
                 <div class="modal-header">
-                    <h6 class="modal-title text-danger">Delete brand</h6><button aria-label="Close" class="close"
-                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                    <h6 class="modal-title text-danger">Delete Purchases Invoice</h6><button aria-label="Close"
+                        class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <form action="products/destroy" method="POST">
                     {{ csrf_field() }}

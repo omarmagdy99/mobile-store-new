@@ -13,7 +13,7 @@
         <div class="my-auto">
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Add
-                    invoice purchases</span>
+                    Purchases Invoice</span>
             </div>
         </div>
     </div>
@@ -41,11 +41,12 @@
         <div class=" col-md-12 col-sm-12">
             <div class="card  box-shadow-0">
                 <div class="card-header">
-                    <h2 class="card-title mb-1">Add invoice purchases</h2>
+                    <h2 class="card-title mb-1">Add Purchases Invoice</h2>
                 </div>
                 <div class="card-body pt-0">
                     <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="">
                         {{ csrf_field() }}
+<<<<<<< HEAD
                         <div class="row other">
                             
 
@@ -78,6 +79,32 @@
                             </div>
 
 
+=======
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" name="barcode" placeholder="Invoice Number">
+                            </div>
+                            <div class="form-group col-md-6">
+
+                                <select name="category_id" class="form-control SlectBox"
+                                    onclick="console.log($(this).val())" onchange="console.log('change is firing')">
+                                    <!--placeholder-->
+                                    <option disabled selected>Product Barcode</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <input type="number" class="form-control" name="sales_price" placeholder="Quantity">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <input type="number" class="form-control" name="purchase_price"
+                                    placeholder="Purchase Price">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <input type="number" class="form-control" name="quantity" placeholder="Quantity">
+                            </div>
+
+>>>>>>> 7af557f9bb7e6b96e528da29ec481abb8c0341d5
 
                             <div class="form-group mb-0 mt-3 justify-content-end col-md-12">
                                 <div>
@@ -96,6 +123,7 @@
     </div>
     </div>
     <!-- Container closed -->
+    </div>
     </div>
     <!-- main-content closed -->
 @endsection

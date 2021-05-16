@@ -14,8 +14,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brand_data=brand::all();
-        return view('pages.BrandsAndCategories.brands',compact('brand_data'));
+        $brand_data = brand::all();
+        return view('pages.BrandsAndCategories.brands', compact('brand_data'));
     }
 
     /**
@@ -37,13 +37,13 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'brand_name'=>['required','unique:brands'],
+            'brand_name' => ['required', 'unique:brands'],
 
         ]);
         brand::create([
-            'brand_name'=>$request->brand_name,
+            'brand_name' => $request->brand_name,
         ]);
-        session()->flash('add','added successfully');
+        session()->flash('add', 'added successfully');
         return redirect('/brands');
     }
 
@@ -79,16 +79,16 @@ class BrandController extends Controller
     public function update(Request $request)
     {
 
-        $id=$request->brand_id;
-        $data=brand::find($id);
+        $id = $request->brand_id;
+        $data = brand::find($id);
         $request->validate([
-            'brand_name'=>['required','unique:brands'],
+            'brand_name' => ['required', 'unique:brands'],
 
         ]);
         $data->update([
-            'brand_name'=>$request->brand_name,
+            'brand_name' => $request->brand_name,
         ]);
-        session()->flash('update','updated successfully');
+        session()->flash('update', 'updated successfully');
         return redirect('brands');
     }
 
@@ -101,7 +101,7 @@ class BrandController extends Controller
     public function destroy(Request $request)
     {
         brand::find($request->brand_id)->delete();
-        session()->flash('delete','deleted successfully');
+        session()->flash('delete', 'deleted successfully');
         return redirect('brands');
     }
 }

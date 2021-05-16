@@ -24,7 +24,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Customers</span>
+                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    Customers</span>
             </div>
         </div>
     </div>
@@ -47,8 +48,9 @@
     
     <div class="row">
         @if ($errors->any())
-        <div class="alert alert-danger">
+            <div class="alert alert-danger">
 
+<<<<<<< HEAD
             @foreach ($errors->all() as $error)
                 <div class="alert alert-danger mg-b-0" role="alert">
                     <button aria-label="Close"  class="close" data-dismiss="alert" type="button">
@@ -57,10 +59,21 @@
                     <strong>Oh snap!</strong> {{ $error }}
                 </div>
             @endforeach
+=======
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger mg-b-0" role="alert">
+                        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Oh snap!</strong> {{ $error }}
+                    </div>
+                @endforeach
+>>>>>>> 7af557f9bb7e6b96e528da29ec481abb8c0341d5
 
-        </div>
-    @endif
+            </div>
+        @endif
 
+<<<<<<< HEAD
     @if (session('update'))
     <div class="alert alert-info" role="alert">
             <button aria-label="Close" class="close" data-dismiss="alert" type="button">
@@ -68,17 +81,35 @@
             </button>
             <strong>Well done!</strong> {{ session('update') }}
         </div>
+=======
+        @if (session('add'))
+            <div class="alert alert-success" role="alert">
+                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Well done!</strong> {{ session('add') }}
+            </div>
 
-    @endif
-    @if (session('delete'))
-        <div class="alert alert-danger" role="alert">
-            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Well done!</strong> {{ session('delete') }}
-        </div>
+        @endif
+        @if (session('update'))
+            <div class="alert alert-info" role="alert">
+                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Well done!</strong> {{ session('update') }}
+            </div>
+>>>>>>> 7af557f9bb7e6b96e528da29ec481abb8c0341d5
 
-    @endif
+        @endif
+        @if (session('delete'))
+            <div class="alert alert-danger" role="alert">
+                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Well done!</strong> {{ session('delete') }}
+            </div>
+
+        @endif
 
         <!--div-->
         <div class="col-xl-12">
@@ -108,32 +139,36 @@
                             </thead>
                             <tbody>
                                 @php
-                                  $i=1;  
+                                    $i = 1;
                                 @endphp
                                 @foreach ($customer_data as $item)
-                                    
-                                <tr>
-                                    <td>
-                                        @php
-                                            echo $i++;
-                                        @endphp
-                                    </td>
-                                    <td>{{$item->name}}</td>
-                                    <td>{{$item->phone}}</td>
-                                    <td>
 
-                                        <a class="modal-effect btn btn-sm btn-info btn_update" data-effect="effect-scale"
-                                            data-toggle="modal" href="#exampleModal2" title="تعديل" data-c_id="{{$item->id}}" data-c_name="{{$item->name}}" data-c_phone="{{$item->phone}}"><i
-                                                class="las la-pen fa-2x"></i></a>
+                                    <tr>
+                                        <td>
+                                            @php
+                                                echo $i++;
+                                            @endphp
+                                        </td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->phone }}</td>
+                                        <td>
 
-                                        <a class="modal-effect btn btn-sm btn-danger btn_delete" data-effect="effect-scale"
-                                            data-toggle="modal" href="#modaldemo7" title="حذف" data-c_id="{{$item->id}}" data-c_name="{{$item->name}}"><i class="las la-trash fa-2x"></i>
-                                        </a>
+                                            <a class="modal-effect btn btn-sm btn-info btn_update"
+                                                data-effect="effect-scale" data-toggle="modal" href="#exampleModal2"
+                                                title="تعديل" data-c_id="{{ $item->id }}"
+                                                data-c_name="{{ $item->name }}" data-c_phone="{{ $item->phone }}"><i
+                                                    class="las la-pen fa-2x"></i></a>
 
-                                    </td>
+                                            <a class="modal-effect btn btn-sm btn-danger btn_delete"
+                                                data-effect="effect-scale" data-toggle="modal" href="#modaldemo7"
+                                                title="حذف" data-c_id="{{ $item->id }}"
+                                                data-c_name="{{ $item->name }}"><i class="las la-trash fa-2x"></i>
+                                            </a>
+
+                                        </td>
 
 
-                                </tr>
+                                    </tr>
                                 @endforeach
 
                             </tbody>
@@ -151,97 +186,100 @@
     <!-- Container closed -->
 
     </div>
-    		<!-- Modal add -->
-		<div class="modal" id="modaldemo8">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content modal-content-demo">
-					
-					<div class="modal-header">
-						<h6 class="modal-title">Add Customer</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-					</div>
-					<form action="{{route('customers.store')}}" method="POST">
-                        {{ csrf_field() }}
-						<div class="modal-body">
-							<div class="form-group">
-                                <label for="">Name</label>
-                                <input type="text"  class="form-control"   name="name" placeholder="Name">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="phone"  placeholder="Phone">
-                            </div>
-						</div>
-						<div class="modal-footer">
-							<button class="btn ripple btn-primary" type="submit">Add</button>
-							<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<!-- End Modal add-->
-    		<!-- Modal update -->
-		<div class="modal" id="exampleModal2">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content modal-content-demo">
-					
-					<div class="modal-header">
-						<h6 class="modal-title">Add Customer</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-					</div>
-					<form action="/customers/update" method="POST">
-                        {{ csrf_field() }}
-                        {{ method_field('PUT') }}
-						<div class="modal-body">
-							<div class="form-group">
-                                <label for="">Name</label>
-                                <input type="text"  class="form-control"  id="c_uname" name="name" placeholder="Name">
-                                <input type="hidden"  class="form-control" name="id" id="c_uid" placeholder="id">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="phone" id="c_uphone" placeholder="Phone">
-                            </div>
-						</div>
-						<div class="modal-footer">
-							<button class="btn ripple btn-primary" type="submit">Update</button>
-							<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<!-- End Modal update-->
-	    {{-- model delete --}}
-        <div class="modal" id="modaldemo7">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content modal-content-demo">
-    
-                    <div class="modal-header">
-                        <h6 class="modal-title text-danger">Delete Supplier</h6><button aria-label="Close" class="close"
-                            data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <form action="customers/destroy" method="POST">
-                        {{ csrf_field() }}
-    
-                        {{ method_field('delete') }}
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="">Name</label>
-                                <input type="text" disabled class="form-control"  id="c_name" placeholder="Name">
-                                <input type="hidden"  class="form-control" name="id" id="c_id" placeholder="id">
-                            </div>
-                            
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn ripple btn-primary bg-danger" type="submit">Delete</button>
-                            <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
-                        </div>
-                    </form>
+    <!-- Modal add -->
+    <div class="modal" id="modaldemo8">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+
+                <div class="modal-header">
+                    <h6 class="modal-title">Add Customer</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                        type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
+                <form action="{{ route('customers.store') }}" method="POST">
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input type="text" class="form-control" name="name" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="phone" placeholder="Phone">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn ripple btn-primary" type="submit">Add</button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
-        {{-- end model delete --}}
+    </div>
+    <!-- End Modal add-->
+    <!-- Modal update -->
+    <div class="modal" id="exampleModal2">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+
+                <div class="modal-header">
+                    <h6 class="modal-title">Update Customer</h6><button aria-label="Close" class="close"
+                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="/customers/update" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('PUT') }}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input type="text" class="form-control" id="c_uname" name="name" placeholder="Name">
+                            <input type="hidden" class="form-control" name="id" id="c_uid" placeholder="id">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="phone" id="c_uphone" placeholder="Phone">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn ripple btn-primary" type="submit">Update</button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal update-->
+    {{-- model delete --}}
+    <div class="modal" id="modaldemo7">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+
+                <div class="modal-header">
+                    <h6 class="modal-title text-danger">Delete Customer</h6><button aria-label="Close" class="close"
+                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="customers/destroy" method="POST">
+                    {{ csrf_field() }}
+
+                    {{ method_field('delete') }}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input type="text" disabled class="form-control" id="c_name" placeholder="Name">
+                            <input type="hidden" class="form-control" name="id" id="c_id" placeholder="id">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn ripple btn-primary bg-danger" type="submit">Delete</button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- end model delete --}}
 @endsection
 
 @section('js')
+<<<<<<< HEAD
 <!--Internal  Notify js -->
 <script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
@@ -249,12 +287,16 @@
 
 <script>
      $('.btn_delete').click(function() {
+=======
+    <script>
+        $('.btn_delete').click(function() {
+>>>>>>> 7af557f9bb7e6b96e528da29ec481abb8c0341d5
             $c_name = $(this).data('c_name');
             $id = $(this).data('c_id');
             $('#c_id').val($id);
             $('#c_name').val($c_name);
         });
-     $('.btn_update').click(function() {
+        $('.btn_update').click(function() {
             $c_uname = $(this).data('c_name');
             $c_uphome = $(this).data('c_phone');
             $u_id = $(this).data('c_id');
@@ -262,6 +304,7 @@
             $('#c_uname').val($c_uname);
             $('#c_uphone').val($c_uphome);
         });
+<<<<<<< HEAD
         function not1() {
 	notif({
 		msg: "Default <b>Top</b> Notification",
@@ -270,6 +313,11 @@
 }
 </script>
 <!-- Internal Data tables -->
+=======
+
+    </script>
+    <!-- Internal Data tables -->
+>>>>>>> 7af557f9bb7e6b96e528da29ec481abb8c0341d5
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
@@ -288,8 +336,13 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
+<<<<<<< HEAD
  <!-- Internal Modal js-->
  <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
  <!-- Internal Treeview js -->
 <script src="{{URL::asset('assets/plugins/treeview/treeview.js')}}"></script>
+=======
+    <!-- Internal Modal js-->
+    <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
+>>>>>>> 7af557f9bb7e6b96e528da29ec481abb8c0341d5
 @endsection
