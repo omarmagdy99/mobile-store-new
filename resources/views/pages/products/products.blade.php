@@ -92,8 +92,8 @@
                                         </td>
                                         <td>
 
-                                            <a class="modal-effect btn btn-sm btn-info " data-effect="effect-scale"
-                                                data-toggle="modal" href="#exampleModal2" title="تعديل"><i
+                                            <a class=" btn btn-sm btn-info " 
+                                                 href="/editProducts/{{ $item->barcode }}" title="تعديل"><i
                                                     class="las la-pen fa-2x"></i></a>
 
                                             <a class="modal-effect btn btn-sm btn-danger btn_delete"

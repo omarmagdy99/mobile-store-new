@@ -26,6 +26,9 @@ Auth::routes();
     Route::get('/purchases', function () {
         return view('pages.Invoices.purchases.purchases');
     });
+    Route::get('/Addpurchases', function () {
+        return view('pages.Invoices.purchases.AddPurchases');
+    });
   
 
 
@@ -64,6 +67,7 @@ Auth::routes();
 
     Route::resource('/products','ProductController');
     Route::get('/addProducts','ProductController@brand_cat' );
+    Route::get('/editProducts/{barcode}','ProductController@edit' );
 
     Route::resource('/brands', 'BrandController');
     Route::resource('/categories', 'CategoryController');

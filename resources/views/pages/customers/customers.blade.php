@@ -11,6 +11,13 @@
     <link href="{{ URL::asset('assets/plugins/multislider/multislider.css') }}" rel="stylesheet">
     <!--- Select2 css -->
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <!--Internal  Font Awesome -->
+<link href="{{URL::asset('assets/plugins/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+<!--Internal   Notify -->
+<link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
+<!--Internal  treeview -->
+<link href="{{URL::asset('assets/plugins/treeview/treeview.css')}}" rel="stylesheet" type="text/css" />
+
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -22,16 +29,29 @@
         </div>
     </div>
     <!-- breadcrumb -->
-@endsection
-@section('content')
+    @endsection
+    @section('content')
+    @if (session('add'))
+    {{-- <div class="alert alert-success" role="alert">
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Well done!</strong> {{ session('add') }} --}}
+    </div>
+    @endif
+    <script> 
+        not1();
+        
+        </script>
     <!-- row -->
+    
     <div class="row">
         @if ($errors->any())
         <div class="alert alert-danger">
 
             @foreach ($errors->all() as $error)
                 <div class="alert alert-danger mg-b-0" role="alert">
-                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                    <button aria-label="Close"  class="close" data-dismiss="alert" type="button">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <strong>Oh snap!</strong> {{ $error }}
@@ -41,17 +61,8 @@
         </div>
     @endif
 
-    @if (session('add'))
-        <div class="alert alert-success" role="alert">
-            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Well done!</strong> {{ session('add') }}
-        </div>
-
-    @endif
     @if (session('update'))
-        <div class="alert alert-info" role="alert">
+    <div class="alert alert-info" role="alert">
             <button aria-label="Close" class="close" data-dismiss="alert" type="button">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -76,7 +87,8 @@
                     <div class="row row-sm">
                         <div class="col-md-4 ">
                             <a class="modal-effect btn btn-outline-primary btn-block wd-40p" data-effect="effect-scale"
-                                data-toggle="modal" href="#modaldemo8">Add Customer</a>
+                                data-toggle="modal" href="#modaldemo8" >Add Customer</a>
+                                
                         </div>
                     </div>
                     <div class="mt-3">
@@ -230,6 +242,11 @@
 @endsection
 
 @section('js')
+<!--Internal  Notify js -->
+<script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
+
+
 <script>
      $('.btn_delete').click(function() {
             $c_name = $(this).data('c_name');
@@ -245,6 +262,12 @@
             $('#c_uname').val($c_uname);
             $('#c_uphone').val($c_uphome);
         });
+        function not1() {
+	notif({
+		msg: "Default <b>Top</b> Notification",
+		position: "top",
+	});
+}
 </script>
 <!-- Internal Data tables -->
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
@@ -267,4 +290,6 @@
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
  <!-- Internal Modal js-->
  <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
+ <!-- Internal Treeview js -->
+<script src="{{URL::asset('assets/plugins/treeview/treeview.js')}}"></script>
 @endsection
