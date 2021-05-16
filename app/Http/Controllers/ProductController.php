@@ -125,7 +125,7 @@ class ProductController extends Controller
             'quantity' => $request->quantity,
             'image' => $file,
         ]);
-        
+        session()->flash('edit','edited sucessfuly');
         return redirect('/products');
        
     }
