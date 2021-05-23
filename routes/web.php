@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-// Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/', function () {
     return view('home');
@@ -69,13 +68,14 @@ Route::resource('/categories', 'CategoryController');
 // Add User Route 
 
 
+Route::resource('/usersList', 'Auth\RegisterController');
+
 Route::get('/addUsers', function () {
     return view('pages.users.addUsers');
 });
 // User List Route 
 
 
-Route::resource('/usersList', 'Auth\RegisterController');
 Route::get('/updateUser/{id}', 'Auth\RegisterController@update_data');
 // ===============================================================
 

@@ -162,7 +162,6 @@
 
 @endsection
 @section('js')
-@section('js')
     <script>
         $('.btn_delete').click(function() {
             $user_name = $(this).data('user_name');
