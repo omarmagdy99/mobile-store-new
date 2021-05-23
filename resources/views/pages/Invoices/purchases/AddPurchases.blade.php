@@ -46,40 +46,39 @@
                 <div class="card-body pt-0">
                     <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="">
                         {{ csrf_field() }}
-<<<<<<< HEAD
                         <div class="row other">
-                            
 
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" name="barcode" placeholder="Barcode">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" name="product_name" placeholder="Name">
-                                </div>
-                                <div class="form-group col-md-6">
 
-                                    <select name="category_id" class="form-control SlectBox"
-                                        onclick="console.log($(this).val())" onchange="console.log('change is firing')">
-                                        <!--placeholder-->
-                                        <option disabled selected>Choose Category</option>
-                                    </select>
-                                </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" name="barcode" placeholder="Barcode">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" name="product_name" placeholder="Name">
+                            </div>
+                            <div class="form-group col-md-6">
 
-                                <div class="form-group col-md-4">
-                                    <input type="number" class="form-control" name="sales_price" placeholder="Sales Price">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <input type="number" class="form-control" name="purchase_price"
-                                        placeholder="Purchase Price">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <input type="number" class="form-control" name="quantity" placeholder="Quantity">
-                                </div>
-                                <a class="btn btn-primary plus">plus</a>
+                                <select name="category_id" class="form-control SlectBox"
+                                    onclick="console.log($(this).val())" onchange="console.log('change is firing')">
+                                    <!--placeholder-->
+                                    <option disabled selected>Choose Category</option>
+                                </select>
                             </div>
 
+                            <div class="form-group col-md-4">
+                                <input type="number" class="form-control" name="sales_price" placeholder="Sales Price">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <input type="number" class="form-control" name="purchase_price"
+                                    placeholder="Purchase Price">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <input type="number" class="form-control" name="quantity" placeholder="Quantity">
+                            </div>
+                            <a class="btn btn-primary plus">plus</a>
+                        </div>
 
-=======
+
+
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <input type="text" class="form-control" name="barcode" placeholder="Invoice Number">
@@ -104,7 +103,7 @@
                                 <input type="number" class="form-control" name="quantity" placeholder="Quantity">
                             </div>
 
->>>>>>> 7af557f9bb7e6b96e528da29ec481abb8c0341d5
+
 
                             <div class="form-group mb-0 mt-3 justify-content-end col-md-12">
                                 <div>
@@ -112,7 +111,7 @@
                                     <a href="/products" class="btn btn-secondary">Cancel</a>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </form>
                 </div>
@@ -133,11 +132,12 @@
     <!--Internal Fileuploads js-->
     <script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
-<script>
-    $('.plus').click(function () { 
-        $elment=$('.other').html();
-        
-        $('.other').append($elment);
-    });
-</script>
+    <script>
+        $('.plus').click(function() {
+            $elment = $('.other').html();
+
+            $('.other').append($elment);
+        });
+
+    </script>
 @endsection

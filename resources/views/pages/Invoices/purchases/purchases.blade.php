@@ -56,11 +56,10 @@
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
-<<<<<<< HEAD
                     <a class="btn btn-outline-primary btn-block wd-15p" href="Addpurchases">Add invoice</a>
-=======
+
                     <a class="btn btn-outline-primary btn-block wd-15p" href="/addPurchaseInvoice">Add Invoice</a>
->>>>>>> 7af557f9bb7e6b96e528da29ec481abb8c0341d5
+
                     <div class="mt-3">
                         <h4 class="card-title mg-b-0">Purchases Invoices List</h4>
                     </div>
