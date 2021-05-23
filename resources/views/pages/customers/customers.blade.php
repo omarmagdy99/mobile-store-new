@@ -50,7 +50,6 @@
         @if ($errors->any())
             <div class="alert alert-danger">
 
-<<<<<<< HEAD
             @foreach ($errors->all() as $error)
                 <div class="alert alert-danger mg-b-0" role="alert">
                     <button aria-label="Close"  class="close" data-dismiss="alert" type="button">
@@ -59,21 +58,10 @@
                     <strong>Oh snap!</strong> {{ $error }}
                 </div>
             @endforeach
-=======
-                @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger mg-b-0" role="alert">
-                        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <strong>Oh snap!</strong> {{ $error }}
-                    </div>
-                @endforeach
->>>>>>> 7af557f9bb7e6b96e528da29ec481abb8c0341d5
 
             </div>
         @endif
 
-<<<<<<< HEAD
     @if (session('update'))
     <div class="alert alert-info" role="alert">
             <button aria-label="Close" class="close" data-dismiss="alert" type="button">
@@ -81,24 +69,6 @@
             </button>
             <strong>Well done!</strong> {{ session('update') }}
         </div>
-=======
-        @if (session('add'))
-            <div class="alert alert-success" role="alert">
-                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>Well done!</strong> {{ session('add') }}
-            </div>
-
-        @endif
-        @if (session('update'))
-            <div class="alert alert-info" role="alert">
-                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <strong>Well done!</strong> {{ session('update') }}
-            </div>
->>>>>>> 7af557f9bb7e6b96e528da29ec481abb8c0341d5
 
         @endif
         @if (session('delete'))
@@ -279,7 +249,6 @@
 @endsection
 
 @section('js')
-<<<<<<< HEAD
 <!--Internal  Notify js -->
 <script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
@@ -287,10 +256,6 @@
 
 <script>
      $('.btn_delete').click(function() {
-=======
-    <script>
-        $('.btn_delete').click(function() {
->>>>>>> 7af557f9bb7e6b96e528da29ec481abb8c0341d5
             $c_name = $(this).data('c_name');
             $id = $(this).data('c_id');
             $('#c_id').val($id);
@@ -304,7 +269,6 @@
             $('#c_uname').val($c_uname);
             $('#c_uphone').val($c_uphome);
         });
-<<<<<<< HEAD
         function not1() {
 	notif({
 		msg: "Default <b>Top</b> Notification",
@@ -313,11 +277,6 @@
 }
 </script>
 <!-- Internal Data tables -->
-=======
-
-    </script>
-    <!-- Internal Data tables -->
->>>>>>> 7af557f9bb7e6b96e528da29ec481abb8c0341d5
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
@@ -336,13 +295,8 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
-<<<<<<< HEAD
  <!-- Internal Modal js-->
  <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
  <!-- Internal Treeview js -->
 <script src="{{URL::asset('assets/plugins/treeview/treeview.js')}}"></script>
-=======
-    <!-- Internal Modal js-->
-    <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
->>>>>>> 7af557f9bb7e6b96e528da29ec481abb8c0341d5
 @endsection
