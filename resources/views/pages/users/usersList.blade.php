@@ -124,8 +124,7 @@
         <!--/div-->
 
     </div>
-    </div>
-    </div>
+
 
     <div class="modal" id="modaldemo7">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -161,7 +160,7 @@
 
 
 @endsection
-@section('js')
+
 @section('js')
     <script>
         $('.btn_delete').click(function() {
