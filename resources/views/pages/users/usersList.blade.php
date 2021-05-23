@@ -68,7 +68,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example" class="table key-buttons text-md-nowrap ">
+                        <table id="example" class="table key-buttons  text-md-nowrap ">
                             <thead>
                                 <tr>
                                     <th class="wd-5p border-bottom-0">#</th>
@@ -77,7 +77,7 @@
                                     <th class="wd-10p border-bottom-0">Email</th>
                                     <th class="wd-10p border-bottom-0">Phone</th>
                                     <th class="wd-10p border-bottom-0">National ID</th>
-                                    <th class="wd-20p border-bottom-0">Image</th>
+                                    <th class="wd-10p border-bottom-0">Image</th>
                                     <th class="wd-10p border-bottom-0">Operations</th>
                                 </tr>
                             </thead>
@@ -93,7 +93,7 @@
                                         <td>{{ $item->phone }}<br>{{ $item->s_phone }}</td>
                                         <td>{{ $item->national_id }}</td>
                                         <td>
-                                            <img src="storage/{{ $item->image }}" width="100" alt="">
+                                            <img src="storage/{{ $item->image }}" class="rounded-circle avatar-md mr-2" width="100" alt="">
                                         </td>
                                         <td>
 
@@ -123,11 +123,7 @@
         <!--/div-->
 
 
-    </div>
-    <!-- row closed -->
-    </div>
-    <!-- Container closed -->
-    </div>
+   
     <div class="modal" id="modaldemo7">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content modal-content-demo">
@@ -203,7 +199,11 @@
         <!--Internal  Notify js -->
         <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
         <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
-    
+    <!--Internal  Datepicker js -->
+<script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+<!-- Internal Select2 js-->
+<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+
     
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
