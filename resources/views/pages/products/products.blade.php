@@ -30,7 +30,7 @@
 @section('content')
     <!-- row -->
 
-   
+
     @if (session()->has('add'))
         <div class="alert alert-success" role="alert">
             <button aria-label="Close" class="close" data-dismiss="alert" type="button">
@@ -186,14 +186,14 @@
         }
         @if (session()->has('edit'))
             $(document).ready(function () {
-                        not9();
-                       
-            }); 
-     @endif
+            not9();
         
-        </script>
-        
- 
+            });
+        @endif
+
+    </script>
+
+
     <!-- Internal Data tables -->
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>

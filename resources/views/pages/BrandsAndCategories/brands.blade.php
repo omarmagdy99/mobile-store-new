@@ -9,6 +9,8 @@
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
     <!---Internal  Multislider css-->
     <link href="{{ URL::asset('assets/plugins/multislider/multislider.css') }}" rel="stylesheet">
+    <!--Internal   Notify -->
+    <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
     <!--- Select2 css -->
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 @endsection
@@ -39,34 +41,7 @@
 
         </div>
     @endif
-    @if (session('add'))
-        <div class="alert alert-success" role="alert">
-            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Well done!</strong> {{ session('add') }}
-        </div>
 
-    @endif
-    @if (session('delete'))
-        <div class="alert alert-danger" role="alert">
-            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Well done!</strong> {{ session('delete') }}
-        </div>
-
-    @endif
-
-    @if (session('update'))
-        <div class="alert alert-info" role="alert">
-            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Well done!</strong> {{ session('update') }}
-        </div>
-
-    @endif
 
     <!-- row -->
     <div class="row">
@@ -219,6 +194,11 @@
 
 @endsection
 @section('js')
+    <!--Internal  Notify js -->
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+
+
     <script>
         $('.btn_delete').click(function() {
             $brand_name = $(this).data('brand_name');
@@ -236,6 +216,49 @@
 
 
         });
+
+        function not9() {
+            notif({
+                type: "info",
+                msg: "<b>Updated:</b>successfully",
+                position: "right"
+            });
+        }
+        @if (session()->has('update'))
+            $(document).ready(function () {
+            not9();
+        
+            });
+        @endif
+
+
+        function not10() {
+            notif({
+                type: "success",
+                msg: "<b>Added:</b>successfully",
+                position: "center"
+            });
+        }
+        @if (session()->has('add'))
+            $(document).ready(function () {
+            not10();
+        
+            });
+        @endif
+
+        function not11() {
+            notif({
+                type: "error",
+                msg: "<b>Deleted: </b>Successfully",
+                position: "center",
+            });
+        }
+        @if (session()->has('delete'))
+            $(document).ready(function () {
+            not11();
+        
+            });
+        @endif
 
     </script>
     <!-- Internal Data tables -->
