@@ -18,12 +18,14 @@
             <div class="dropdown user-pro-body">
                 <div class="">
                     <img alt="user-img" class="avatar avatar-xl brround"
-                        src="{{ URL::asset('assets/img/faces/6.jpg') }}"><span
+                        src="{{ URL('storage') }}/{{ Auth::user()->image }}"><span
                         class="avatar-status profile-status bg-green"></span>
                 </div>
                 <div class="user-info">
-                    <h4 class="font-weight-semibold mt-3 mb-0">omar</h4>
-                    <span class="mb-0 text-muted">magdy</span>
+                    <h4 class="font-weight-semibold mt-3 mb-0">{{ Auth::user()->f_name }}
+                        {{ Auth::user()->l_name }}
+                    </h4>
+                    <span class="mb-0 text-muted">{{ Auth::user()->permission }}</span>
                 </div>
             </div>
         </div>

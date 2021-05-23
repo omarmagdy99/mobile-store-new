@@ -3,20 +3,20 @@
     <div class="container-fluid">
         <div class="main-header-left ">
             <div class="responsive-logo">
-                <a href="{{ url('/' . ($page = 'index')) }}"><img src="{{ URL::asset('assets/img/brand/logo.png') }}"
-                        class="logo-1" alt="logo"></a>
+                <a href="{{ url('/' . ($page = 'index')) }}"><img
+                        src="{{ URL::asset('assets/img/brand/logo.png') }}" class="logo-1" alt="logo"></a>
                 <a href="{{ url('/' . ($page = 'index')) }}"><img
                         src="{{ URL::asset('assets/img/brand/logo-white.png') }}" class="dark-logo-1" alt="logo"></a>
-                <a href="{{ url('/' . ($page = 'index')) }}"><img src="{{ URL::asset('assets/img/brand/favicon.png') }}"
-                        class="logo-2" alt="logo"></a>
-                <a href="{{ url('/' . ($page = 'index')) }}"><img src="{{ URL::asset('assets/img/brand/favicon.png') }}"
-                        class="dark-logo-2" alt="logo"></a>
+                <a href="{{ url('/' . ($page = 'index')) }}"><img
+                        src="{{ URL::asset('assets/img/brand/favicon.png') }}" class="logo-2" alt="logo"></a>
+                <a href="{{ url('/' . ($page = 'index')) }}"><img
+                        src="{{ URL::asset('assets/img/brand/favicon.png') }}" class="dark-logo-2" alt="logo"></a>
             </div>
             <div class="app-sidebar__toggle" data-toggle="sidebar">
                 <a class="open-toggle" href="#"><i class="header-icon fe fe-align-left"></i></a>
                 <a class="close-toggle" href="#"><i class="header-icons fe fe-x"></i></a>
             </div>
-   
+
         </div>
         <div class="main-header-right">
             <ul class="nav">
@@ -290,14 +290,15 @@
                 </div>
                 <div class="dropdown main-profile-menu nav nav-item nav-link">
                     <a class="profile-user d-flex" href=""><img alt=""
-                            src="{{ URL::asset('assets/img/faces/6.jpg') }}"></a>
+                            src="{{ URL('storage') }}/{{ Auth::user()->image }}"></a>
                     <div class="dropdown-menu">
                         <div class="main-header-profile bg-primary p-3">
                             <div class="d-flex wd-100p">
-                                <div class="main-img-user"><img alt="" src="{{ URL::asset('assets/img/faces/6.jpg') }}"
-                                        class=""></div>
+                                <div class="main-img-user"><img alt=""
+                                        src="{{ URL('storage') }}/{{ Auth::user()->image }}" class=""></div>
                                 <div class="mr-3 my-auto">
-                                    <h6>Petey Cruiser</h6><span>Premium Member</span>
+                                    <h6>{{ Auth::user()->f_name }}
+                                        {{ Auth::user()->l_name }}</h6><span>{{ Auth::user()->permission }}</span>
                                 </div>
                             </div>
                         </div>

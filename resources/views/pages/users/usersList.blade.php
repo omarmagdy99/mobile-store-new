@@ -93,12 +93,13 @@
                                         <td>{{ $item->phone }}<br>{{ $item->s_phone }}</td>
                                         <td>{{ $item->national_id }}</td>
                                         <td>
-                                            <img src="storage/{{ $item->image }}" class="rounded-circle avatar-md mr-2" width="100" alt="">
+                                            <img src="{{ URL('storage') }}/{{ $item->image }}"
+                                                class="rounded-circle avatar-md mr-2" width="120" alt="">
                                         </td>
                                         <td>
 
-                                            <a class=" btn btn-sm btn-info "  href="/updateUser/{{ $item->id }}" title="تعديل"><i
-                                                    class="las la-pen fa-2x"></i></a>
+                                            <a class=" btn btn-sm btn-info " href="/updateUser/{{ $item->id }}"
+                                                title="تعديل"><i class="las la-pen fa-2x"></i></a>
 
                                             <a class="modal-effect btn btn-sm btn-danger btn_delete"
                                                 data-effect="effect-slide-in-bottom" data-toggle="modal" href="#modaldemo7"
@@ -122,8 +123,10 @@
         </div>
         <!--/div-->
 
+    </div>
+    </div>
+    </div>
 
-   
     <div class="modal" id="modaldemo7">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content modal-content-demo">
@@ -196,19 +199,19 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
-        <!--Internal  Notify js -->
-        <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
-        <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+    <!--Internal  Notify js -->
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
     <!--Internal  Datepicker js -->
-<script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
-<!-- Internal Select2 js-->
-<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
+    <!-- Internal Select2 js-->
+    <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
 
-    
+
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
     <script>
-          function not9() {
+        function not9() {
             notif({
                 type: "info",
                 msg: "<b>update:</b>successfully",
@@ -217,9 +220,10 @@
         }
         @if (session()->has('edit'))
             $(document).ready(function () {
-                        not9();
-                       
-            }); 
-     @endif
+            not9();
+        
+            });
+        @endif
+
     </script>
 @endsection
