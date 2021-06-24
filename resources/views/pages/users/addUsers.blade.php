@@ -35,7 +35,6 @@
     @if (session()->has('add'))
         <script>
             window.location = '/usersList';
-
         </script>
 
 
@@ -55,11 +54,9 @@
 
 
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="f_name" placeholder="First Name">
+                                <input type="text" class="form-control" name="name" placeholder="First Name">
                             </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="l_name" placeholder="Last Name">
-                            </div>
+
                             <div class="form-group col-md-12">
                                 <input type="email" class="form-control" name="email" placeholder="Email ">
                             </div>
@@ -73,15 +70,8 @@
                             <div class="form-group col-md-6">
                                 <input type="text" class="form-control" name="phone" placeholder="Phone">
                             </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="s_phone" placeholder="Phone 2">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="national_id" placeholder="National ID">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="address" placeholder="Address">
-                            </div>
+
+
                             <div class="form-group col-md-6">
                                 <div class="">
                                     <label for="">Gender</label><br>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+
 class RegisterController extends Controller
 {
     /*
@@ -84,8 +85,6 @@ class RegisterController extends Controller
             'email' => ['required', 'unique:users', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'confirmed'],
             'phone' => ['required'],
-            'address' => ['required'],
-            'national_id' => ['required'],
             'pic' => ['required'],
             'gender' => ['required'],
             'permission' => ['required'],
@@ -97,9 +96,6 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
-            's_phone' => $request->s_phone,
-            'address' => $request->address,
-            'national_id' => $request->national_id,
             'image' => $request->file('pic')->store('userImage', 'public'),
             'gender' => $request->gender,
             'permission' => $request->permission,
@@ -114,51 +110,47 @@ class RegisterController extends Controller
         session()->flash('delete', 'user deleted successfully');
         return redirect('usersList');
     }
-    public function update_data($id){
-        $user_data=User::where('id',$id)->first();
-        return view('pages.users.updateUser',compact('user_data'));
+    public function update_data($id)
+    {
+        $user_data = User::where('id', $id)->first();
+        return view('pages.users.updateUser', compact('user_data'));
     }
-    public function update(Request $request){
-        $id=$request->id;
-        $d_user=User::where('id',$id)->first();
+    public function update(Request $request)
+    {
+        $id = $request->id;
+        $d_user = User::where('id', $id)->first();
         $request->validate([
             'f_name' => ['string', 'required'],
             'l_name' => ['string', 'required'],
             'email' => ['required',  'string', 'email', 'max:255'],
-            'password' => [  'confirmed'],
+            'password' => ['confirmed'],
             'phone' => ['required'],
-            'address' => ['required'],
-            'national_id' => ['required'],
             'pic' => ['required'],
             'gender' => ['required'],
             'permission' => ['required'],
 
         ]);
-        if($d_user->image!=$request->pic){
-            $file=$request->file('pic')->store('userImage','public');
+        if ($d_user->image != $request->pic) {
+            $file = $request->file('pic')->store('userImage', 'public');
             Storage::disk('public')->delete($d_user->image);
-        }else{
-            $file=$request->pic;
+        } else {
+            $file = $request->pic;
         }
-        if(isset($request->password)){
-         $d_user->update([
-            'password'=>Hash::make($request->password),
-         ]);
+        if (isset($request->password)) {
+            $d_user->update([
+                'password' => Hash::make($request->password),
+            ]);
         }
         $d_user->update([
             'f_name' => $request->f_name,
             'l_name' => $request->l_name,
             'email' => $request->email,
             'phone' => $request->phone,
-            's_phone' => $request->s_phone,
-            'address' => $request->address,
-            'national_id' => $request->national_id,
             'image' => $file,
             'gender' => $request->gender,
             'permission' => $request->permission,
-         ]);
-        session()->flash('edit','updated successfuly');
+        ]);
+        session()->flash('edit', 'updated successfuly');
         return redirect('/usersList');
     }
-    
 }
