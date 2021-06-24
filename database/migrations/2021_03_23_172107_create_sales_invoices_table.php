@@ -15,13 +15,13 @@ class CreateSalesInvoicesTable extends Migration
     {
         Schema::create('sales_invoices', function (Blueprint $table) {
             $table->id();
-            $table->double('total', 10, 2);
+            $table->integer('total');
             $table->text('notes')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('customer_id');
-            $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

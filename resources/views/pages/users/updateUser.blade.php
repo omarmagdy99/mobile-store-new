@@ -56,12 +56,10 @@
 
 
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="f_name" placeholder="First Name" value="{{$user_data->f_name}}">
+                                <input type="text" class="form-control" name="name" placeholder="First Name" value="{{$user_data->f_name}}">
                                 <input type="hidden" name="id" value="{{$user_data->id}}">
                             </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="l_name" placeholder="Last Name" value="{{$user_data->l_name}}">
-                            </div>
+                  
                             <div class="form-group col-md-12">
                                 <input type="email" class="form-control" name="email" placeholder="Email " value="{{$user_data->email}}">
                             </div>
@@ -75,15 +73,8 @@
                             <div class="form-group col-md-6">
                                 <input type="text" class="form-control" name="phone" placeholder="Phone" value="{{$user_data->phone}}">
                             </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="s_phone" placeholder="Phone 2" value="{{$user_data->s_phone}}">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="national_id" placeholder="National ID" value="{{$user_data->national_id}}">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="address" placeholder="Address" value="{{$user_data->address}}">
-                            </div>
+                     
+                
                             <div class="form-group col-md-6">
                                 <div class="">
                                     <label for="">Gender</label><br>

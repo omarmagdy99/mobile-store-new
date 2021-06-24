@@ -17,15 +17,13 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('barcode');
             $table->string('product_name');
-            $table->integer('quantity');
+            $table->integer('balance');
             $table->string('image');
             $table->integer('sale_price');
-            $table->integer('purchase_price');
+            $table->string('brand_name');
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('brand_id');
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
         });
     }
 

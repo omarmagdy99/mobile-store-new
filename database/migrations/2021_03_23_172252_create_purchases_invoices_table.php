@@ -15,13 +15,17 @@ class CreatePurchasesInvoicesTable extends Migration
     {
         Schema::create('purchases_invoices', function (Blueprint $table) {
             $table->id();
-            $table->double('total', 10, 2);
+            $table->string('product_name');
+            $table->integer('quantity');
+            $table->integer('price');
+            $table->integer('sub_total');
+            $table->integer('total');
             $table->text('notes')->nullable();
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('user_id');
-            $table->timestamps();
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

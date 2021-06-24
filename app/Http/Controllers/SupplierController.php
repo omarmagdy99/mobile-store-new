@@ -37,15 +37,15 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'f_name' => ['required'],
-            'l_name' => ['required'],
+            'name' => ['required'],
+
             'phone' => ['required', 'max:11'],
             's_phone' => ['max:11'],
             'company_name' => ['required'],
         ]);
         supplier::create([
-            'f_name' => $request->f_name,
-            'l_name' => $request->l_name,
+            'name' => $request->f_name,
+
             'phone' => $request->phone,
             's_phone' => $request->s_phone,
             'company_name' => $request->company_name,
@@ -86,16 +86,16 @@ class SupplierController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'f_name' => ['required'],
-            'l_name' => ['required'],
+            'name' => ['required'],
+
             'phone' => ['required', 'max:11'],
             's_phone' => ['max:11'],
             'company_name' => ['required'],
         ]);
         $data = supplier::where('id', $request->id)->first();
         $data->update([
-            'f_name' => $request->f_name,
-            'l_name' => $request->l_name,
+            'name' => $request->f_name,
+
             'phone' => $request->phone,
             's_phone' => $request->s_phone,
             'company_name' => $request->company_name,
