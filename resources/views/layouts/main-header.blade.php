@@ -297,8 +297,8 @@
                                 <div class="main-img-user"><img alt=""
                                         src="{{ URL('storage') }}/{{ Auth::user()->image }}" class=""></div>
                                 <div class="mr-3 my-auto">
-                                    <h6>{{ Auth::user()->f_name }}
-                                        {{ Auth::user()->l_name }}</h6><span>{{ Auth::user()->permission }}</span>
+                                    <h6>{{ Auth::user()->name }}
+                                        </h6><span>{{ Auth::user()->permission }}</span>
                                 </div>
                             </div>
                         </div>
