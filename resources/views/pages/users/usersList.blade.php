@@ -31,7 +31,6 @@
     @if ($errors->any())
         <script>
             window.location = '/addUsers';
-
         </script>
     @endif
     @if (session()->has('add'))
@@ -72,11 +71,9 @@
                             <thead>
                                 <tr>
                                     <th class="wd-5p border-bottom-0">#</th>
-
                                     <th class="wd-10p border-bottom-0">Name</th>
                                     <th class="wd-10p border-bottom-0">Email</th>
                                     <th class="wd-10p border-bottom-0">Phone</th>
-                                    <th class="wd-10p border-bottom-0">National ID</th>
                                     <th class="wd-10p border-bottom-0">Image</th>
                                     <th class="wd-10p border-bottom-0">Operations</th>
                                 </tr>
@@ -87,11 +84,9 @@
 
                                     <tr>
                                         <td>@php echo $i++; @endphp</td>
-                                        <td>{{ $item->f_name }} {{ $item->l_name }}</td>
-
+                                        <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
-                                        <td>{{ $item->phone }}<br>{{ $item->s_phone }}</td>
-                                        <td>{{ $item->national_id }}</td>
+                                        <td>{{ $item->phone }}</td>
                                         <td>
                                             <img src="{{ URL('storage') }}/{{ $item->image }}"
                                                 class="rounded-circle avatar-md mr-2" width="120" alt="">
@@ -103,9 +98,8 @@
 
                                             <a class="modal-effect btn btn-sm btn-danger btn_delete"
                                                 data-effect="effect-slide-in-bottom" data-toggle="modal" href="#modaldemo7"
-                                                data-user_lname="{{ $item->l_name }}"
-                                                data-user_name="{{ $item->email }}"
-                                                data-user_fname="{{ $item->f_name }}"
+                                                data-user_name="{{ $item->name }}"
+                                                data-user_email="{{ $item->email }}"
                                                 data-user_pic="{{ $item->image }}" data-id="{{ $item->id }}"
                                                 title="Delete"><i class="las la-trash fa-2x"></i>
                                             </a>
@@ -140,12 +134,12 @@
                     {{ method_field('delete') }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" disabled class="form-control" id="u_user_name" placeholder="email">
-                            <input type="hidden" class="form-control" name="user_id" id="u_user_id" placeholder="Name">
+                            <input type="text" disabled class="form-control" id="u_user_email" placeholder="email">
+                            <input type="hidden" class="form-control" name="user_id" id="u_user_id" placeholder="id">
                         </div>
                         <div class="form-group">
                             <input type="text" disabled class="form-control" id="u_name" placeholder="Name">
-                            <input type="hidden" class="form-control" name="pic" id="u_user_pic" placeholder="Name">
+                            <input type="hidden" class="form-control" name="pic" id="u_user_pic" placeholder="image">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -160,24 +154,19 @@
 
 
 @endsection
-<<<<<<< HEAD
-=======
 
->>>>>>> 7d2980832e3f7b6e4ea0dd684a3ef83a7780cd9f
 @section('js')
     <script>
         $('.btn_delete').click(function() {
+            $user_email = $(this).data('user_email');
             $user_name = $(this).data('user_name');
-            $user_lname = $(this).data('user_lname');
-            $user_fname = $(this).data('user_fname');
             $user_pic = $(this).data('user_pic');
             $id = $(this).data('id');
             $('#u_user_id').val($id);
-            $('#u_user_name').val($user_name);
-            $('#u_name').val($user_fname + ' ' + $user_lname);
+            $('#u_user_email').val($user_email);
+            $('#u_name').val($user_name);
             $('#u_user_pic').val($user_pic);
         });
-
     </script>
 
     <!-- Internal Modal js-->
@@ -226,6 +215,5 @@
         
             });
         @endif
-
     </script>
 @endsection

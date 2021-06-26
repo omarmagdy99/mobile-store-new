@@ -80,8 +80,8 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'f_name' => ['string', 'required'],
-            'l_name' => ['string', 'required'],
+            'name' => ['string', 'required'],
+
             'email' => ['required', 'unique:users', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'confirmed'],
             'phone' => ['required'],
@@ -91,8 +91,8 @@ class RegisterController extends Controller
 
         ]);
         User::create([
-            'f_name' => $request->f_name,
-            'l_name' => $request->l_name,
+            'name' => $request->name,
+
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
@@ -120,8 +120,8 @@ class RegisterController extends Controller
         $id = $request->id;
         $d_user = User::where('id', $id)->first();
         $request->validate([
-            'f_name' => ['string', 'required'],
-            'l_name' => ['string', 'required'],
+            'name' => ['string', 'required'],
+
             'email' => ['required',  'string', 'email', 'max:255'],
             'password' => ['confirmed'],
             'phone' => ['required'],
@@ -142,8 +142,8 @@ class RegisterController extends Controller
             ]);
         }
         $d_user->update([
-            'f_name' => $request->f_name,
-            'l_name' => $request->l_name,
+            'name' => $request->name,
+
             'email' => $request->email,
             'phone' => $request->phone,
             'image' => $file,

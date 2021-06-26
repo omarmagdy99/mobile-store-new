@@ -102,18 +102,25 @@
 
                                     <tr>
                                         <td><?php echo $i++; ?></td>
-                                        <td>{{ $supplier_data->f_name }} {{ $supplier_data->l_name }}</td>
-                                        <td>{{ $supplier_data->phone }}<br>{{ $supplier_data->s_phone }}</td>
+                                        <td>{{ $supplier_data->name }}</td>
+                                        <td>{{ $supplier_data->phone }}</td>
                                         <td>{{ $supplier_data->company_name }}</td>
 
                                         <td>
 
-                                            <a class="modal-effect btn btn-sm btn-info btn_update" data-effect="effect-scale"
-                                                data-toggle="modal" href="#modaldemo6" title="Update" data-id="{{ $supplier_data->id }}"  data-f_name="{{ $supplier_data->f_name }} " data-l_name="{{ $supplier_data->l_name }}" data-s_company="{{ $supplier_data->company_name }}" data-phone="{{ $supplier_data->phone }}" data-s_phone="{{ $supplier_data->s_phone }}"><i
-                                                    class="las la-pen fa-2x" ></i></a>
+                                            <a class="modal-effect btn btn-sm btn-info btn_update"
+                                                data-effect="effect-scale" data-toggle="modal" href="#modaldemo6"
+                                                title="Update" data-id="{{ $supplier_data->id }}"
+                                                data-name="{{ $supplier_data->name }} "
+                                                data-s_company="{{ $supplier_data->company_name }}"
+                                                data-phone="{{ $supplier_data->phone }}"><i
+                                                    class="las la-pen fa-2x"></i></a>
 
-                                            <a class="modal-effect btn btn-sm btn-danger btn_delete" data-effect="effect-scale"
-                                                data-toggle="modal" href="#modaldemo7" data-id="{{ $supplier_data->id }}"  data-s_name="{{ $supplier_data->f_name }} {{ $supplier_data->l_name }}" data-s_company="{{ $supplier_data->company_name }}" title="Delete"><i
+                                            <a class="modal-effect btn btn-sm btn-danger btn_delete"
+                                                data-effect="effect-scale" data-toggle="modal" href="#modaldemo7"
+                                                data-id="{{ $supplier_data->id }}"
+                                                data-s_name="{{ $supplier_data->name }}"
+                                                data-s_company="{{ $supplier_data->company_name }}" title="Delete"><i
                                                     class="las la-trash fa-2x"></i>
                                             </a>
 
@@ -147,20 +154,16 @@
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group" method="post" action="">
-                            <input type="text" class="form-control" name="f_name" id="" placeholder="First Name">
+                            <input type="text" class="form-control" name="name" id="" placeholder="Name">
                         </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="l_name" id="" placeholder="Last Name">
-                        </div>
+
                         <div class="form-group">
                             <input type="text" class="form-control" name="company_name" id="" placeholder="Company Name">
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="phone" id="" placeholder="Phone">
                         </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="s_phone" id="" placeholder="Phone 2">
-                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button class="btn ripple btn-primary" type="submit">Add</button>
@@ -185,26 +188,21 @@
                     {{ method_field('PUT') }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="">First Name</label>
-                            <input type="text" class="form-control" name="f_name" id="s_fname" placeholder="First Name">
+
+                            <input type="text" class="form-control" name="name" id="s_name" placeholder="Name">
                             <input type="hidden" class="form-control" name="id" id="s_uid" placeholder="id">
                         </div>
+
                         <div class="form-group">
-                            <label for="">Last Name</label>
-                            <input type="text" class="form-control" name="l_name" id="s_lname" placeholder="Last Name">
+
+                            <input type="text" class="form-control" name="company_name" id="s_ucompany"
+                                placeholder="Company Name">
                         </div>
                         <div class="form-group">
-                            <label for="">Company Name</label>
-                            <input type="text" class="form-control" name="company_name" id="s_ucompany" placeholder="Company Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Phone</label>
+
                             <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone">
                         </div>
-                        <div class="form-group">
-                            <label for="">Phone 2</label>
-                            <input type="text" class="form-control" name="s_phone" id="s_phone" placeholder="Phone 2">
-                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button class="btn ripple btn-primary bg-info" type="submit">Update</button>
@@ -231,12 +229,12 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="">Name</label>
-                            <input type="text" disabled class="form-control"  id="s_name" placeholder="Name">
-                            <input type="hidden"  class="form-control" name="id" id="s_id" placeholder="id">
+                            <input type="text" disabled class="form-control" id="s_name" placeholder="Name">
+                            <input type="hidden" class="form-control" name="id" id="s_id" placeholder="id">
                         </div>
                         <div class="form-group">
                             <label for="">Company Name</label>
-                            <input type="text" disabled class="form-control"  id="s_company" placeholder="Company Name">
+                            <input type="text" disabled class="form-control" id="s_company" placeholder="Company Name">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -260,21 +258,18 @@
         });
         $('.btn_update').click(function() {
             $id = $(this).data('id');
-            $l_name = $(this).data('l_name');
-            $f_name = $(this).data('f_name');
+
+            $name = $(this).data('name');
             $phone = $(this).data('phone');
-            $s_phone = $(this).data('s_phone');
+
             $s_company = $(this).data('s_company');
             $('#s_uid').val($id);
-            $('#s_fname').val($f_name);
-            $('#s_lname').val($l_name);
+            $('#s_name').val($name);
             $('#s_ucompany').val($s_company);
             $('#phone').val($phone);
-            $('#s_phone').val($s_phone);
 
 
         });
-
     </script>
     <!-- Internal Data tables -->
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>

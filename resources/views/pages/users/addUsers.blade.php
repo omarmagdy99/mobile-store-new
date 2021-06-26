@@ -54,7 +54,7 @@
 
 
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="name" placeholder="First Name">
+                                <input type="text" class="form-control" name="name" placeholder="Name">
                             </div>
 
                             <div class="form-group col-md-12">
