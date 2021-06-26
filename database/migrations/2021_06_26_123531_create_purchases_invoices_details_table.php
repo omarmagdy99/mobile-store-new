@@ -15,6 +15,12 @@ class CreatePurchasesInvoicesDetailsTable extends Migration
     {
         Schema::create('purchases_invoices_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('invoice_id');
+            $table->string('product_name');
+            $table->integer('quantity');
+            $table->integer('price');
+            $table->integer('total');
+            $table->foreign('invoice_id')->references('id')->on('purchases_invoices')->onDelete('cascade');
             $table->timestamps();
         });
     }

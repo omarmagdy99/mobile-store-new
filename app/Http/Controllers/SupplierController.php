@@ -44,10 +44,10 @@ class SupplierController extends Controller
             'company_name' => ['required'],
         ]);
         supplier::create([
-            'name' => $request->f_name,
+            'name' => $request->name,
 
             'phone' => $request->phone,
-            's_phone' => $request->s_phone,
+
             'company_name' => $request->company_name,
         ]);
         session()->flash('add', 'Supplier Added Successfuly');

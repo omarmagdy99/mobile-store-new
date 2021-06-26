@@ -15,7 +15,7 @@ class CreateSalesInvoicesTable extends Migration
     {
         Schema::create('sales_invoices', function (Blueprint $table) {
             $table->id();
-            $table->integer('total');
+            $table->integer('sub_total');
             $table->text('notes')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('customer_id');

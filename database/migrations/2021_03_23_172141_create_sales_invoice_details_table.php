@@ -18,7 +18,8 @@ class CreateSalesInvoiceDetailsTable extends Migration
             $table->unsignedBigInteger('sales_invoice_id');
             $table->unsignedBigInteger('product_id');
             $table->integer('qunatity');
-            $table->integer('sub_total');
+            $table->integer('total');
+
             $table->timestamps();
             $table->foreign('sales_invoice_id')->references('id')->on('sales_invoices')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\purchases_invoice;
+use App\purchases_invoices_details;
+use App\supplier;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+
 
 class PurchasesInvoiceController extends Controller
 {
@@ -14,7 +19,8 @@ class PurchasesInvoiceController extends Controller
      */
     public function index()
     {
-        return view('pages.invoices.purchases.AddPurchases');
+        $purchases_invoice=DB::select('select * from purchases_invoices ');
+        return view('pages.Invoices.purchases.purchases',compact('purchases_invoice'));
     }
 
     /**
@@ -35,7 +41,28 @@ class PurchasesInvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dateStamp=date("Y-m-d");
+        $p_id=DB::table('purchases_invoices')->insertGetId([
+        'sub_total'=>$request->sub_total,
+        'notes'=>$request->note,
+        'supplier_id'=>$request->supplier_id,
+        'user_id'=>Auth::user()->id,
+        'created_at'=>$dateStamp
+    ]);
+
+
+    for($i=0;$i<count($request->price);$i++){
+        purchases_invoices_details::create([
+            'invoice_id'=>$p_id,
+            'product_name'=>$request->product_name[$i],
+            'price'=>$request->price[$i],
+            'quantity'=>$request->quantity[$i],
+            'total'=>$request->total[$i],
+    ]);
+
+
+    }
+    return redirect('/purchases');
     }
 
     /**
@@ -46,7 +73,8 @@ class PurchasesInvoiceController extends Controller
      */
     public function show(purchases_invoice $purchases_invoice)
     {
-        //
+        $supplier_data=supplier::all();
+        return view('pages.Invoices.purchases.AddPurchases', compact('supplier_data'));
     }
 
     /**

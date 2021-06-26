@@ -19,37 +19,33 @@ Auth::routes();
 Route::get('/', function () {
     return view('home');
 });
-// Sales Route 
+// Sales Route
 Route::get('/sales', function () {
     return view('pages.Invoices.sales.sales');
 });
 // ===============================================================
-// Purchases Route 
-Route::get('/purchases', function () {
-    return view('pages.Invoices.purchases.purchases');
-});
+// Purchases Route
 
-// Add Purchases Route 
 
-Route::get('/Addpurchases', function () {
-    return view('pages.Invoices.purchases.AddPurchases');
-});
+// Add Purchases Route
 
-Route::resource('/addPurchaseInvoice', 'PurchasesInvoiceController');
+Route::get('/Addpurchases', 'PurchasesInvoiceController@show');
+
+Route::resource('/purchases', 'PurchasesInvoiceController');
 // ===============================================================
-// Suppliers Route 
+// Suppliers Route
 
 Route::resource('/suppliers', 'SupplierController');
 // ===============================================================
-// Customers Route 
+// Customers Route
 
 Route::resource('/customers', 'CustomerController');
 // ===============================================================
-// Products Route 
+// Products Route
 
 Route::resource('/products', 'ProductController');
 
-// Add Products Route 
+// Add Products Route
 
 
 Route::get('/addProducts', 'ProductController@brand_cat');
@@ -57,15 +53,15 @@ Route::get('/addProducts', 'ProductController@brand_cat');
 
 Route::get('/editProducts/{barcode}', 'ProductController@edit');
 // ===============================================================
-// Brands Route 
+// Brands Route
 
 Route::resource('/brands', 'BrandController');
 // ===============================================================
-// Categories Route 
+// Categories Route
 
 Route::resource('/categories', 'CategoryController');
 // ===============================================================
-// Add User Route 
+// Add User Route
 
 
 Route::resource('/usersList', 'Auth\RegisterController');
@@ -73,7 +69,7 @@ Route::resource('/usersList', 'Auth\RegisterController');
 Route::get('/addUsers', function () {
     return view('pages.users.addUsers');
 });
-// User List Route 
+// User List Route
 
 
 Route::get('/updateUser/{id}', 'Auth\RegisterController@update_data');

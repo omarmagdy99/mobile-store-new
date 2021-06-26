@@ -1,15 +1,14 @@
 @extends('layouts.master')
 @section('css')
-    <!-- Internal Select2 css -->
-    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
-    <!--Internal  Datetimepicker-slider css -->
-    <link href="{{ URL::asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css') }}"
-        rel="stylesheet">
-    <link href="{{ URL::asset('assets/plugins/pickerjs/picker.min.css') }}" rel="stylesheet">
-    <!-- Internal Spectrum-colorpicker css -->
-    <link href="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.css') }}" rel="stylesheet">
-
+<!-- Internal Select2 css -->
+<link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+<!--Internal  Datetimepicker-slider css -->
+<link href="{{ URL::asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css') }}"
+    rel="stylesheet">
+<link href="{{ URL::asset('assets/plugins/pickerjs/picker.min.css') }}" rel="stylesheet">
+<!-- Internal Spectrum-colorpicker css -->
+<link href="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.css') }}" rel="stylesheet">
 @endsection
 @section('page-header')
 <!-- breadcrumb -->
@@ -55,95 +54,73 @@
 <div class="row row-sm">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
         <div class="card">
-            <div class="card-header pb-0">
-                <div class="d-flex justify-content-between">
-                    <h4 class="card-title mg-b-0">USERS TABLE</h4>
-                    <i class="mdi mdi-dots-horizontal text-gray"></i>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 mg-t-20 mg-lg-t-0">
-                        <p class="mg-b-10">Single Select with Search</p><select class="form-control select2">
-                            <option label="Choose one">
-                            </option>
-                            <option value="Firefox">
-                                Firefox
-                            </option>
-                            <option value="Chrome">
-                                Chrome
-                            </option>
-                            <option value="Safari">
-                                Safari
-                            </option>
-                            <option value="Opera">
-                                Opera
-                            </option>
-                            <option value="Internet Explorer">
-                                Internet Explorer
-                            </option>
-                        </select>
-                    </div><!-- col-6 -->
-                    <div class="col-lg-6 mg-t-20 mg-lg-t-0">
-                        <p class="mg-b-10">Single Select with Search</p><select class="form-control select2">
-                            <option label="Choose one">
-                            </option>
-                            <option value="Firefox">
-                                Firefox
-                            </option>
-                            <option value="Chrome">
-                                Chrome
-                            </option>
-                            <option value="Safari">
-                                Safari
-                            </option>
-                            <option value="Opera">
-                                Opera
-                            </option>
-                            <option value="Internet Explorer">
-                                Internet Explorer
-                            </option>
-                        </select>
-                    </div><!-- col-6 -->
-
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <input type="text" name="product_name" id="product_name" class="form-control"
-                            placeholder="Product Name">
+            <form action="{{route('purchases.store')}}" method="post">
+                {{csrf_field()}}
+                <div class="card-header pb-0">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="card-title mg-b-0">USERS TABLE</h4>
+                        <i class="mdi mdi-dots-horizontal text-gray"></i>
                     </div>
-                    <div class="col-md-3">
-                        <input type="number" name="price" id="price" class="form-control" placeholder="Price">
-                    </div>
-                    <div class="col-md-3">
-                        <input type="number" name="quantity" id="quantity" class="form-control" placeholder="quantity">
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" class="btn btn-primary addVal">add</a>
-                    </div>
+                    <div class="row my-2">
+                        <div class="col-lg-12 mg-t-20 mg-lg-t-0 mb-3">
+                            <p class="mg-b-10">supplier Name</p><select class="form-control select2" name="supplier_id">
+                                <option label="Choose one">
+                                </option>
+                                @foreach ($supplier_data as $supplier )
 
+                                <option value="{{$supplier->id}}">
+                                    {{$supplier->name}}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div><!-- col-6 -->
+                        <div class="col-lg-12 mg-t-20 mg-lg-t-0">
+                            <textarea name="note" class="form-control" cols="30" rows="3" placeholder="note"></textarea>
+                        </div><!-- col-6 -->
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <input type="text" id="product_name" class="form-control" placeholder="Product Name">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" id="price" class="form-control" placeholder="Price">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" id="quantity" class="form-control" placeholder="quantity">
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#" class="btn btn-primary addVal">add</a>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive border-top userlist-table">
-                    <input type="number" name="sub_total" id="subTotal" class="form-control" placeholder="sub total"
-                        value="0" readonly>
-                    <table id="tableDel" class="table card-table table-striped table-vcenter text-nowrap mb-0">
-                        <thead>
-                            <tr>
+                <div class="card-body">
+                    <div class="table-responsive border-top userlist-table">
+                        <label>Sub Total</label>
+                        <input type="number" name="sub_total" id="subTotal" class="form-control" placeholder="sub total"
+                            value="0" readonly>
+                        <table id="tableDel" class="table card-table table-striped table-vcenter text-nowrap mb-0">
+                            <thead>
+                                <tr>
 
 
-                                <th class="wd-lg-20p"><span>Product</span></th>
-                                <th class="wd-lg-20p"><span>Price</span></th>
-                                <th class="wd-lg-20p"><span>quantity</span></th>
-                                <th class="wd-lg-20p"><span>total</span></th>
-                                <th class="wd-lg-20p">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                                    <th class="wd-lg-20p"><span>Product</span></th>
+                                    <th class="wd-lg-20p"><span>Price</span></th>
+                                    <th class="wd-lg-20p"><span>quantity</span></th>
+                                    <th class="wd-lg-20p"><span>total</span></th>
+                                    <th class="wd-lg-20p">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn btn-primary " type="submit">save</button>
                 </div>
-            </div>
+
+            </form>
         </div>
     </div><!-- COL END -->
 </div>
@@ -156,15 +133,22 @@
 @section('js')
 <!--Internal  Datepicker js -->
 <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
-<!-- Internal Select2 js-->
+<!--Internal  jquery.maskedinput js -->
+<script src="{{ URL::asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
+<!--Internal  spectrum-colorpicker js -->
+<script src="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
+<!-- Internal Select2.min js -->
 <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
-    <!-- Internal form-elements js -->
-    <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
-    <!--Internal  pickerjs js -->
-    <script src="{{ URL::asset('assets/plugins/pickerjs/picker.min.js') }}"></script>
-
-
-
+<!--Internal Ion.rangeSlider.min js -->
+<script src="{{ URL::asset('assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
+<!--Internal  jquery-simple-datetimepicker js -->
+<script src="{{ URL::asset('assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js') }}"></script>
+<!-- Ionicons js -->
+<script src="{{ URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js') }}"></script>
+<!--Internal  pickerjs js -->
+<script src="{{ URL::asset('assets/plugins/pickerjs/picker.min.js') }}"></script>
+<!-- Internal form-elements js -->
+<script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
 <script>
     $(document).ready(function () {
 
@@ -243,10 +227,10 @@
 
 				$('tbody').append(
                     '<tr class="td-'+$i+'">' +
-                        '<td class="search">'+$product_name+'<input type="hidden" value="'+$product_name+'"></td>' +
-                        '<td ><span class="spanPrice">'+$price+'</span><input type="hidden" value="'+$price+'" class="price form-control"  ></td>' +
-                        '<td><span class="spanQuantity">'+$quantity+'</span><input type="hidden" value="'+$quantity+'" class="quantity form-control"  ></td>' +
-                        '<td><span class="spanTotal">'+$total+'</span><input type="hidden" value="'+$total+'" class="total"></td>' +
+                        '<td class="search">'+$product_name+'<input type="hidden" value="'+$product_name+'" name="product_name[]"></td>' +
+                        '<td ><span class="spanPrice">'+$price+'</span><input type="hidden" value="'+$price+'" class="price form-control"  name="price[]" ></td>' +
+                        '<td><span class="spanQuantity">'+$quantity+'</span><input type="hidden" value="'+$quantity+'" class="quantity form-control"  name="quantity[]" ></td>' +
+                        '<td><span class="spanTotal">'+$total+'</span><input type="hidden" value="'+$total+'" class="total" name="total[]"></td>' +
                         '<td><a href="#" class="btn btn-sm btn-danger delRow"><i class="las la-trash "></i></a> <a href="#" class="btn btn-sm btn-info updateRow" data-num="td-'+$i+'"><i class="las la-pen"></i></a> <a href="#" class="btn btn-sm btn-primary doneUpdate" data-num="td-'+$i+'" ><i class="las la-search" ></i></a></td>' +
                         '</tr>'
 						);

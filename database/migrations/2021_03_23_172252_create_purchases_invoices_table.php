@@ -15,11 +15,7 @@ class CreatePurchasesInvoicesTable extends Migration
     {
         Schema::create('purchases_invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('product_name');
-            $table->integer('quantity');
-            $table->integer('price');
             $table->integer('sub_total');
-            $table->integer('total');
             $table->text('notes')->nullable();
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('user_id');
