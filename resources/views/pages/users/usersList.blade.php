@@ -154,7 +154,6 @@
 
 
 @endsection
-
 @section('js')
     <script>
         $('.btn_delete').click(function() {
@@ -212,7 +211,7 @@
         @if (session()->has('edit'))
             $(document).ready(function () {
             not9();
-        
+
             });
         @endif
     </script>
