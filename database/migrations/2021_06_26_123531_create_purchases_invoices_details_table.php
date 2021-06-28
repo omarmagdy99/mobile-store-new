@@ -18,8 +18,8 @@ class CreatePurchasesInvoicesDetailsTable extends Migration
             $table->unsignedBigInteger('invoice_id');
             $table->string('product_name');
             $table->integer('quantity');
-            $table->integer('price');
-            $table->integer('total');
+            $table->double('price');
+            $table->double('total');
             $table->foreign('invoice_id')->references('id')->on('purchases_invoices')->onDelete('cascade');
             $table->timestamps();
         });
