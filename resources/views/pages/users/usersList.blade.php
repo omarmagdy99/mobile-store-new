@@ -211,7 +211,7 @@
         @if (session()->has('edit'))
             $(document).ready(function () {
             not9();
-
+        
             });
         @endif
     </script>
