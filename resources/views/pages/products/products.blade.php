@@ -13,6 +13,10 @@
     <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
     <!--Internal  treeview -->
     <link href="{{ URL::asset('assets/plugins/treeview/treeview.css') }}" rel="stylesheet" type="text/css" />
+<!--Internal   Notify -->
+<link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet" />
+<!--Internal  treeview -->
+<link href="{{URL::asset('assets/plugins/treeview/treeview.css')}}" rel="stylesheet" type="text/css" />
 
 @endsection
 @section('page-header')
@@ -31,26 +35,6 @@
     <!-- row -->
 
 
-    @if (session()->has('add'))
-        <div class="alert alert-success" role="alert">
-            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Well done!</strong> {{ session()->get('add') }}
-        </div>
-
-
-    @endif
-    @if (session()->has('delete'))
-
-        <div class="alert alert-danger" role="alert">
-            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Well done!</strong> {{ session()->get('delete') }}
-        </div>
-
-    @endif
     <div class="row">
 
 
@@ -84,7 +68,7 @@
                                     <tr>
 
                                         <td>{{ $item->barcode }}</td>
-                                        <td>{{ $item->product_name }}</td>
+                                        <td>{{ $item->product_name }} {{ $item->brand_name }} </td>
                                         <td>{{ $item->sale_price }}</td>
                                         <td>{{ $item->purchase_price }}</td>
                                         <td>{{ $item->quantity }}</td>
@@ -187,7 +171,7 @@
         @if (session()->has('edit'))
             $(document).ready(function () {
             not9();
-        
+
             });
         @endif
 
@@ -215,6 +199,39 @@
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
     <!-- Internal Modal js-->
     <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
+    <!--Internal  Notify js -->
+    <script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+    <script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
+
+        @if (session()->has('delete'))
+
+    <script>
+        notif({
+        msg: "<b>Success:</b> deleted successfully",
+        type: "success"
+    });
+    </script>
+    @endif
+    @if (session()->has('update'))
+
+    <script>
+        notif({
+        msg: "<b>Success:</b> updated successfully",
+        type: "info"
+    });
+    </script>
+
+    @endif
+    @if (session()->has('add'))
+
+    <script>
+       notif({
+        msg: "<b>Success:</b> Added successfully",
+        type: "success"
+    });
+    </script>
+
+    @endif
 
 
 @endsection

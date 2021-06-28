@@ -11,6 +11,11 @@
     <link href="{{ URL::asset('assets/plugins/multislider/multislider.css') }}" rel="stylesheet">
     <!--- Select2 css -->
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <!--Internal   Notify -->
+<link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet" />
+<!--Internal  treeview -->
+<link href="{{URL::asset('assets/plugins/treeview/treeview.css')}}" rel="stylesheet" type="text/css" />
+
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -38,34 +43,6 @@
             @endforeach
 
         </div>
-    @endif
-    @if (session('add'))
-        <div class="alert alert-success" role="alert">
-            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Well done!</strong> {{ session('add') }}
-        </div>
-
-    @endif
-    @if (session('delete'))
-        <div class="alert alert-danger" role="alert">
-            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Well done!</strong> {{ session('delete') }}
-        </div>
-
-    @endif
-
-    @if (session('update'))
-        <div class="alert alert-info" role="alert">
-            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Well done!</strong> {{ session('update') }}
-        </div>
-
     @endif
 
     <!-- row -->
@@ -263,4 +240,38 @@
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
     <!-- Internal Modal js-->
     <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
+    <!--Internal  Notify js -->
+<script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
+
+    @if (session()->has('delete'))
+
+<script>
+    notif({
+    msg: "<b>Success:</b> deleted successfully",
+    type: "success"
+});
+</script>
+@endif
+@if (session()->has('update'))
+
+<script>
+    notif({
+    msg: "<b>Success:</b> updated successfully",
+    type: "info"
+});
+</script>
+
+@endif
+@if (session()->has('add'))
+
+<script>
+   notif({
+    msg: "<b>Success:</b> Added successfully",
+    type: "success"
+});
+</script>
+
+@endif
+
 @endsection

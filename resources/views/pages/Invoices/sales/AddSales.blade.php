@@ -54,7 +54,7 @@
 <div class="row row-sm">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
         <div class="card">
-            <form action="{{route('purchases.store')}}" method="post">
+            <form action="{{route('Sales.store')}}" method="post">
                 {{csrf_field()}}
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
@@ -63,14 +63,14 @@
                     </div>
                     <div class="row my-2">
                         <div class="col-lg-12 mg-t-20 mg-lg-t-0 mb-3">
-                            <p class="mg-b-10">supplier Name</p><select class="form-control select2" name="supplier_id">
+                            <p class="mg-b-10">customer Name</p><select class="form-control select2" name="customer_id">
                                 <option label="Choose one">
                                 </option>
 
-                                @foreach ($supplier_data as $supplier )
+                                @foreach ($customer_data as $customer )
 
-                                <option value="{{$supplier->id}}">
-                                    {{$supplier->name}}
+                                <option value="{{$customer->id}}">
+                                    {{$customer->name}}
                                 </option>
                                 @endforeach
                             </select>
@@ -82,7 +82,18 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <input type="text" id="product_name" class="form-control" placeholder="Product Name">
+
+                            <select class="form-control select2"   id="product_name">
+                                <option label="Choose product">
+                                </option>
+
+                                @foreach ($product_data as $product )
+
+                                <option class="product_{{$product->id}}" value="{{$product->id}}" >
+                                    {{$product->product_name}}
+                                </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-3">
                             <input type="number" id="price" class="form-control" placeholder="Price">
@@ -165,6 +176,8 @@
             $NewsubTotal=$subTotal-$total;
             $('#subTotal').val($NewsubTotal);
 			$(this).parent().parent().remove();
+            $product_id=$(this).data('product_id');
+
 
 		})
                 // delete row end
@@ -223,7 +236,10 @@
             e.preventDefault();
 			if (!$('#product_name').val() == '' && !$('#price').val() == '' && !$('#quantity').val() == '') {
                 $i++;
-				$product_name=$('#product_name').val();
+				$product_name=$('#product_name option:selected').text();
+				$product_id=$('#product_name').val();
+				$('#product_name').val('');
+
 				$price=$('#price').val();
 				$quantity=$('#quantity').val();
                 $total=$price*$quantity;
@@ -234,11 +250,11 @@
 
 				$('tbody').append(
                     '<tr class="td-'+$i+'">' +
-                        '<td class="search">'+$product_name+'<input type="hidden" value="'+$product_name+'" name="product_name[]"></td>' +
+                        '<td class="search">'+$product_name+'<input type="hidden" value="'+$product_id+'" name="product_id[]"></td>' +
                         '<td ><span class="spanPrice">'+$price+'</span><input type="hidden" value="'+$price+'" class="price form-control"  name="price[]" ></td>' +
                         '<td><span class="spanQuantity">'+$quantity+'</span><input type="hidden" value="'+$quantity+'" class="quantity form-control"  name="quantity[]" ></td>' +
                         '<td><span class="spanTotal">'+$total+'</span><input type="hidden" value="'+$total+'" class="total" name="total[]"></td>' +
-                        '<td><a href="#" class="btn btn-sm btn-danger delRow" data-num="td-'+$i+'"><i class="las la-trash "></i></a> <a href="#" class="btn btn-sm btn-info updateRow" data-num="td-'+$i+'"><i class="las la-pen"></i></a> <a href="#" class="btn btn-sm btn-primary doneUpdate" data-num="td-'+$i+'" ><i class="las la-search" ></i></a></td>' +
+                        '<td><a href="#" class="btn btn-sm btn-danger delRow" data-num="td-'+$i+'"><i class="las la-trash "></i></a> <a href="#" class="btn btn-sm btn-info updateRow" data-num="td-'+$i+'" ><i class="las la-pen"></i></a> <a href="#" class="btn btn-sm btn-primary doneUpdate" data-num="td-'+$i+'" ><i class="las la-search" ></i></a></td>' +
                         '</tr>'
 						);
 						$('.doneUpdate').hide();

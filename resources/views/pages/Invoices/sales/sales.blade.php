@@ -27,7 +27,7 @@
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
-                    <a class="btn btn-outline-primary btn-block wd-15p" href="products/add">Add sales Invoice</a>
+                    <a class="btn btn-outline-primary btn-block wd-15p" href="AddSales">Add sales Invoice</a>
                     <div class="mt-3">
                         <h4 class="card-title mg-b-0">Sales Invoice List</h4>
                     </div>

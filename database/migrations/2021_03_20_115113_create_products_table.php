@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('barcode');
             $table->string('product_name');
-            $table->integer('balance');
+            $table->integer('quantity');
             $table->string('image');
             $table->integer('sale_price');
             $table->string('brand_name');

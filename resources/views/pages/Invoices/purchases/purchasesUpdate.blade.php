@@ -54,7 +54,8 @@
 <div class="row row-sm">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
         <div class="card">
-            <form action="{{route('purchases.store')}}" method="post">
+            <form action="/purchasesUpdate/{{$d_purchases_invoice->id}}" method="get">
+                {{method_field('PUT')}}
                 {{csrf_field()}}
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
@@ -66,6 +67,8 @@
                             <p class="mg-b-10">supplier Name</p><select class="form-control select2" name="supplier_id">
                                 <option label="Choose one">
                                 </option>
+                                <option value="{{$d_purchases_invoice->supplier_id}}" selected>
+                                    {{$d_purchases_invoice->supplierName->name}} </option>
 
                                 @foreach ($supplier_data as $supplier )
 
@@ -76,7 +79,8 @@
                             </select>
                         </div><!-- col-6 -->
                         <div class="col-lg-12 mg-t-20 mg-lg-t-0">
-                            <textarea name="note" class="form-control" cols="30" rows="3" placeholder="note"></textarea>
+                            <textarea name="note" class="form-control" cols="30" rows="3"
+                                placeholder="note">{{$d_purchases_invoice->notes}}</textarea>
                         </div><!-- col-6 -->
 
                     </div>
@@ -100,12 +104,10 @@
                     <div class="table-responsive border-top userlist-table">
                         <label>Sub Total</label>
                         <input type="number" name="sub_total" id="subTotal" class="form-control" placeholder="sub total"
-                            value="0" readonly>
+                            value="{{$d_purchases_invoice->sub_total}}" readonly>
                         <table id="tableDel" class="table card-table table-striped table-vcenter text-nowrap mb-0">
                             <thead>
                                 <tr>
-
-
                                     <th class="wd-lg-20p"><span>Product</span></th>
                                     <th class="wd-lg-20p"><span>Price</span></th>
                                     <th class="wd-lg-20p"><span>quantity</span></th>
@@ -114,6 +116,31 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                $i=1;
+                                @endphp
+                                @foreach ($purchases_invoices_details as $item)
+                                <tr class="td-<?php echo $i;?>">
+                                    <td class="search"><input type="hidden" value="{{$item->product_name}}"
+                                        name="product_name[]"><input type="hidden" value="{{$item->id}}"
+                                        name="product_id[]">{{$item->product_name}} </td>
+                                    <td><span class="spanPrice">{{$item->price}}</span><input type="hidden"
+                                            value="{{$item->price}}" class="price form-control" name="price[]"></td>
+                                    <td><span class="spanQuantity">{{$item->quantity}}</span><input type="hidden"
+                                            value="{{$item->quantity}}" class="quantity form-control" name="quantity[]">
+                                    </td>
+                                    <td><span class="spanTotal">{{$item->total}}</span><input type="hidden"
+                                            value="{{$item->total}}" class="total" name="total[]"></td>
+                                    <td><a class="btn btn-sm btn-danger delRow" data-num="td-<?php echo $i;?>"><input type="hidden" class="status" name="status[]" value="unDelete"><i
+                                                class="las la-trash "></i></a> <a class="btn btn-sm btn-info updateRow"
+                                            data-num="td-<?php echo $i;?>"><i class="las la-pen"></i></a>
+                                        <a class="btn btn-sm btn-primary doneUpdate" data-num="td-<?php echo $i;?>"
+                                            data-i="<?php echo $i;?>"><i class="las la-search"></i></a></td>
+                                </tr>
+                                @php
+                                $i++;
+                                @endphp
+                                @endforeach
 
                             </tbody>
                         </table>
@@ -156,7 +183,7 @@
 		});
 
                 // delete row start
-
+                $('.doneUpdate').hide();
 		$('#tableDel').on('click','.delRow',function(){
             $num=$(this).data('num');
 
@@ -164,8 +191,9 @@
             $subTotal=$('#subTotal').val();
             $NewsubTotal=$subTotal-$total;
             $('#subTotal').val($NewsubTotal);
-			$(this).parent().parent().remove();
 
+			$(this).parent().parent().hide();
+            $('.'+$num+' .status').val('delete');
 		})
                 // delete row end
 
@@ -218,7 +246,8 @@
 
 
         // add button start
-		$i=0;
+        $i=$('table tr:last-child .doneUpdate').data('i');
+
 		$('.addVal').click(function(e) {
             e.preventDefault();
 			if (!$('#product_name').val() == '' && !$('#price').val() == '' && !$('#quantity').val() == '') {
@@ -234,11 +263,11 @@
 
 				$('tbody').append(
                     '<tr class="td-'+$i+'">' +
-                        '<td class="search">'+$product_name+'<input type="hidden" value="'+$product_name+'" name="product_name[]"></td>' +
+                        '<td class="search">'+$product_name+'<input type="hidden" value="'+$product_name+'" name="product_name[]"></td> ' +
                         '<td ><span class="spanPrice">'+$price+'</span><input type="hidden" value="'+$price+'" class="price form-control"  name="price[]" ></td>' +
                         '<td><span class="spanQuantity">'+$quantity+'</span><input type="hidden" value="'+$quantity+'" class="quantity form-control"  name="quantity[]" ></td>' +
                         '<td><span class="spanTotal">'+$total+'</span><input type="hidden" value="'+$total+'" class="total" name="total[]"></td>' +
-                        '<td><a href="#" class="btn btn-sm btn-danger delRow" data-num="td-'+$i+'"><i class="las la-trash "></i></a> <a href="#" class="btn btn-sm btn-info updateRow" data-num="td-'+$i+'"><i class="las la-pen"></i></a> <a href="#" class="btn btn-sm btn-primary doneUpdate" data-num="td-'+$i+'" ><i class="las la-search" ></i></a></td>' +
+                        '<td><a  class="btn btn-sm btn-danger delRow" data-num="td-'+$i+'"><input type="hidden" class="status" name="status[]" value="unDelete"><i class="las la-trash "></i></a> <a  class="btn btn-sm btn-info updateRow" data-num="td-'+$i+'"><i class="las la-pen"></i></a> <a  class="btn btn-sm btn-primary doneUpdate" data-num="td-'+$i+'" ><i class="las la-search" ></i></a></td>' +
                         '</tr>'
 						);
 						$('.doneUpdate').hide();

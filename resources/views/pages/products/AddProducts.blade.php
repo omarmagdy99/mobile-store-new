@@ -68,24 +68,10 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-
-                                <select name="brand_id" class="form-control SlectBox" onclick="console.log($(this).val())"
-                                    onchange="console.log('change is firing')">
-                                    <!--placeholder-->
-                                    <option disabled selected>Choose Brand</option>
-                                    @foreach ($brand_data as $item)
-                                        <option value="{{ $item->id }}">{{ $item->brand_name }}
-                                        </option>
-
-                                    @endforeach
-                                </select>
+                                <input type="text" class="form-control" name="brand_name" placeholder="brand name">
                             </div>
                             <div class="form-group col-md-4">
                                 <input type="number" class="form-control" name="sales_price" placeholder="Sales Price">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <input type="number" class="form-control" name="purchase_price"
-                                    placeholder="Purchase Price">
                             </div>
                             <div class="form-group col-md-4">
                                 <input type="number" class="form-control" name="quantity" placeholder="Quantity">

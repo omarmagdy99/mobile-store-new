@@ -23,14 +23,18 @@ Route::get('/', function () {
 Route::get('/sales', function () {
     return view('pages.Invoices.sales.sales');
 });
+Route::get('/AddSales', 'SalesInvoiceController@show');
+Route::resource('/Sales', 'SalesInvoiceController');
 // ===============================================================
 // Purchases Route
-
 
 // Add Purchases Route
 
 Route::get('/Addpurchases', 'PurchasesInvoiceController@show');
 
+Route::get('/purchasesDetails/{id}', 'PurchasesInvoiceController@detials');
+Route::get('/purchasesShowUpdate/{id}', 'PurchasesInvoiceController@edit');
+Route::get('/purchasesUpdate/{id}', 'PurchasesInvoiceController@update');
 Route::resource('/purchases', 'PurchasesInvoiceController');
 // ===============================================================
 // Suppliers Route
@@ -48,14 +52,14 @@ Route::resource('/products', 'ProductController');
 // Add Products Route
 
 
-Route::get('/addProducts', 'ProductController@brand_cat');
+Route::get('/addProducts', 'ProductController@cat');
 // Update Product Route
 
 Route::get('/editProducts/{barcode}', 'ProductController@edit');
 // ===============================================================
 // Brands Route
 
-Route::resource('/brands', 'BrandController');
+
 // ===============================================================
 // Categories Route
 
