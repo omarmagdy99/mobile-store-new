@@ -23,7 +23,7 @@
                 </div>
                 <div class="user-info">
                     <h4 class="font-weight-semibold mt-3 mb-0">{{ Auth::user()->name }}
-                       
+
                     </h4>
                     <span class="mb-0 text-muted">{{ Auth::user()->permission }}</span>
                 </div>
@@ -140,7 +140,7 @@
                             d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
                     </svg><span class="side-menu__label">Reports</span><i class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'productsReports')) }}">Products
+                    <li><a class="slide-item" href="{{ url('/' . ($page = 'productSearch')) }}">Products
                             Reports</a>
                     </li>
                     <li><a class="slide-item" href="{{ url('/' . ($page = 'invoicesReports')) }}">Invoices

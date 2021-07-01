@@ -16,7 +16,7 @@
     <div class="my-auto">
         <div class="d-flex">
             <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                Empty</span>
+                PURCHASES INVOICES</span>
         </div>
     </div>
     <div class="d-flex my-xl-auto right-content">
@@ -51,6 +51,21 @@
 @endsection
 @section('content')
 <!--Row-->
+@if ($errors->any())
+<div class="alert alert-danger">
+
+@foreach ($errors->all() as $error)
+<div class="alert alert-danger mg-b-0" role="alert">
+    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Oh snap!</strong> {{ $error }}
+</div>
+@endforeach
+
+</div>
+@endif
+
 <div class="row row-sm">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
         <div class="card">
@@ -58,7 +73,7 @@
                 {{csrf_field()}}
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">USERS TABLE</h4>
+                        <h4 class="card-title mg-b-0">ADD PURCHASES INVOICES</h4>
                         <i class="mdi mdi-dots-horizontal text-gray"></i>
                     </div>
                     <div class="row my-2">

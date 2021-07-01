@@ -20,7 +20,7 @@ class SalesInvoiceController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.invoices.sales.sales');
     }
 
     /**
@@ -41,30 +41,52 @@ class SalesInvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $subTotal=0;
+        $request->validate([
+
+            'note'=>['required'],
+            'customer_id'=>['required'],
+            'product_id'=>['required'],
+            'quantity'=>['required'],
+            'price'=>['required'],
+
+        ],[
+            'customer_id.required'=>'you must enter customer name'
+        ]);
+            $subTotal=0;
+            for($i=0;$i<count($request->price);$i++){
+                $total=$request->price[$i]*$request->quantity[$i];
+                $subTotal+=+$total;
+            }
+            $data_naw=date("Y-m-d h:i:s");
+            $id_invoice=DB::table('sales_invoices')->insertGetID([
+                'sub_total'=>$subTotal,
+                'notes'=>$request->note,
+                'user_id'=>Auth::user()->id,
+                'customer_id'=>$request->customer_id,
+                'created_at'=>$data_naw
+        ]);
         for($i=0;$i<count($request->price);$i++){
-            $total=$request->price[$i]*$request->quantity[$i];
-            $subTotal+=+$total;
+            $details=sales_invoice_details::where('sales_invoice_id','=',$id_invoice)->where('product_id','=',$request->product_id[$i])->first();
+            if(!isset($details)){
+
+                $total=$request->price[$i]*$request->quantity[$i];
+                sales_invoice_details::create([
+                    'sales_invoice_id'=>$id_invoice,
+                    'product_id'=>$request->product_id[$i],
+                    'qunatity'=>$request->quantity[$i],
+                    'price'=>$request->price[$i],
+                    'total'=>$total
+                ]);
+                $product_quantity=product::where('id','=',$request->product_id[$i])->first();
+                $quantity=$product_quantity->quantity;
+               $newQuantity=$quantity-$request->quantity[$i];
+               $product_quantity->update([
+                   'quantity'=>$newQuantity
+                ]);
+            }
         }
-        $data_naw=date("Y-m-d h:i:s");
-        $id_invoice=DB::table('sales_invoices')->insertGetID([
-            'sub_total'=>$subTotal,
-            'notes'=>$request->note,
-            'user_id'=>Auth::user()->id,
-            'customer_id'=>$request->customer_id,
-            'created_at'=>$data_naw
-    ]);
-    for($i=0;$i<count($request->price);$i++){
-        $total=$request->price[$i]*$request->quantity[$i];
-        sales_invoice_details::create([
-            'sales_invoice_id'=>$id_invoice,
-            'product_id'=>$request->product_id[$i],
-            'qunatity'=>$request->quantity[$i],
-            'price'=>$request->price[$i],
-            'total'=>$total
-    ]);
-    }
-    return redirect('AddSales');
+        $request->session()->flash('add','adedd Successfully');
+        return redirect('/sales');
     }
 
     /**

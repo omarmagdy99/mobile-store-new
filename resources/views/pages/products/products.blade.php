@@ -56,9 +56,9 @@
                                     <th class="border-bottom-0" style="width: 2%">Barcode</th>
                                     <th class="wd-5p border-bottom-0">Name</th>
                                     <th class="wd-5p border-bottom-0">Sale Price</th>
-                                    <th class="wd-5p border-bottom-0">Purchase Price</th>
+                                    
                                     <th class="wd-5p border-bottom-0">Quantity</th>
-                                    <th class="wd-20p border-bottom-0">Image</th>
+                                    <th class="wd-15p border-bottom-0">Image</th>
                                     <th class="wd-10p border-bottom-0">Operations</th>
                                 </tr>
                             </thead>
@@ -70,10 +70,10 @@
                                         <td>{{ $item->barcode }}</td>
                                         <td>{{ $item->product_name }} {{ $item->brand_name }} </td>
                                         <td>{{ $item->sale_price }}</td>
-                                        <td>{{ $item->purchase_price }}</td>
+
                                         <td>{{ $item->quantity }}</td>
                                         <td>
-                                            <img src="storage/{{ $item->image }}" alt="product Image" width="100">
+                                            <img src="storage/{{ $item->image }}" alt="product Image" width="50">
                                         </td>
                                         <td>
 

@@ -52,16 +52,20 @@
                     {{ method_field('PUT') }}
                     <div class="row">
                         <div class="form-group col-md-6">
+                            <label >Barcode</label>
+
                             <input type="text" class="form-control" name="barcode" placeholder="Barcode"
                                 value="{{ $product->barcode }}">
                             <input type="hidden" name="id" value="{{ $product->id }}">
                         </div>
                         <div class="form-group col-md-6">
+                            <label >product name</label>
+
                             <input type="text" class="form-control" name="product_name" placeholder="Name"
                                 value="{{ $product->product_name }}">
                         </div>
                         <div class="form-group col-md-6">
-
+                            <label >category name</label>
                             <select name="category_id" class="form-control SlectBox"
                                 onclick="console.log($(this).val())" onchange="console.log('change is firing')">
                                 <!--placeholder-->
@@ -78,24 +82,26 @@
                         <div class="form-group col-md-6">
 
                             <div class="form-group col-md-6">
+                                <label >brand name</label>
                                 <input type="text" class="form-control" name="brand_name" placeholder="brand name"
                                     value="{{ $product->brand_name }}">
                             </div>
                         </div>
                         <div class="form-group col-md-4">
+                            <label >Sales Price</label>
+
                             <input type="number" class="form-control" value="{{ $product->sale_price }}"
-                                name="sales_price" placeholder="Sales Price">
+                            name="sales_price" placeholder="Sales Price">
                         </div>
                         <div class="form-group col-md-4">
-                            <input type="number" class="form-control" name="purchase_price" placeholder="Purchase Price"
-                                value="{{ $product->purchase_price }}">
-                        </div>
-                        <div class="form-group col-md-4">
+
+                            <label >quantity</label>
                             <input type="number" class="form-control" name="quantity" placeholder="Quantity"
                                 value="{{ $product->quantity }}">
                         </div>
                         <div class="form-group col-md-12 file_image">
                             <div class=" mt-4 ">
+
                                 <label for="">Product Image</label><br>
                                 <img src="{{ URL('storage') }}/{{ $product->image }}" alt="product Image" width="100"
                                     name="pic">

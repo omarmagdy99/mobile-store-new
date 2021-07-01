@@ -51,10 +51,27 @@
 @endsection
 @section('content')
 <!--Row-->
+@if ($errors->any())
+<div class="alert alert-danger">
+
+@foreach ($errors->all() as $error)
+<div class="alert alert-danger mg-b-0" role="alert">
+    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Oh snap!</strong> {{ $error }}
+</div>
+@endforeach
+
+</div>
+@endif
 <div class="row row-sm">
+
+    <!--div-->
+
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
         <div class="card">
-            <form action="{{route('Sales.store')}}" method="post">
+            <form action="{{route('sales.store')}}" method="post">
                 {{csrf_field()}}
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
@@ -81,25 +98,41 @@
 
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-3 product_div">
 
-                            <select class="form-control select2"   id="product_name">
+                            <select class="form-control select2 "   id="product_name">
                                 <option label="Choose product">
                                 </option>
 
                                 @foreach ($product_data as $product )
 
-                                <option class="product_{{$product->id}}" value="{{$product->id}}" >
+                                <option class="product_{{$product->id}} " value="{{$product->id}}" >
                                     {{$product->product_name}}
+
                                 </option>
                                 @endforeach
                             </select>
+                            {{-- select(change)->val
+                                 --}}
+                            <ul name="" class="select_price" >
+                                @foreach ($product_data as $product )
+                                <li class="price_{{$product->id}} ">{{$product->sale_price}}</li>
+
+                                <li class="quantity_{{$product->id}} ">{{$product->quantity}}</li>
+                                @endforeach
+                            </ul>
                         </div>
                         <div class="col-md-3">
-                            <input type="number" id="price" class="form-control" placeholder="Price">
+
+                            <input type="number" id="price" class="form-control" placeholder="Price" readonly>
                         </div>
-                        <div class="col-md-3">
-                            <input type="number" id="quantity" class="form-control" placeholder="quantity">
+                        <div class="col-md-3 quantity_select">
+                            <select class="form-control select2 "   id="quantity">
+                                <option label="Choose product">
+                                </option>
+
+
+                            </select>
                         </div>
                         <div class="col-md-3">
                             <a href="#" class="btn btn-primary addVal">add</a>
@@ -161,11 +194,26 @@
 <script src="{{ URL::asset('assets/plugins/pickerjs/picker.min.js') }}"></script>
 <!-- Internal form-elements js -->
 <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
+
+
 <script>
     $(document).ready(function () {
-
+        $('.select_price').hide();
 		});
+        //get select value
+        $('.product_div select').on('change',function(){
+            $selectId=$(this).val();
+            $selectPrice=$('.price_'+$selectId+'').html();
+             $('#price').val($selectPrice);
+            $selectQuantity=parseInt($('.quantity_'+$selectId+'').html());
+            $('.quantity_select select option ').remove();
+            $('.quantity_select select').append('<option label="Choose product">');
+                for($i=1;$i<=$selectQuantity;$i++){
+                    $('.quantity_select select').append('</option> <option  >'+$i+'</option>');
+                }
 
+
+        })
                 // delete row start
 
 		$('#tableDel').on('click','.delRow',function(){

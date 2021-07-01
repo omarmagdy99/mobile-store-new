@@ -7,6 +7,10 @@
     <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+<!--Internal   Notify -->
+<link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet" />
+<!--Internal  treeview -->
+<link href="{{URL::asset('assets/plugins/treeview/treeview.css')}}" rel="stylesheet" type="text/css" />
 
 @endsection
 @section('page-header')
@@ -23,7 +27,7 @@
 @section('content')
     <!-- row -->
     <div class="row">
-        <!--div-->
+
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
@@ -109,5 +113,38 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
+    <!--Internal  Notify js -->
+    <script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+    <script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
+
+        @if (session()->has('delete'))
+
+    <script>
+        notif({
+        msg: "<b>Success:</b> deleted successfully",
+        type: "success"
+    });
+    </script>
+    @endif
+    @if (session()->has('update'))
+
+    <script>
+        notif({
+        msg: "<b>Success:</b> updated successfully",
+        type: "info"
+    });
+    </script>
+
+    @endif
+    @if (session()->has('add'))
+
+    <script>
+       notif({
+        msg: "<b>Success:</b> Added successfully",
+        type: "success"
+    });
+    </script>
+
+    @endif
 
 @endsection

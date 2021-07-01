@@ -40,7 +40,19 @@ class PurchasesInvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   $subTotal=0;
+    { $request->validate([
+
+        'note'=>['required'],
+        'supplier_id'=>['required'],
+        'product_name'=>['required'],
+        'quantity'=>['required'],
+        'price'=>['required'],
+
+        ],[
+        'supplier_id.required'=>'you must enter supplier name'
+        ]);
+
+        $subTotal=0;
         for($i=0;$i<count($request->price);$i++){
         $Total=$request->price[$i]*$request->quantity[$i];
 
@@ -58,17 +70,36 @@ class PurchasesInvoiceController extends Controller
 
 
     for($i=0;$i<count($request->price);$i++){
-        $total=$request->price[$i]*$request->quantity[$i];
-        purchases_invoices_details::create([
-            'invoice_id'=>$p_id,
-            'product_name'=>$request->product_name[$i],
-            'price'=>$request->price[$i],
-            'quantity'=>$request->quantity[$i],
-            'total'=>$total,
-    ]);
+        $uniquePur=purchases_invoices_details::where('invoice_id','=',$p_id)->where('product_name','=',$request->product_name[$i])->first();
+        if(empty($uniquePur)){
+            $total=$request->price[$i]*$request->quantity[$i];
+            purchases_invoices_details::create([
+                'invoice_id'=>$p_id,
+                'product_name'=>$request->product_name[$i],
+                'price'=>$request->price[$i],
+                'quantity'=>$request->quantity[$i],
+                'total'=>$total,
+            ]);
+        }
+        else{
+            $total=$request->price[$i]*$request->quantity[$i];
+           $oldTotal= $uniquePur->total;
+           $oldQuantity=$uniquePur->quantity;
+           $newTotal=$total+$oldTotal;
+           $newQuantity=$request->quantity[$i]+$oldQuantity;
+           $uniquePur->update([
+            'quantity'=> $newQuantity,
+            'total'=> $newTotal,
+        ]);
+
+
+
+        }
 
 
     }
+    $request->session()->flash('add','adedd Successfully');
+
     return redirect('/purchases');
     }
 
@@ -107,64 +138,98 @@ class PurchasesInvoiceController extends Controller
      */
     public function update($id,Request $request)
     {
+        // $request->validate([
+
+        //     'note'=>['required'],
+        //     'supplier_id'=>['required'],
+        //     'product_name'=>['required'],
+        //     'quantity'=>['required'],
+        //     'price'=>['required'],
+
+        //     ],[
+        //     'supplier_id.required'=>'you must enter supplier name'
+        //     ]);
+        //     $subTotal=0;
+        // for($i=0;$i<count($request->price);$i++){
+
+        //     if($request->status[$i]=='unDelete'){
+        //         if(empty($request->product_id[$i])){
+        //             $uniquePur=purchases_invoices_details::where('invoice_id','=',$id)->where('product_name','=',$request->product_name[$i])->first();
+        //             if(empty($uniquePur)){
+        //             $Total=$request->price[$i]*$request->quantity[$i];
+
+        //             $subTotal+=+$Total;
+        //             }
+        //         }
+        //         else{
+        //             $Total=$request->price[$i]*$request->quantity[$i];
+
+        //             $subTotal+=+$Total;
+        //         }
+        //     }
+        // }
+        // $purchases_invoice=purchases_invoice::find($id)->get()->first();
+        // $purchases_invoice->update([
+        // 'sub_total'=>$subTotal,
+        // 'notes'=>$request->note,
+        // 'supplier_id'=>$request->supplier_id,
+        // ]);
+        // if(isset($request->price)){
 
 
-        $purchases_invoice=purchases_invoice::find($id)->get()->first();
-        $purchases_invoice->update([
-        'sub_total'=>$request->sub_total,
-        'notes'=>$request->note,
-        'supplier_id'=>$request->supplier_id,
-        ]);
-        if(isset($request->price)){
+        //     for($i=0;$i<count($request->price);$i++){
+        //         $total=$request->price[$i]*$request->quantity[$i];
+        //         //case (1) old invoice
+        //         if(isset($request->product_id[$i])){ //-> if isset
+        //             //get data
+        //             $product=purchases_invoices_details::find($request->product_id[$i])->get()->first();
+
+        //                 // case (A) delete Invoice
+        //             if($request->status[$i]=='delete'){//->if Delete
+        //                 // delete Invoice
+        //                 $product->forceDelete();
+        //             } //->if Delete
+
+        //             // case (B) UnDelete invoice
+        //             else{ //-> if Undelete invoice
+        //                 // update invoice = update
+
+        //                 $product->update([
+        //                     'product_name'=>$request->product_name[$i],
+        //                     'price'=>$request->price[$i],
+        //                     'quantity'=>$request->quantity[$i],
+        //                     'total'=>$total,
+        //                 ]);
+        //             }//-> if Undelete invoice  = update
+        //         }//-> if isset
+        //         //case (2) new invoice
+        //         else{//->if not isset
+        //             // case (A) UnDelete invoice
+
+        //             if($request->status[$i]=='unDelete'){//->if unDelete
 
 
-            for($i=0;$i<count($request->price);$i++){
+        //                 $uniquePur=purchases_invoices_details::where('invoice_id','=',$id)->where('product_name','=',$request->product_name[$i])->first();
+        //                 if(empty($uniquePur)){
 
+        //                     // create invoice
+        //                     purchases_invoices_details::create([
+        //                         'invoice_id'=>$id,
+        //                         'product_name'=>$request->product_name[$i],
+        //                         'price'=>$request->price[$i],
+        //                         'quantity'=>$request->quantity[$i],
+        //                         'total'=>$total,
+        //                     ]);
+        //                 }
 
-                //case (1) old invoice
-                if(isset($request->product_id[$i])){ //-> if isset
-                    //get data
-                    $product=purchases_invoices_details::find($request->product_id[$i])->get()->first();
+        //                 } //->if unDelete
+        //         }//->if not isset
+        //     }
+        // }
 
-                        // case (A) delete Invoice
-                    if($request->status[$i]=='delete'){//->if Delete
-                        // delete Invoice
-                        $product->forceDelete();
-                    } //->if Delete
-
-                    // case (B) UnDelete invoice
-                    else{ //-> if Undelete invoice
-                        // update invoice = update
-
-                        $product->update([
-                            'product_name'=>$request->product_name[$i],
-                            'price'=>$request->price[$i],
-                            'quantity'=>$request->quantity[$i],
-                            'total'=>$request->total[$i],
-                        ]);
-                    }//-> if Undelete invoice  = update
-                }//-> if isset
-                //case (2) new invoice
-                else{//->if not isset
-                    // case (A) UnDelete invoice
-
-                    if($request->status[$i]=='unDelete'){//->if unDelete
-
-                        // create invoice
-                        purchases_invoices_details::create([
-                            'invoice_id'=>$id,
-                            'product_name'=>$request->product_name[$i],
-                            'price'=>$request->price[$i],
-                            'quantity'=>$request->quantity[$i],
-                            'total'=>$request->total[$i],
-                        ]);
-                    } //->if unDelete
-                }//->if not isset
-            }
-        }
-
-        $request->session()->flash('update', 'update successfully');
-        return redirect('/purchases');
+        // $request->session()->flash('update', 'update successfully');
+        // return redirect('/purchases');
+            return $request;
     }
     public function detials($id){
         $d_purchases_invoice=purchases_invoice::where('id','=',$id)->get()->first();

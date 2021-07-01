@@ -20,11 +20,9 @@ Route::get('/', function () {
     return view('home');
 });
 // Sales Route
-Route::get('/sales', function () {
-    return view('pages.Invoices.sales.sales');
-});
+
 Route::get('/AddSales', 'SalesInvoiceController@show');
-Route::resource('/Sales', 'SalesInvoiceController');
+ Route::resource('/sales', 'SalesInvoiceController');
 // ===============================================================
 // Purchases Route
 
@@ -38,6 +36,16 @@ Route::get('/purchasesUpdate/{id}', 'PurchasesInvoiceController@update');
 Route::resource('/purchases', 'PurchasesInvoiceController');
 // ===============================================================
 // Suppliers Route
+
+// ===============================================================
+// Reportes Route
+
+
+
+Route::get('/productReportes/{id}','ProductController@showReport');
+Route::get('/productSearch','ProductController@productSearch');
+// ===============================================================
+// Reportes Route
 
 Route::resource('/suppliers', 'SupplierController');
 // ===============================================================
