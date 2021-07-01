@@ -139,7 +139,7 @@ class SalesInvoiceController extends Controller
         $d_sales_invoice=sales_invoice::where('id','=',$request->id)->first();
         $details=sales_invoice_details::where('sales_invoice_id','=',$request->id)->get();
         // $product_data=product::where('id','$d_sales_invoice->product_id')->first();
-        $qu
+    
         for ($i=0; $i < count($details); $i++) {
             echo $details[$i];
         }

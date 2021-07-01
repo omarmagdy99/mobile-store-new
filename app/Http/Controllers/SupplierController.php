@@ -38,9 +38,9 @@ class SupplierController extends Controller
     {
         $request->validate([
             'name' => ['required'],
+            //!==================================================================
+            'phone' => 'required|numeric|digits:11|starts_with:0',
 
-            'phone' => ['required', 'max:11'],
-            's_phone' => ['max:11'],
             'company_name' => ['required'],
         ]);
         supplier::create([

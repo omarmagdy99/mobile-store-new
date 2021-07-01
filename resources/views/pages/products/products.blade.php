@@ -58,7 +58,7 @@
                                     <th class="wd-5p border-bottom-0">Sale Price</th>
                                     
                                     <th class="wd-5p border-bottom-0">Quantity</th>
-                                    <th class="wd-15p border-bottom-0">Image</th>
+                                    <th class="wd-10p border-bottom-0">Image</th>
                                     <th class="wd-10p border-bottom-0">Operations</th>
                                 </tr>
                             </thead>
