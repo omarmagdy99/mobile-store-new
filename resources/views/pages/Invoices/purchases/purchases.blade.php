@@ -61,8 +61,7 @@
                                     <th class="border-bottom-0" style="width: 2%">invoice number</th>
                                     <th class="wd-lg-20p">Sub Total</th>
                                     <th class="wd-lg-20p">Date</th>
-                                    <th class="wd-lg-20p">Suppiler Name</th>
-                                    <th class="wd-lg-20p">User Name</th>
+                                    
                                     <th class="wd-lg-20p">note</th>
                                     <th class="wd-lg-20p">Action</th>
                                 </tr>
@@ -80,8 +79,7 @@
                                     <td>{{ $purchases->id }}</td>
                                     <td>{{ $purchases->sub_total }}</td>
                                     <td>{{ $purchases->created_at }}</td>
-                                    <td>{{ $purchases->supplier_id }}</td>
-                                    <td>{{ $purchases->user_id }}</td>
+
                                     <td>{{ $purchases->notes }}</td>
                                     <td>
                                         <a href="/purchasesDetails/{{ $purchases->id }}" class="btn btn-sm btn-primary">

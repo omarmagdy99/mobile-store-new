@@ -90,7 +90,7 @@
                                 <tr>
 
                                     <td class="tx-right" >Sub-Total</td>
-                                    <td class="tx-right" colspan="4">${{$subTotal}}</td>
+                                    <td class="tx-right" colspan="4">${{number_format($subTotal)}}</td>
                                 </tr>
                                 <tr>
 

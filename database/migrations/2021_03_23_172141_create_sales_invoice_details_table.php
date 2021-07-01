@@ -17,7 +17,7 @@ class CreateSalesInvoiceDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('sales_invoice_id');
             $table->unsignedBigInteger('product_id');
-            $table->integer('qunatity');
+            $table->integer('quantity');
             $table->double('price');
             $table->double('total');
             $table->timestamps();

@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 Route::get('/AddSales', 'SalesInvoiceController@show');
  Route::resource('/sales', 'SalesInvoiceController');
+ Route::get('/salesDetails/{id}', 'salesInvoiceController@detials');
 // ===============================================================
 // Purchases Route
 

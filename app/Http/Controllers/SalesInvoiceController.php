@@ -19,8 +19,8 @@ class SalesInvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('pages.invoices.sales.sales');
+    {  $sales_invoice=DB::select('select * from sales_invoices ');
+        return view('pages.invoices.sales.sales',compact('sales_invoice'));
     }
 
     /**
@@ -110,7 +110,10 @@ class SalesInvoiceController extends Controller
      */
     public function edit(sales_invoice $sales_invoice)
     {
-        //
+        // $d_purchases_invoice=purchases_invoice::where('id','=',$id)->get()->first();
+        // $purchases_invoices_details=purchases_invoices_details::where('invoice_id','=',$id)->get();
+        // $supplier_data=supplier::get();
+        // return view('pages.Invoices.sales.salesUpdate',compact(['d_purchases_invoice','purchases_invoices_details','supplier_data']));
     }
 
     /**
@@ -131,8 +134,21 @@ class SalesInvoiceController extends Controller
      * @param  \App\sales_invoice  $sales_invoice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(sales_invoice $sales_invoice)
+    public function destroy(Request $request)
     {
-        //
+        $d_sales_invoice=sales_invoice::where('id','=',$request->id)->first();
+        $details=sales_invoice_details::where('sales_invoice_id','=',$request->id)->get();
+        // $product_data=product::where('id','$d_sales_invoice->product_id')->first();
+        $qu
+        for ($i=0; $i < count($details); $i++) {
+            echo $details[$i];
+        }
+
+    }
+    public function detials($id){
+        $d_sales_invoice=sales_invoice::where('id','=',$id)->get()->first();
+        $sales_invoice_details=sales_invoice_details::where('sales_invoice_id','=',$id)->get();
+        return view('pages.Invoices.sales.salesDetails',compact(['d_sales_invoice','sales_invoice_details']));
+
     }
 }
