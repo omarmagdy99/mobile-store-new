@@ -24,7 +24,7 @@ class ProductController extends Controller
     {
 
         $category_data = category::all();
-        return view('pages.products.AddProducts', [ 'category_data' => $category_data]);
+        return view('pages.products.AddProducts', ['category_data' => $category_data]);
     }
 
     /**
@@ -52,7 +52,7 @@ class ProductController extends Controller
             'category_id' => ['required'],
             'pic' => ['required'],
             'sales_price' => ['required'],
-            'quantity' => ['required'],
+            'quantity' => 'required|integer|min:1'
 
         ]);
         product::create([
@@ -90,7 +90,7 @@ class ProductController extends Controller
         $product = product::where('barcode', $barcode)->first();
 
         $category_data = category::all();
-        return view('pages.products.UpdateProducts', [ 'category_data' => $category_data, 'product' => $product]);
+        return view('pages.products.UpdateProducts', ['category_data' => $category_data, 'product' => $product]);
     }
 
     /**
@@ -114,11 +114,11 @@ class ProductController extends Controller
         ]);
         $id = $request->id;
         $p_data = product::where('id', $id)->first();
-        if($p_data->image!=$request->pic){
+        if ($p_data->image != $request->pic) {
 
-            $file=$request->file('pic')->store('productName', 'public');
+            $file = $request->file('pic')->store('productName', 'public');
             Storage::disk('public')->delete($p_data->image);
-        }else{
+        } else {
             $file = $request->pic;
         }
 
@@ -133,7 +133,6 @@ class ProductController extends Controller
         ]);
         session()->flash('edit', 'edited successfully');
         return redirect('/products');
-
     }
 
     /**
@@ -151,43 +150,40 @@ class ProductController extends Controller
         return redirect('/products');
     }
 
-    public function showReport($id){
-        if($id=='allProduct'){
-            $reportProduct=product::get();
-            if(isset($reportProduct)){
+    public function showReport($id)
+    {
+        if ($id == 'allProduct') {
+            $reportProduct = product::get();
+            if (isset($reportProduct)) {
 
-                return view('pages.reportes.allProductReportes',compact('reportProduct'));
+                return view('pages.reportes.allProductReportes', compact('reportProduct'));
             }
+        } else {
 
-        }else {
+            $reportProduct = product::where('id', '=', $id)->first();
+            if (isset($reportProduct)) {
 
-            $reportProduct=product::where('id','=',$id)->first();
-            if(isset($reportProduct)){
-
-                return view('pages.reportes.productReportes',compact('reportProduct'));
-            }else{
+                return view('pages.reportes.productReportes', compact('reportProduct'));
+            } else {
                 return view('pages.reportes.search');
-
             }
         }
     }
 
 
 
-    public function productSearch(Request $request){
+    public function productSearch(Request $request)
+    {
 
-        if(isset($request->barcode)){
-            $product_data=product::where('barcode','like',"%$request->barcode%")->get();
-            return view('pages.reportes.search',compact('product_data'));
-        }
-        else if (isset($request->product_name)){
-            $product_data=product::where('product_name','like',"%$request->product_name%")->get();
-            return view('pages.reportes.search',compact('product_data'));
-        }
-        else if(isset($request->brand_name))
-        {
-            $product_data=product::where('brand_name','like',"%$request->brand_name%")->get();
-            return view('pages.reportes.search',compact('product_data'));
+        if (isset($request->barcode)) {
+            $product_data = product::where('barcode', 'like', "%$request->barcode%")->get();
+            return view('pages.reportes.search', compact('product_data'));
+        } else if (isset($request->product_name)) {
+            $product_data = product::where('product_name', 'like', "%$request->product_name%")->get();
+            return view('pages.reportes.search', compact('product_data'));
+        } else if (isset($request->brand_name)) {
+            $product_data = product::where('brand_name', 'like', "%$request->brand_name%")->get();
+            return view('pages.reportes.search', compact('product_data'));
         }
         return view('pages.reportes.search');
     }
