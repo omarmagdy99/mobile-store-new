@@ -73,7 +73,7 @@ class SalesInvoiceController extends Controller
                 sales_invoice_details::create([
                     'sales_invoice_id'=>$id_invoice,
                     'product_id'=>$request->product_id[$i],
-                    'qunatity'=>$request->quantity[$i],
+                    'quantity'=>$request->quantity[$i],
                     'price'=>$request->price[$i],
                     'total'=>$total
                 ]);
@@ -95,7 +95,7 @@ class SalesInvoiceController extends Controller
      * @param  \App\sales_invoice  $sales_invoice
      * @return \Illuminate\Http\Response
      */
-    public function show(sales_invoice $sales_invoice)
+    public function show(Request $request)
     {
         $customer_data=customer::all();
         $product_data=product::all();
@@ -108,12 +108,13 @@ class SalesInvoiceController extends Controller
      * @param  \App\sales_invoice  $sales_invoice
      * @return \Illuminate\Http\Response
      */
-    public function edit(sales_invoice $sales_invoice)
+    public function edit($id)
     {
-        // $d_purchases_invoice=purchases_invoice::where('id','=',$id)->get()->first();
-        // $purchases_invoices_details=purchases_invoices_details::where('invoice_id','=',$id)->get();
-        // $supplier_data=supplier::get();
-        // return view('pages.Invoices.sales.salesUpdate',compact(['d_purchases_invoice','purchases_invoices_details','supplier_data']));
+        $d_sales_invoice=sales_invoice::where('id','=',$id)->get()->first();
+        $sales_invoices_details=sales_invoice_details::where('sales_invoice_id','=',$id)->get();
+        $customer_data=customer::get();
+        $product_data=product::all();
+        return view('pages.Invoices.sales.salesUpdate',compact(['product_data','d_sales_invoice','sales_invoices_details','customer_data']));
     }
 
     /**
@@ -123,9 +124,110 @@ class SalesInvoiceController extends Controller
      * @param  \App\sales_invoice  $sales_invoice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, sales_invoice $sales_invoice)
+    public function update($id,Request $request)
     {
-        //
+        $request->validate([
+
+            'note'=>['required'],
+            'customer_id'=>['required'],
+            'product_id'=>['required'],
+            'quantity'=>['required'],
+            'price'=>['required'],
+
+        ],[
+            'customer_id.required'=>'you must enter customer name'
+        ]);
+        $subTotal=0;
+        for($i=0;$i<count($request->price);$i++){
+
+            if($request->status[$i]=='unDelete'){
+
+                    $Total=$request->price[$i]*$request->quantity[$i];
+
+                    $subTotal+=+$Total;
+            }
+        }
+        $sales_invoice=sales_invoice::where('id',$id)->first();
+        $sales_invoice->update([
+        'sub_total'=>$subTotal,
+        'notes'=>$request->note,
+        'customer_id'=>$request->customer_id,
+        ]);
+        // if(isset($request->price)){
+
+
+        // for($i=0;$i<count($request->price);$i++){
+        //     $total=$request->price[$i]*$request->quantity[$i];
+
+        //     //case (1) old invoice
+        //     if(isset($request->product_id[$i])){ //-> if isset
+
+        //         //get data
+
+        //             // case (A) delete Invoice
+        //         if($request->status[$i]=='delete'){//->if Delete
+        //             // delete Invoice
+        //             $product=sales_invoices_details::find($request->product_id[$i])->get()->first();
+        //             $product->forceDelete();
+        //         } //->if Delete
+
+        //         // case (B) UnDelete invoice
+        //         elseif($request->status[$i]=='unDelete'){ //-> if Undelete invoice
+        //             // update invoice = update
+
+        //             $Update_product=sales_invoices_details::where('id','=',$request->product_id[$i])->first();
+        //             $Update_product->update([
+        //                 'product_name'=>$request->product_name[$i],
+        //                 'price'=>$request->price[$i],
+        //                 'quantity'=>$request->quantity[$i],
+        //                 'total'=>$total,
+        //             ]);
+        //         }//-> if Undelete invoice  = update
+        //     }//-> if isset
+        //     //case (2) new invoice
+        //     elseif(empty($request->product_id[$i])){//->if not isset
+        //         // case (A) UnDelete invoice
+
+        //         if($request->status[$i]=='unDelete'){//->if unDelete
+
+        //             //this product new
+        //             $uniquePur=sales_invoices_details::where('invoice_id','=',$id)->where('product_name','=',$request->product_name[$i])->first();
+        //             if(empty($uniquePur)){
+
+        //                 // create invoice
+        //                 sales_invoices_details::create([
+        //                     'invoice_id'=>$id,
+        //                     'product_name'=>$request->product_name[$i],
+        //                     'price'=>$request->price[$i],
+        //                     'quantity'=>$request->quantity[$i],
+        //                     'total'=>$total,
+        //                 ]);
+        //             }
+        //             //this product new
+        //             //this product old
+        //             elseif(isset($uniquePur)){
+        //                 // $uniquePur=sales_invoices_details::where('invoice_id','=',$id)->where('product_name','=',$request->product_name[$i])->first();
+
+        //                 $newQuantity=$request->quantity[$i]+$uniquePur->quantity;
+        //                 $newTotal=$newQuantity*$uniquePur->price;
+
+        //                 // update invoice
+        //                 $uniquePur->update([
+        //                     'quantity'=>$newQuantity,
+        //                     'total'=>$newTotal,
+        //                 ]);
+
+
+        //             }
+        //             //this product old
+
+        //             } //->if unDelete
+        //     }//->if not isset
+        // }
+        // }
+
+        $request->session()->flash('update', 'update successfully');
+        return redirect('/sales');
     }
 
     /**
@@ -139,10 +241,18 @@ class SalesInvoiceController extends Controller
         $d_sales_invoice=sales_invoice::where('id','=',$request->id)->first();
         $details=sales_invoice_details::where('sales_invoice_id','=',$request->id)->get();
         // $product_data=product::where('id','$d_sales_invoice->product_id')->first();
-        $qu
+        $quantity=0;
         for ($i=0; $i < count($details); $i++) {
-            echo $details[$i];
+            $productSelect=product::where('id','=',$details[$i]->product_id)->first();
+            $quantity=$productSelect->quantity+$details[$i]->quantity;
+            $productSelect->update([
+            'quantity'=>$quantity,
+        ]);
         }
+        $d_sales_invoice->delete();
+        session()->flash('delete', 'deleted successfully');
+        return back();
+
 
     }
     public function detials($id){

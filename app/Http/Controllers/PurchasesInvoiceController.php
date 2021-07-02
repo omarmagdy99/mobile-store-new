@@ -153,19 +153,7 @@ class PurchasesInvoiceController extends Controller
         for($i=0;$i<count($request->price);$i++){
 
             if($request->status[$i]=='unDelete'){
-                // if(empty($request->product_id[$i])){
-                //     $uniquePur=purchases_invoices_details::where('invoice_id','=',$id)->where('product_name','=',$request->product_name[$i])->first();
-                //     if(empty($uniquePur)){
-                //     $Total=$request->price[$i]*$request->quantity[$i];
-
-                //     $subTotal+=+$Total;
-                //     }
-                // }
-                // else if(isset($uniquePur)){
-                //     $Total=$request->price[$i]*$request->quantity[$i];
-
-                //     $subTotal+=+$Total;
-                // }
+               
                     $Total=$request->price[$i]*$request->quantity[$i];
 
                     $subTotal+=+$Total;

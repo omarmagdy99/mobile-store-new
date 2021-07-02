@@ -21,9 +21,11 @@ Route::get('/', function () {
 });
 // Sales Route
 
-Route::get('/AddSales', 'SalesInvoiceController@show');
+Route::get('/Addsales', 'SalesInvoiceController@show');
  Route::resource('/sales', 'SalesInvoiceController');
  Route::get('/salesDetails/{id}', 'salesInvoiceController@detials');
+ Route::get('/salesShowUpdate/{id}', 'SalesInvoiceController@edit');
+ Route::get('/salesUpdate/{id}', 'SalesInvoiceController@update');
 // ===============================================================
 // Purchases Route
 

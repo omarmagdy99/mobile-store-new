@@ -134,7 +134,7 @@
 
                                                         <td><?php echo $i++;?></td>
                                                         <td>{{$salesDetails->productName->product_name}}</td>
-                                                        <td>{{$salesDetails->qunatity}}</td>
+                                                        <td>{{$salesDetails->quantity}}</td>
                                                         <td>{{$salesDetails->price}}</td>
                                                         <td>{{$salesDetails->total}}</td>
 
