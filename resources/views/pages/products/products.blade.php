@@ -49,17 +49,17 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="example" class="table key-buttons text-md-nowrap ">
+                    <div class="table-responsive ">
+                        <table id="example" class="table card-table  key-buttons text-md-nowrap ">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0" style="width: 2%">Barcode</th>
-                                    <th class="wd-5p border-bottom-0">Name</th>
-                                    <th class="wd-5p border-bottom-0">Sale Price</th>
-                                    
-                                    <th class="wd-5p border-bottom-0">Quantity</th>
-                                    <th class="wd-10p border-bottom-0">Image</th>
-                                    <th class="wd-10p border-bottom-0">Operations</th>
+                                    <th class="border-bottom-0" style="width: 1%">Barcode</th>
+                                    <th class="wd-lg-5p border-bottom-0">Name</th>
+                                    <th class="wd-lg-5p border-bottom-0">Sale Price</th>
+
+                                    <th class="wd-lg-5p border-bottom-0">Quantity</th>
+                                    <th class="wd-lg-5p border-bottom-0">Operations</th>
+                                    <th class="wd-lg-5p border-bottom-0">Image</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,11 +70,7 @@
                                         <td>{{ $item->barcode }}</td>
                                         <td>{{ $item->product_name }} {{ $item->brand_name }} </td>
                                         <td>{{ $item->sale_price }}</td>
-
                                         <td>{{ $item->quantity }}</td>
-                                        <td>
-                                            <img src="storage/{{ $item->image }}" alt="product Image" width="50">
-                                        </td>
                                         <td>
 
                                             <a class=" btn btn-sm btn-info " href="/editProducts/{{ $item->barcode }}"
@@ -89,6 +85,10 @@
                                             </a>
 
                                         </td>
+                                        <td>
+                                            <img src="storage/{{ $item->image }}" alt="product Image" width="50">
+                                        </td>
+
 
 
                                     </tr>

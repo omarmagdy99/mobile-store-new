@@ -156,16 +156,16 @@ class ProductController extends Controller
             $reportProduct = product::get();
             if (isset($reportProduct)) {
 
-                return view('pages.reportes.allProductReportes', compact('reportProduct'));
+                return view('pages.reportes.product.allProductReportes', compact('reportProduct'));
             }
         } else {
 
             $reportProduct = product::where('id', '=', $id)->first();
             if (isset($reportProduct)) {
 
-                return view('pages.reportes.productReportes', compact('reportProduct'));
+                return view('pages.reportes.product.productReportes', compact('reportProduct'));
             } else {
-                return view('pages.reportes.search');
+                return view('pages.reportes.product.search');
             }
         }
     }
@@ -177,14 +177,14 @@ class ProductController extends Controller
 
         if (isset($request->barcode)) {
             $product_data = product::where('barcode', 'like', "%$request->barcode%")->get();
-            return view('pages.reportes.search', compact('product_data'));
+            return view('pages.reportes.product.search', compact('product_data'));
         } else if (isset($request->product_name)) {
             $product_data = product::where('product_name', 'like', "%$request->product_name%")->get();
-            return view('pages.reportes.search', compact('product_data'));
+            return view('pages.reportes.product.search', compact('product_data'));
         } else if (isset($request->brand_name)) {
             $product_data = product::where('brand_name', 'like', "%$request->brand_name%")->get();
-            return view('pages.reportes.search', compact('product_data'));
+            return view('pages.reportes.product.search', compact('product_data'));
         }
-        return view('pages.reportes.search');
+        return view('pages.reportes.product.search');
     }
 }

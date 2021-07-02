@@ -153,78 +153,90 @@ class SalesInvoiceController extends Controller
         'notes'=>$request->note,
         'customer_id'=>$request->customer_id,
         ]);
-        // if(isset($request->price)){
+        if(isset($request->price)){
 
 
-        // for($i=0;$i<count($request->price);$i++){
-        //     $total=$request->price[$i]*$request->quantity[$i];
+        for($i=0;$i<count($request->price);$i++){
+            $total=$request->price[$i]*$request->quantity[$i];
 
-        //     //case (1) old invoice
-        //     if(isset($request->product_id[$i])){ //-> if isset
+            //case (1) old invoice
+            if(isset($request->sales_id[$i])){ //-> if isset
 
-        //         //get data
+                //get data
 
-        //             // case (A) delete Invoice
-        //         if($request->status[$i]=='delete'){//->if Delete
-        //             // delete Invoice
-        //             $product=sales_invoices_details::find($request->product_id[$i])->get()->first();
-        //             $product->forceDelete();
-        //         } //->if Delete
+                    // case (A) delete Invoice
+                if($request->status[$i]=='delete'){//->if Delete
+                    // delete Invoice
 
-        //         // case (B) UnDelete invoice
-        //         elseif($request->status[$i]=='unDelete'){ //-> if Undelete invoice
-        //             // update invoice = update
+                    $quantity=0;
+                    $details=sales_invoice_details::where('id','=',$request->sales_id[$i])->first();
 
-        //             $Update_product=sales_invoices_details::where('id','=',$request->product_id[$i])->first();
-        //             $Update_product->update([
-        //                 'product_name'=>$request->product_name[$i],
-        //                 'price'=>$request->price[$i],
-        //                 'quantity'=>$request->quantity[$i],
-        //                 'total'=>$total,
-        //             ]);
-        //         }//-> if Undelete invoice  = update
-        //     }//-> if isset
-        //     //case (2) new invoice
-        //     elseif(empty($request->product_id[$i])){//->if not isset
-        //         // case (A) UnDelete invoice
+                        $productSelect=product::where('id','=',$request->product_id[$i])->first();
+                        $product_quantity=$productSelect->quantity;
+                        $request_quantity=$request->quantity;
 
-        //         if($request->status[$i]=='unDelete'){//->if unDelete
+                        $quantity=floatval($product_quantity)+ floatval($request_quantity);
+                        $productSelect->update([
+                        'quantity'=>$quantity,
+                        ]);
 
-        //             //this product new
-        //             $uniquePur=sales_invoices_details::where('invoice_id','=',$id)->where('product_name','=',$request->product_name[$i])->first();
-        //             if(empty($uniquePur)){
+                    $details->delete();
 
-        //                 // create invoice
-        //                 sales_invoices_details::create([
-        //                     'invoice_id'=>$id,
-        //                     'product_name'=>$request->product_name[$i],
-        //                     'price'=>$request->price[$i],
-        //                     'quantity'=>$request->quantity[$i],
-        //                     'total'=>$total,
-        //                 ]);
-        //             }
-        //             //this product new
-        //             //this product old
-        //             elseif(isset($uniquePur)){
-        //                 // $uniquePur=sales_invoices_details::where('invoice_id','=',$id)->where('product_name','=',$request->product_name[$i])->first();
+                } //->if Delete
 
-        //                 $newQuantity=$request->quantity[$i]+$uniquePur->quantity;
-        //                 $newTotal=$newQuantity*$uniquePur->price;
+                // case (B) UnDelete invoice
+                elseif($request->status[$i]=='unDelete'){ //-> if Undelete invoice
+                    // update invoice = update
 
-        //                 // update invoice
-        //                 $uniquePur->update([
-        //                     'quantity'=>$newQuantity,
-        //                     'total'=>$newTotal,
-        //                 ]);
+                    $Update_product=sales_invoice_details::where('id','=',$request->sales_id[$i])->first();
+                    $Update_product->update([
+                        'product_id'=>$request->product_id[$i],
+                        'price'=>$request->price[$i],
+                        'quantity'=>$request->quantity[$i],
+                        'total'=>$total,
+                    ]);
+                }//-> if Undelete invoice  = update
+            }//-> if isset
+            //case (2) new invoice
+            elseif(empty($request->sales_id[$i])){//->if not isset
+                // case (A) UnDelete invoice
+
+                if($request->status[$i]=='unDelete'){//->if unDelete
+
+                    //this product new
+                    $uniquePur=sales_invoice_details::where('sales_invoice_id','=',$id)->where('product_id','=',$request->product_id[$i])->first();
+                    if(empty($uniquePur)){
+
+                        // create invoice
+                        sales_invoice_details::create([
+                            'sales_invoice_id'=>$id,
+                            'product_id'=>$request->product_id[$i],
+                            'price'=>$request->price[$i],
+                            'quantity'=>$request->quantity[$i],
+                            'total'=>$total,
+                        ]);
+                    }
+                    //this product new
+                    //this product old
+                    elseif(isset($uniquePur)){
+
+                        $newQuantity=$request->quantity[$i]+$uniquePur->quantity;
+                        $newTotal=$newQuantity*$uniquePur->price;
+
+                        // update invoice
+                        $uniquePur->update([
+                            'quantity'=>$newQuantity,
+                            'total'=>$newTotal,
+                        ]);
 
 
-        //             }
-        //             //this product old
+                    }
+                    //this product old
 
-        //             } //->if unDelete
-        //     }//->if not isset
-        // }
-        // }
+                    } //->if unDelete
+            }//->if not isset
+        }
+        }
 
         $request->session()->flash('update', 'update successfully');
         return redirect('/sales');
@@ -261,4 +273,60 @@ class SalesInvoiceController extends Controller
         return view('pages.Invoices.sales.salesDetails',compact(['d_sales_invoice','sales_invoice_details']));
 
     }
+    public function showReport($id)
+    {
+
+        $d_sales_invoice=sales_invoice::where('id','=',$id)->get()->first();
+        $sales_invoice_details=sales_invoice_details::where('sales_invoice_id','=',$id)->get();
+        return view('pages.reportes.sales.salesReportes',compact(['d_sales_invoice','sales_invoice_details']));
+
+    }
+
+
+
+    public function salesSearch(Request $request)
+    {
+        $from=date($request->date_from);
+        $to=date($request->date_to);
+        $id=$request->id;
+        $customer_name=$request->customer_name;
+        if($request->search_to=='from_date'){
+            if(!empty($from &&$to)){
+
+                $invoice_data=sales_invoice::whereBetween('created_at',[$from.'%',$to.'%'])->get();
+            }
+            else{
+                $invoice_data=sales_invoice::where('created_at','like',"%$from%")->get();
+
+            }
+
+
+        }else{
+            if(isset($id)){
+
+                $invoice_data=sales_invoice::where('id','like',"%$id%")->get();
+            }else{
+                $id_customer=customer::where('name','like',"%$customer_name%")->get();
+                for($i=0;$i<count($id_customer);$i++){
+                    $invoice_data[$i]=sales_invoice::where('customer_id','=',$id_customer[$i]->id)->get();
+
+
+                }
+
+
+
+            }
+
+
+        }
+        if(empty($invoice_data)){
+
+            return view('pages.reportes.sales.search',compact('id','customer_name','from','to'));
+        }else{
+
+            return view('pages.reportes.sales.search',compact('invoice_data','id','customer_name','from','to'));
+        }
+
+    }
+
 }

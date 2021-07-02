@@ -44,9 +44,15 @@ Route::resource('/purchases', 'PurchasesInvoiceController');
 // Reportes Route
 
 
+// report sales
+Route::get('/salesReportes/{id}','SalesInvoiceController@showReport');
+Route::get('/salesShow','SalesInvoiceController@salesSearch');
 
+// report sales
+// report product
 Route::get('/productReportes/{id}','ProductController@showReport');
 Route::get('/productSearch','ProductController@productSearch');
+// report product
 // ===============================================================
 // Reportes Route
 

@@ -149,7 +149,8 @@
                                 @foreach ($sales_invoices_details as $item)
                                 <tr class="td-<?php echo $i;?>">
                                     <td class="search"><input type="hidden" value="{{$item->id}}"
-                                            name="product_id[]">{{$item->productName->product_name}} </td>
+                                        name="sales_id[]"><input type="hidden" value="{{$item->product_id}}"
+                                        name="product_id[]">{{$item->productName->product_name}} </td>
                                     <td><span class="spanPrice">{{$item->price}}</span><input type="hidden"
                                             value="{{$item->price}}" class="price form-control" name="price[]"></td>
                                     <td><span class="spanQuantity">{{$item->quantity}}</span><input type="hidden"
@@ -295,6 +296,7 @@
 			if (!$('#product_name').val() == '' && !$('#price').val() == '' && !$('#quantity').val() == '') {
                 $i++;
                 $product_name=$('#product_name option:selected').text();				$price=$('#price').val();
+                $product_id=$('#product_name option:selected').val();				$price=$('#price').val();
 				$quantity=$('#quantity').val();
                 $total=$price*$quantity;
                 $subTotal=parseInt($('#subTotal').val());
@@ -304,7 +306,7 @@
 
 				$('tbody').append(
                     '<tr class="td-'+$i+'">' +
-                        '<td class="search">'+$product_name+'<input type="hidden" value="'+$product_name+'" name="product_name[]"></td> ' +
+                        '<td class="search">'+$product_name+'<input type="hidden" value="'+$product_name+'" name="product_name[]"><input type="hidden" value="'+$product_id+'" name="product_id[]"></td> ' +
                         '<td ><span class="spanPrice">'+$price+'</span><input type="hidden" value="'+$price+'" class="price form-control"  name="price[]" ></td>' +
                         '<td><span class="spanQuantity">'+$quantity+'</span><input type="hidden" value="'+$quantity+'" class="quantity form-control"  name="quantity[]" ></td>' +
                         '<td><span class="spanTotal">'+$total+'</span><input type="hidden" value="'+$total+'" class="total" name="total[]"></td>' +
