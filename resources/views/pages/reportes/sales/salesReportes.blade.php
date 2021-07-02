@@ -46,71 +46,48 @@
 								<div class="card-body">
 									<div class="invoice-header">
 										<h1 class="invoice-title">Invoice</h1>
-										<div class="billed-from">
-											<h6>BootstrapDash, Inc.</h6>
-											<p>201 Something St., Something Town, YT 242, Country 6546<br>
-											Tel No: 324 445-4544<br>
-											Email: youremail@companyname.com</p>
-										</div><!-- billed-from -->
+
 									</div><!-- invoice-header -->
 									<div class="row mg-t-20">
-										<div class="col-md">
-											<label class="tx-gray-600">Billed To</label>
-											<div class="billed-to">
-												<h6>Juan Dela Cruz</h6>
-												<p>4033 Patterson Road, Staten Island, NY 10301<br>
-												Tel No: 324 445-4544<br>
-												Email: youremail@companyname.com</p>
-											</div>
-										</div>
+
 										<div class="col-md">
 											<label class="tx-gray-600">Invoice Information</label>
-											<p class="invoice-info-row"><span>Invoice No</span> <span>GHT-673-00</span></p>
-											<p class="invoice-info-row"><span>Project ID</span> <span>32334300</span></p>
-											<p class="invoice-info-row"><span>Issue Date:</span> <span>November 21, 2017</span></p>
-											<p class="invoice-info-row"><span>Due Date:</span> <span>November 30, 2017</span></p>
+											<p class="invoice-info-row"><span>Invoice No:</span> <span>{{$d_sales_invoice->id}}</span></p>
+											<p class="invoice-info-row"><span>user name:</span> <span>{{$d_sales_invoice->usersName->name}}</span></p>
+											<p class="invoice-info-row"><span>customer name:</span> <span>{{$d_sales_invoice->customerName->name}}</span></p>
+											<p class="invoice-info-row"><span>created at:</span> <span>{{$d_sales_invoice->created_at}}</span></p>
 										</div>
 									</div>
 									<div class="table-responsive mg-t-40">
 										<table class="table table-invoice border text-md-nowrap mb-0">
 											<thead>
 												<tr>
+													<th class="wd-20p">#</th>
 													<th class="wd-20p">Type</th>
-													<th class="wd-40p">Description</th>
+
 													<th class="tx-center">QNTY</th>
 													<th class="tx-right">Unit Price</th>
 													<th class="tx-right">Amount</th>
 												</tr>
 											</thead>
 											<tbody>
+                                                @php
+                                                    $i=1;
+                                                @endphp
+                                                @foreach ($sales_invoice_details as $sales)
+
 												<tr>
-													<td>Website Design</td>
-													<td class="tx-12">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam...</td>
-													<td class="tx-center">2</td>
-													<td class="tx-right">$150.00</td>
-													<td class="tx-right">$300.00</td>
+													<td>@php echo $i++;
+                                                    @endphp</td>
+													<td>{{$sales->product_id}}</td>
+													
+													<td class="tx-center">{{$sales->product_id}}</td>
+													<td class="tx-right">${{$sales->product_id}}</td>
+													<td class="tx-right">${{$sales->product_id}}0</td>
 												</tr>
-												<tr>
-													<td>Firefox Plugin</td>
-													<td class="tx-12">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque...</td>
-													<td class="tx-center">1</td>
-													<td class="tx-right">$1,200.00</td>
-													<td class="tx-right">$1,200.00</td>
-												</tr>
-												<tr>
-													<td>iPhone App</td>
-													<td class="tx-12">Et harum quidem rerum facilis est et expedita distinctio</td>
-													<td class="tx-center">2</td>
-													<td class="tx-right">$850.00</td>
-													<td class="tx-right">$1,700.00</td>
-												</tr>
-												<tr>
-													<td>Android App</td>
-													<td class="tx-12">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut</td>
-													<td class="tx-center">3</td>
-													<td class="tx-right">$850.00</td>
-													<td class="tx-right">$2,550.00</td>
-												</tr>
+                                                @endforeach
+
+
 												<tr>
 													<td class="valign-middle" colspan="2" rowspan="4">
 														<div class="invoice-notes">

@@ -115,8 +115,7 @@
                     </svg><span class="side-menu__label">Users</span><i class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
                     <li><a class="slide-item" href="{{ url('/' . ($page = 'usersList')) }}">Users List</a></li>
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'usersPermission')) }}">Users
-                            Permissions</a>
+
                     </li>
                     <li><a class="slide-item" href="{{ url('/' . ($page = 'addUsers')) }}">Add New User</a></li>
 
@@ -141,7 +140,7 @@
                     <li><a class="slide-item" href="{{ url('/' . ($page = 'salesShow')) }}">Sales
                             Reports</a>
                     </li>
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'customersReports')) }}">Customers
+                    <li><a class="slide-item" href="{{ url('/' . ($page = 'customersReports')) }}">purchases
                             Reports</a>
                     </li>
 
