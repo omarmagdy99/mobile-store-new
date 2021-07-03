@@ -43,10 +43,9 @@ class PurchasesInvoiceController extends Controller
     {
         $request->validate([
 
-            'note' => ['required'],
             'supplier_id' => ['required'],
             'product_name' => ['required'],
-            'quantity' => 'required|integer|min:1',
+            'quantity' => 'required|min:1',
             'price' => ['required'],
 
         ], [
@@ -135,7 +134,6 @@ class PurchasesInvoiceController extends Controller
     {
         $request->validate([
 
-            'note' => ['required'],
             'supplier_id' => ['required'],
             'product_name' => ['required'],
             'quantity' => ['required'],
@@ -148,7 +146,7 @@ class PurchasesInvoiceController extends Controller
         for ($i = 0; $i < count($request->price); $i++) {
 
             if ($request->status[$i] == 'unDelete') {
-               
+
                 $Total = $request->price[$i] * $request->quantity[$i];
 
                 $subTotal += +$Total;
