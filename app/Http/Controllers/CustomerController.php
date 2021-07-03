@@ -7,33 +7,18 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // دالة خاصة باحضار البيانات المخزنة في قواعد البيانات لعرضها في الشاشة
+
     public function index()
     {
+        //ووضعها في متغيرModelسطر خاص باحضار جميع البيانات من ال 
         $customer_data = customer::all();
+
+        //All customerسطر خاص بارسال البيانات الي الشاشة 
         return view('pages.customers.customers', compact('customer_data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -49,35 +34,11 @@ class CustomerController extends Controller
         return redirect('/customers');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(customer $customer)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(customer $customer)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\customer  $customer
-     * @return \Illuminate\Http\Response
-     */
+
+
+
     public function update(Request $request)
     {
         $request->validate([
@@ -94,12 +55,6 @@ class CustomerController extends Controller
         return redirect('/customers');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\customer  $customer
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request)
     {
         customer::where('id', $request->id)->delete();

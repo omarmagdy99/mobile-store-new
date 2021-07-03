@@ -14,13 +14,32 @@ class CreateSalesInvoicesTable extends Migration
     public function up()
     {
         Schema::create('sales_invoices', function (Blueprint $table) {
+            //unsignedBigIntegerحقل من نوع 
+            //Auto incrementلا يقبل القيم السالبة و 
+            //عدد الخانات المسموح بها 20
             $table->id();
+
+            //حقل يقبل ارقام فقط
             $table->integer('sub_total');
+
+            // ويمكن تركة فارغtext حقل من نوع 
             $table->text('notes')->nullable();
+            // ===============================
+
+            // لا يقبل القيم السالبة
+            //عدد الخانات المسموح بها 20
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('customer_id');
+            // ============================
+
+            //سطرين خاصيين بتعريف المفتاح الخارجي في الجدول
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            //onDelete Cascade 
+            //  متعلق بهForeignKeyعند مسح المفتاح الرئيسي يمسح كل 
+            // ===================================
+
+            //حقل الخاص ب وضع التاريخ و التوقيت الحالي في الجدول
             $table->timestamps();
         });
     }
