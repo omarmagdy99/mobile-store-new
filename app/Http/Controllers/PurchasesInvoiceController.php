@@ -43,7 +43,6 @@ class PurchasesInvoiceController extends Controller
     {
         $request->validate([
 
-            'note' => ['required'],
             'supplier_id' => ['required'],
             'product_name' => ['required'],
             'quantity' => 'required|min:1',
@@ -135,7 +134,6 @@ class PurchasesInvoiceController extends Controller
     {
         $request->validate([
 
-            'note' => ['required'],
             'supplier_id' => ['required'],
             'product_name' => ['required'],
             'quantity' => ['required'],

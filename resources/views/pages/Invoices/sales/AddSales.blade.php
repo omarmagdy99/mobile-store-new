@@ -1,53 +1,54 @@
 @extends('layouts.master')
 @section('css')
-<!-- Internal Select2 css -->
-<link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
-<!--Internal  Datetimepicker-slider css -->
-<link href="{{ URL::asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css') }}" rel="stylesheet">
-<link href="{{ URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css') }}"
-    rel="stylesheet">
-<link href="{{ URL::asset('assets/plugins/pickerjs/picker.min.css') }}" rel="stylesheet">
-<!-- Internal Spectrum-colorpicker css -->
-<link href="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.css') }}" rel="stylesheet">
+    <!-- Internal Select2 css -->
+    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <!--Internal  Datetimepicker-slider css -->
+    <link href="{{ URL::asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css') }}"
+        rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css') }}"
+        rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/pickerjs/picker.min.css') }}" rel="stylesheet">
+    <!-- Internal Spectrum-colorpicker css -->
+    <link href="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.css') }}" rel="stylesheet">
 @endsection
 @section('page-header')
-<!-- breadcrumb -->
-<div class="breadcrumb-header justify-content-between">
-    <div class="my-auto">
-        <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                Empty</span>
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+            <div class="d-flex">
+                <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    Empty</span>
+            </div>
         </div>
-    </div>
-    <div class="d-flex my-xl-auto right-content">
-        <div class="pr-1 mb-3 mb-xl-0">
-            <button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
-        </div>
-        <div class="pr-1 mb-3 mb-xl-0">
-            <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
-        </div>
-        <div class="pr-1 mb-3 mb-xl-0">
-            <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
-        </div>
-        <div class="mb-3 mb-xl-0">
-            <div class="btn-group dropdown">
-                <button type="button" class="btn btn-primary">14 Aug 2019</button>
-                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                    id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate"
-                    data-x-placement="bottom-end">
-                    <a class="dropdown-item" href="#">2015</a>
-                    <a class="dropdown-item" href="#">2016</a>
-                    <a class="dropdown-item" href="#">2017</a>
-                    <a class="dropdown-item" href="#">2018</a>
+        <div class="d-flex my-xl-auto right-content">
+            <div class="pr-1 mb-3 mb-xl-0">
+                <button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
+            </div>
+            <div class="pr-1 mb-3 mb-xl-0">
+                <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
+            </div>
+            <div class="pr-1 mb-3 mb-xl-0">
+                <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
+            </div>
+            <div class="mb-3 mb-xl-0">
+                <div class="btn-group dropdown">
+                    <button type="button" class="btn btn-primary">14 Aug 2019</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                        id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate"
+                        data-x-placement="bottom-end">
+                        <a class="dropdown-item" href="#">2015</a>
+                        <a class="dropdown-item" href="#">2016</a>
+                        <a class="dropdown-item" href="#">2017</a>
+                        <a class="dropdown-item" href="#">2018</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- breadcrumb -->
+    <!-- breadcrumb -->
 @endsection
 @section('content')
 <!--Row-->
@@ -228,11 +229,11 @@
 
     //   عند اختيار المنتج input  الجزء المسؤول عن نقل سعر المنتج و كمية المنتج إلى
         //get select value
-        $('.product_div select').on('change',function(){
-            $selectId=$(this).val();
-            $selectPrice=$('.price_'+$selectId+'').html();
-             $('#price').val($selectPrice);
-            $selectQuantity=parseInt($('.quantity_'+$selectId+'').html());
+        $('.product_div select').on('change', function() {
+            $selectId = $(this).val();
+            $selectPrice = $('.price_' + $selectId + '').html();
+            $('#price').val($selectPrice);
+            $selectQuantity = parseInt($('.quantity_' + $selectId + '').html());
             $('.quantity_select select option ').remove();
             $('.quantity_select select').append('<option label="Choose product">');
                 for($i=1;$i<=$selectQuantity;$i++){
@@ -249,12 +250,12 @@
 		$('#tableDel').on('click','.delRow',function(){
             $num=$(this).data('num');
 
-            $total=$('.'+$num+' td .total').val();
-            $subTotal=$('#subTotal').val();
-            $NewsubTotal=$subTotal-$total;
+            $total = $('.' + $num + ' td .total').val();
+            $subTotal = $('#subTotal').val();
+            $NewsubTotal = $subTotal - $total;
             $('#subTotal').val($NewsubTotal);
-			$(this).parent().parent().remove();
-            $product_id=$(this).data('product_id');
+            $(this).parent().parent().remove();
+            $product_id = $(this).data('product_id');
 
 
 		})
@@ -280,27 +281,27 @@ $('#tableDel').on('click','.doneUpdate',function(){
     // this step to select Row(start)
 			$num=$(this).data('num');
             // this step to select Row(end)
-			$('.'+$num+' .quantity,.'+$num+' .price').attr('type','hidden');
+            $('.' + $num + ' .quantity,.' + $num + ' .price').attr('type', 'hidden');
             // select input to change val(start)
-			$priceUpdate=$('.'+$num+' .price').val();
-			$quantityUpdate=$('.'+$num+' .quantity').val();
+            $priceUpdate = $('.' + $num + ' .price').val();
+            $quantityUpdate = $('.' + $num + ' .quantity').val();
             // select input to change val(end)
             // this step to change sub total (start)
-            $total=$quantityUpdate*$priceUpdate;
-            $UpdateSubTotal=parseInt($('#subTotal').val());
-            $oldTotal=parseInt($('.'+$num+' .total').val());
-            if($oldTotal>$total){
-                $newTotal=$oldTotal-$total;
-                $UpdateNewSubTotal=$UpdateSubTotal-$newTotal;
-            }else{
-                $newTotal=$total-$oldTotal;
-                $UpdateNewSubTotal=$UpdateSubTotal+$newTotal;
+            $total = $quantityUpdate * $priceUpdate;
+            $UpdateSubTotal = parseInt($('#subTotal').val());
+            $oldTotal = parseInt($('.' + $num + ' .total').val());
+            if ($oldTotal > $total) {
+                $newTotal = $oldTotal - $total;
+                $UpdateNewSubTotal = $UpdateSubTotal - $newTotal;
+            } else {
+                $newTotal = $total - $oldTotal;
+                $UpdateNewSubTotal = $UpdateSubTotal + $newTotal;
             }
             // this step to change sub total (start)
-			$('.'+$num+' .spanPrice').html($priceUpdate);
-			$('.'+$num+' .spanQuantity').html($quantityUpdate);
-			$('.'+$num+' .spanTotal').html($total);
-			$('.'+$num+' .total').val($total);
+            $('.' + $num + ' .spanPrice').html($priceUpdate);
+            $('.' + $num + ' .spanQuantity').html($quantityUpdate);
+            $('.' + $num + ' .spanTotal').html($total);
+            $('.' + $num + ' .total').val($total);
 
             $('#subTotal').val($UpdateNewSubTotal);
 			$('.'+$num+' span').show();
@@ -316,17 +317,17 @@ $('#tableDel').on('click','.doneUpdate',function(){
 		$i=0;
 		$('.addVal').click(function(e) {
             e.preventDefault();
-			if (!$('#product_name').val() == '' && !$('#price').val() == '' && !$('#quantity').val() == '') {
+            if (!$('#product_name').val() == '' && !$('#price').val() == '' && !$('#quantity').val() == '') {
                 $i++;
-				$product_name=$('#product_name option:selected').text();
-				$product_id=$('#product_name').val();
-				$('#product_name').val('');
+                $product_name = $('#product_name option:selected').text();
+                $product_id = $('#product_name').val();
+                $('#product_name').val('');
 
-				$price=$('#price').val();
-				$quantity=$('#quantity').val();
-                $total=$price*$quantity;
-                $subTotal=parseInt($('#subTotal').val());
-                $NewsubTotal=$subTotal+$total;
+                $price = $('#price').val();
+                $quantity = $('#quantity').val();
+                $total = $price * $quantity;
+                $subTotal = parseInt($('#subTotal').val());
+                $NewsubTotal = $subTotal + $total;
                 $('#subTotal').val($NewsubTotal);
 				$('#product_name,#price,#quantity').val('');
 
@@ -350,6 +351,8 @@ $('#tableDel').on('click','.doneUpdate',function(){
 
 
 
+        });
 
-</script>
+        // add button end
+    </script>
 @endsection
