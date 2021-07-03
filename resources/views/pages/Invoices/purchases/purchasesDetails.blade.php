@@ -32,6 +32,8 @@
                         <li><a href="#tab4" class="nav-link active" data-toggle="tab">Invoice</a></li>
                         <li><a href="#tab5" class="nav-link" data-toggle="tab">Details Invoice</a></li>
                     </ul>
+                    <!-- Tabs -->
+
                 </div>
             </div>
             <div class="panel-body tabs-menu-body main-content-body-right border">
@@ -49,6 +51,8 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive border-top userlist-table">
+                                            {{-- الجدول الذي تعرض فيه بيانات الفاتورة --}}
+
                                             <table
                                                 class="table card-table table-striped table-vcenter text-nowrap mb-0">
                                                 <thead>
@@ -65,33 +69,24 @@
                                                     <tr>
 
                                                     <tr>
-
+                                                        {{-- بيانات الفاتورة --}}
                                                         <td>{{$d_purchases_invoice->id}}</td>
                                                         <td>{{$d_purchases_invoice->sub_total}}</td>
                                                         <td>{{$d_purchases_invoice->created_at}}</td>
                                                         <td>{{$d_purchases_invoice->supplierName->name}}</td>
                                                         <td>{{$d_purchases_invoice->usersName->name}}</td>
                                                         <td>{{$d_purchases_invoice->notes}}</td>
+                                                        {{-- بيانات الفاتورة --}}
 
 
                                                     </tr>
 
                                                 </tbody>
                                             </table>
+                                            {{-- الجدول الذي تعرض فيه بيانات الفاتورة --}}
+
                                         </div>
-                                        <ul class="pagination mt-4 mb-0 float-left">
-                                            <li class="page-item page-prev disabled">
-                                                <a class="page-link" href="#" tabindex="-1">Prev</a>
-                                            </li>
-                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                            <li class="page-item page-next">
-                                                <a class="page-link" href="#">Next</a>
-                                            </li>
-                                        </ul>
+
                                     </div>
                                 </div>
                             </div><!-- COL END -->
@@ -113,6 +108,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive border-top userlist-table">
+                                            {{-- الجدول الذي تعرض فيه بيانات تفاصيل الفاتورة --}}
                                             <table
                                                 class="table card-table table-striped table-vcenter text-nowrap mb-0">
                                                 <thead>
@@ -126,10 +122,12 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
+                                                        {{-- purchases derails الجزء مسئول عن عرض المعلومات الخاصه ب --}}
+
                                                         <?php $i=1;?>
                                                         @foreach ($purchases_invoices_details as $purchasesDetails)
 
-                                                        <tr>
+                                                    <tr>
 
 
                                                         <td><?php echo $i++;?></td>
@@ -142,23 +140,14 @@
 
                                                     </tr>
                                                     @endforeach
+                                                    {{-- purchases derails الجزء مسئول عن عرض المعلومات الخاصه ب --}}
 
                                                 </tbody>
                                             </table>
+                                            {{-- الجدول الذي تعرض فيه بيانات تفاصيل الفاتورة --}}
+
                                         </div>
-                                        <ul class="pagination mt-4 mb-0 float-left">
-                                            <li class="page-item page-prev disabled">
-                                                <a class="page-link" href="#" tabindex="-1">Prev</a>
-                                            </li>
-                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                            <li class="page-item page-next">
-                                                <a class="page-link" href="#">Next</a>
-                                            </li>
-                                        </ul>
+
                                     </div>
                                 </div>
                             </div><!-- COL END -->
@@ -178,21 +167,6 @@
 
 @endsection
 @section('js')
-<script>
-    $('.btn_delete').click(function() {
-            $product_name = $(this).data('product_name');
-            $product_barcode = $(this).data('product_barcode');
-            $product_pic = $(this).data('product_pic');
-            $id = $(this).data('id');
-            $('#d_product_id').val($id);
-            $('#d_product_name').val($product_name);
-            $('#d_product_barcode').val($product_barcode);
-            $('#d_product_pic').val($product_pic);
-
-
-        });
-
-</script>
 
 
 

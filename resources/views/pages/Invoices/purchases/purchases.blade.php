@@ -36,11 +36,22 @@
 @section('content')
 <!-- row -->
 
+{{-- إذا كان هناك خطأ  alert الجزء الخاص ب --}}
 @if ($errors->any())
-<script>
-    window.location = '/addProducts';
-</script>
+<div class="alert alert-danger">
+
+    @foreach ($errors->all() as $error)
+    <div class="alert alert-danger mg-b-0" role="alert">
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Oh snap!</strong> {{ $error }}
+    </div>
+    @endforeach
+
+</div>
 @endif
+{{-- إذا كان هناك خطأ  alert الجزء الخاص ب --}}
 <!--Row-->
 <div class="row row-sm">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">

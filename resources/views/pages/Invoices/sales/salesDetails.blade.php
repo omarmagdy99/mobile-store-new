@@ -49,8 +49,8 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="table-responsive border-top userlist-table">
-                                                <table
-                                                    class="table card-table table-striped table-vcenter text-nowrap mb-0">
+                                            {{-- الجدول الذي تعرض فيه بيانات الفاتورة --}}
+                                                <table class="table card-table table-striped table-vcenter text-nowrap mb-0">
                                                     <thead>
                                                         <tr>
                                                             <th class="wd-lg-10p"><span>id</span></th>
@@ -66,32 +66,23 @@
 
                                                         <tr>
 
+                                                        {{-- بيانات الفاتورة --}}
                                                             <td>{{ $d_sales_invoice->id }}</td>
                                                             <td>{{ $d_sales_invoice->sub_total }}</td>
                                                             <td>{{ $d_sales_invoice->created_at }}</td>
                                                             <td>{{ $d_sales_invoice->customerName->name }}</td>
                                                             <td>{{ $d_sales_invoice->usersName->name }}</td>
                                                             <td>{{ $d_sales_invoice->notes }}</td>
+                                                        {{-- بيانات الفاتورة --}}
 
 
                                                         </tr>
 
                                                     </tbody>
                                                 </table>
+                                            {{-- الجدول الذي تعرض فيه بيانات الفاتورة --}}
                                             </div>
-                                            <ul class="pagination mt-4 mb-0 float-left">
-                                                <li class="page-item page-prev disabled">
-                                                    <a class="page-link" href="#" tabindex="-1">Prev</a>
-                                                </li>
-                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                                <li class="page-item page-next">
-                                                    <a class="page-link" href="#">Next</a>
-                                                </li>
-                                            </ul>
+
                                         </div>
                                     </div>
                                 </div><!-- COL END -->
@@ -113,8 +104,8 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="table-responsive border-top userlist-table">
-                                                <table
-                                                    class="table card-table table-striped table-vcenter text-nowrap mb-0">
+                                            {{-- الجدول الذي تعرض فيه بيانات تفاصيل الفاتورة --}}
+                                                <table class="table card-table table-striped table-vcenter text-nowrap mb-0">
                                                     <thead>
                                                         <tr>
                                                             <th class="wd-lg-4p"><span>#</span></th>
@@ -126,6 +117,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr>
+                                                        {{-- sales derails الجزء مسئول عن عرض المعلومات الخاصه ب --}}
                                                             <?php $i = 1; ?>
                                                             @foreach ($sales_invoice_details as $salesDetails)
 
@@ -142,9 +134,11 @@
 
                                                         </tr>
                                                         @endforeach
+                                                        {{-- sales derails الجزء مسئول عن عرض المعلومات الخاصه ب --}}
 
                                                     </tbody>
                                                 </table>
+                                            {{-- الجدول الذي تعرض فيه بيانات تفاصيل الفاتورة --}}
                                             </div>
                                             <ul class="pagination mt-4 mb-0 float-left">
                                                 <li class="page-item page-prev disabled">

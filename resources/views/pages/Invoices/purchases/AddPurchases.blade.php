@@ -105,13 +105,13 @@
                             {{-- quantity --}}
                             <input type="number" id="quantity" class="form-control" placeholder="quantity" min="1">
                             {{-- quantity --}}
-                            {{-- يؤخذ منها المنتجات و الكميه و السعر ليوضع في الجدول input --}}
                         </div>
                         <div class="col-md-3">
                             {{-- إلى الجدول  input   الزرار لنقل المعلومات من ال --}}
                             <a href="#" class="btn btn-primary addVal">add</a>
                             {{-- إلى الجدول  input   الزرار لنقل المعلومات من ال --}}
                         </div>
+                        {{-- يؤخذ منها المنتجات و الكميه و السعر ليوضع في الجدول input --}}
 
                     </div>
                 </div>

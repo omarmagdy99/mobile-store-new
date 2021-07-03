@@ -22,6 +22,7 @@
 @section('content')
 
 
+{{-- إذا كان هناك خطأ  alert الجزء الخاص ب --}}
 @if ($errors->any())
 <div class="alert alert-danger">
 
@@ -36,6 +37,7 @@
 
 </div>
 @endif
+{{-- إذا كان هناك خطأ  alert الجزء الخاص ب --}}
 
 <!-- row -->
 <div class="row">
@@ -47,25 +49,32 @@
 
             </div>
             <div class="card-body pt-0">
+                {{-- form خاصه بالأضافه  --}}
                 <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/products/update">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label >Barcode</label>
-
+                            <label>Barcode</label>
+                            {{-- barcode --}}
                             <input type="text" class="form-control" name="barcode" placeholder="Barcode"
                                 value="{{ $product->barcode }}">
+                            {{-- barcode --}}
+                            {{-- الخاص بال id ليتم التعديل به input--}}
                             <input type="hidden" name="id" value="{{ $product->id }}">
+                            {{-- الخاص بال id ليتم التعديل به input--}}
                         </div>
                         <div class="form-group col-md-6">
-                            <label >product name</label>
+                            <label>product name</label>
+                            {{-- product name --}}
 
                             <input type="text" class="form-control" name="product_name" placeholder="Name"
                                 value="{{ $product->product_name }}">
+                            {{-- product name --}}
                         </div>
                         <div class="form-group col-md-6">
-                            <label >category name</label>
+                            <label>category name</label>
+                            {{--  category خاص بأسماء  select --}}
                             <select name="category_id" class="form-control SlectBox"
                                 onclick="console.log($(this).val())" onchange="console.log('change is firing')">
                                 <!--placeholder-->
@@ -78,58 +87,79 @@
 
                                 @endforeach
                             </select>
+                            {{--  category خاص بأسماء  select --}}
                         </div>
                         <div class="form-group col-md-6">
 
                             <div class="form-group col-md-6">
-                                <label >brand name</label>
+                                <label>brand name</label>
+                                {{-- brand name --}}
                                 <input type="text" class="form-control" name="brand_name" placeholder="brand name"
                                     value="{{ $product->brand_name }}">
+                                {{-- brand name --}}
                             </div>
                         </div>
                         <div class="form-group col-md-4">
-                            <label >Sales Price</label>
+                            <label>Sales Price</label>
+                            {{-- sales price --}}
 
                             <input type="number" class="form-control" value="{{ $product->sale_price }}"
-                            name="sales_price" placeholder="Sales Price">
+                                name="sales_price" placeholder="Sales Price">
+                            {{-- sales price --}}
                         </div>
                         <div class="form-group col-md-4">
 
-                            <label >quantity</label>
+                            <label>quantity</label>
+                            {{-- quantity --}}
                             <input type="number" class="form-control" name="quantity" placeholder="Quantity"
                                 value="{{ $product->quantity }}">
+                            {{-- quantity --}}
                         </div>
                         <div class="form-group col-md-12 file_image">
                             <div class=" mt-4 ">
 
                                 <label for="">Product Image</label><br>
+                                {{-- الصورة القديمة للمنتج في حال انه لم يعدل عليها --}}
                                 <img src="{{ URL('storage') }}/{{ $product->image }}" alt="product Image" width="100"
                                     name="pic">
                                 <input type="hidden" name="pic" class="old_image" value="{{ $product->image }}">
+                                {{-- الصورة القديمة للمنتج في حال انه لم يعدل عليها --}}
                             </div>
                         </div>
                         <div class="form-group col-md-12 input_image">
                             <div class=" mt-4 ">
                                 <label for="">Product Image</label><br>
+                                {{-- الصورة الجديده في حال انه تم التعديل على الصورة --}}
                                 <input type="file" class="dropify new_image" data-height="200"
                                     accept="image/x-png,image/gif,image/jpeg" />
+                                {{-- الصورة الجديده في حال انه تم التعديل على الصورة --}}
 
                             </div>
                         </div>
                         <div class="form-group col-md-12 ">
                             <div class=" mt-4 ">
+                                {{-- زرار لتغيير الصورة او الأحتفاظ بالقديمة --}}
                                 <a class="btn btn-info-gradient text-white hide_image">Change Image</a>
+                                {{-- زرار لتغيير الصورة او الأحتفاظ بالقديمة --}}
                             </div>
                         </div>
                         <div class="form-group mb-0 mt-3 justify-content-end col-md-12">
                             <div>
+                                {{-- زرار الخاص بالتعديل --}}
                                 <button type="submit" class="btn btn-primary">update</button>
+                                {{-- زرار الخاص بالتعديل --}}
+
+
+
+                                {{-- زرار الخاص بإلغاء التعديل --}}
                                 <a href="/products" class="btn btn-secondary">Cancel</a>
+                                {{-- زرار الخاص بإلغاء التعديل --}}
                             </div>
                         </div>
 
                     </div>
                 </form>
+                {{-- form خاصه بالأضافه  --}}
             </div>
         </div>
 
@@ -152,7 +182,13 @@
 <script src="{{ URL::asset('assets/plugins/treeview/treeview.js') }}"></script>
 
 <script>
+//    المسئول عن إختيار الصورة input إخفاء
     $('.input_image').hide();
+//    المسئول عن إختيار الصورة input إخفاء
+
+
+
+// action لإخفاء و إظهار الصورة القديمة و الجديدة
         $('.hide_image').click(function() {
             $('.input_image').toggle([0.2]);
             $('.file_image').toggle([0.2]);
@@ -169,6 +205,7 @@
 
 
         });
+// action لإخفاء و إظهار الصورة القديمة و الجديدة
 
 </script>
 @endsection
