@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class sales_invoice extends Model
 {
-    protected $guarded=[];
-    function usersName(){
-        return $this->belongsTo('App\User','user_id');
+    protected $guarded = [];
+    function usersName()
+    {
+        // الخاص بهIDاحضار بيانات المستخدم ووضع اسمة مكان ال
+        return $this->belongsTo('App\User', 'user_id');
     }
-    function customerName(){
-        return $this->belongsTo('App\customer','customer_id');
+    function customerName()
+    {
+        // الخاص بهIDاحضار بيانات العميل ووضع اسمة مكان ال
+        return $this->belongsTo('App\customer', 'customer_id');
     }
 }
