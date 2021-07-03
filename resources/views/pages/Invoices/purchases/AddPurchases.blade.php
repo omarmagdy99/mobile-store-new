@@ -16,22 +16,11 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                <h4 class="content-title mb-0 my-auto">Home</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
                     PURCHASES INVOICES</span>
             </div>
         </div>
-        <div class="d-flex my-xl-auto right-content">
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
-            </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
-            </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
-            </div>
-
-        </div>
+     
     </div>
     <!-- breadcrumb -->
 @endsection
@@ -64,7 +53,7 @@
                         </div>
                         <div class="row my-2">
                             <div class="col-lg-12 mg-t-20 mg-lg-t-0 mb-3">
-                                <p class="mg-b-10">supplier Name</p><select class="form-control select2" name="supplier_id">
+                                <p class="mg-b-10">Supplier Name</p><select class="form-control select2" name="supplier_id">
                                     <option label="Choose one">
                                     </option>
 
@@ -75,10 +64,10 @@
                                         </option>
                                     @endforeach
                                 </select>
-                            </div><!-- col-6 -->
+                            </div>
                             <div class="col-lg-12 mg-t-20 mg-lg-t-0">
                                 <textarea name="note" class="form-control" cols="30" rows="3" placeholder="note"></textarea>
-                            </div><!-- col-6 -->
+                            </div>
 
                         </div>
                         <div class="row">
