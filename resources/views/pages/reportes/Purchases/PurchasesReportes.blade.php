@@ -52,10 +52,10 @@
 
 										<div class="col-md">
 											<label class="tx-gray-600">Invoice Information</label>
-											<p class="invoice-info-row"><span>Invoice No:</span> <span>{{$d_sales_invoice->id}}</span></p>
-											<p class="invoice-info-row"><span>user name:</span> <span>{{$d_sales_invoice->usersName->name}}</span></p>
-											<p class="invoice-info-row"><span>customer name:</span> <span>{{$d_sales_invoice->customerName->name}}</span></p>
-											<p class="invoice-info-row"><span>created at:</span> <span>{{$d_sales_invoice->created_at}}</span></p>
+											<p class="invoice-info-row"><span>Invoice No:</span> <span>{{$d_Purchases_invoice->id}}</span></p>
+											<p class="invoice-info-row"><span>user name:</span> <span>{{$d_Purchases_invoice->usersName->name}}</span></p>
+											<p class="invoice-info-row"><span>supplier name:</span> <span>{{$d_Purchases_invoice->supplierName->name}}</span></p>
+											<p class="invoice-info-row"><span>created at:</span> <span>{{$d_Purchases_invoice->created_at}}</span></p>
 										</div>
 									</div>
 									<div class="table-responsive mg-t-40">
@@ -75,18 +75,18 @@
                                                     $i=1;
                                                 @endphp
                                                 <span style="display: none">{{$sub_total=0}}</span>
-                                                @foreach ($sales_invoice_details as $sales)
+                                                @foreach ($purchases_invoices_details as $Purchases)
 
 												<tr>
                                                     <td>@php echo $i++;
                                                     @endphp</td>
-													<td>{{$sales->productName->product_name}}</td>
+													<td>{{$Purchases->product_name}}</td>
 
-													<td class="tx-center">{{$sales->quantity}}</td>
-													<td class="tx-right">${{number_format($sales->price)}}</td>
-													<td class="tx-right">${{number_format($sales->total)}}</td>
+													<td class="tx-center">{{$Purchases->quantity}}</td>
+													<td class="tx-right">${{number_format($Purchases->price)}}</td>
+													<td class="tx-right">${{number_format($Purchases->total)}}</td>
 												</tr>
-                                                <span style="display: none">{{$sub_total+=+$sales->total}}</span>
+                                                <span style="display: none">{{$sub_total+=+$Purchases->total}}</span>
                                                 @endforeach
 
 

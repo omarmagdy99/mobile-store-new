@@ -50,24 +50,19 @@
 									</div><!-- invoice-header -->
 									<div class="row mg-t-20">
 
-										<div class="col-md">
-											<label class="tx-gray-600">Invoice Information</label>
-											<p class="invoice-info-row"><span>Invoice No:</span> <span>{{$d_sales_invoice->id}}</span></p>
-											<p class="invoice-info-row"><span>user name:</span> <span>{{$d_sales_invoice->usersName->name}}</span></p>
-											<p class="invoice-info-row"><span>customer name:</span> <span>{{$d_sales_invoice->customerName->name}}</span></p>
-											<p class="invoice-info-row"><span>created at:</span> <span>{{$d_sales_invoice->created_at}}</span></p>
-										</div>
+
 									</div>
 									<div class="table-responsive mg-t-40">
 										<table class="table table-invoice border text-md-nowrap mb-0">
 											<thead>
 												<tr>
 													<th class="wd-20p">#</th>
-													<th class="wd-20p">Product Name</th>
+													<th class="wd-20p">invoice number</th>
 
-													<th class="tx-center">QNTY</th>
-													<th class="tx-right">Unit Price</th>
-													<th class="tx-right">total</th>
+													<th class="tx-right">user name</th>
+													<th class="tx-right">supplier name</th>
+													<th class="tx-right">created at</th>
+													<th class="tx-center">sub total</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -75,18 +70,19 @@
                                                     $i=1;
                                                 @endphp
                                                 <span style="display: none">{{$sub_total=0}}</span>
-                                                @foreach ($sales_invoice_details as $sales)
+                                                @foreach ($d_Purchases_invoice as $Purchases)
 
 												<tr>
                                                     <td>@php echo $i++;
                                                     @endphp</td>
-													<td>{{$sales->productName->product_name}}</td>
+													<td>{{$Purchases->id}}</td>
 
-													<td class="tx-center">{{$sales->quantity}}</td>
-													<td class="tx-right">${{number_format($sales->price)}}</td>
-													<td class="tx-right">${{number_format($sales->total)}}</td>
+                                                    <td class="tx-right">{{ \App\User::where('id','=',$Purchases->user_id)->first()->name}}</td>
+													<td class="tx-right">{{ \App\supplier::where('id','=',$Purchases->supplier_id)->first()->name}}</td>
+													<td class="tx-right">{{$Purchases->created_at}}</td>
+													<td class="tx-right">{{$Purchases->sub_total}}</td>
 												</tr>
-                                                <span style="display: none">{{$sub_total+=+$sales->total}}</span>
+                                                <span style="display: none">{{$sub_total+=+$Purchases->sub_total}}</span>
                                                 @endforeach
 
 
@@ -94,7 +90,7 @@
 
 												<tr>
 													<td class="tx-right tx-uppercase tx-bold tx-inverse">Sub Total</td>
-													<td class="tx-right" colspan="4">
+													<td class="tx-right" colspan="6">
 														<h4 class="tx-primary tx-bold">${{number_format($sub_total)}}</h4>
 													</td>
 												</tr>

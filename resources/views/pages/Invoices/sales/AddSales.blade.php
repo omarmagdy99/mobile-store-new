@@ -51,6 +51,7 @@
 @endsection
 @section('content')
 <!--Row-->
+{{-- إذا كان هناك خطأ  alert الجزء الخاص ب --}}
 @if ($errors->any())
 <div class="alert alert-danger">
 
@@ -65,12 +66,14 @@
 
 </div>
 @endif
+{{-- إذا كان هناك خطأ  alert الجزء الخاص ب --}}
 <div class="row row-sm">
 
     <!--div-->
 
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
         <div class="card">
+            {{-- form خاصه بالأضافه  --}}
             <form action="{{route('sales.store')}}" method="post">
                 {{csrf_field()}}
                 <div class="card-header pb-0">
@@ -80,7 +83,9 @@
                     </div>
                     <div class="row my-2">
                         <div class="col-lg-12 mg-t-20 mg-lg-t-0 mb-3">
-                            <p class="mg-b-10">customer Name</p><select class="form-control select2" name="customer_id">
+                            <p class="mg-b-10">customer Name</p>
+                            {{-- خاص بأسماء العملاء للفاتورة select --}}
+                            <select class="form-control select2" name="customer_id">
                                 <option label="Choose one">
                                 </option>
 
@@ -91,15 +96,20 @@
                                 </option>
                                 @endforeach
                             </select>
+                            {{-- خاص بأسماء العملاء للفاتورة select --}}
+
                         </div><!-- col-6 -->
                         <div class="col-lg-12 mg-t-20 mg-lg-t-0">
+                            {{-- notes --}}
                             <textarea name="note" class="form-control" cols="30" rows="3" placeholder="note"></textarea>
+                            {{-- notes --}}
                         </div><!-- col-6 -->
 
                     </div>
                     <div class="row">
+                        {{-- يؤخذ منها المنتجات و الكميه و السعر ليوضع في الجدول input --}}
                         <div class="col-md-3 product_div">
-
+                            {{-- المسؤول عن اختيار المنتج من جدول المنتجات select --}}
                             <select class="form-control select2 " id="product_name">
                                 <option label="Choose product">
                                 </option>
@@ -112,8 +122,10 @@
                                 </option>
                                 @endforeach
                             </select>
-                            {{-- select(change)->val
-                                 --}}
+                            {{-- المسؤول عن اختيار المنتج من جدول المنتجات select --}}
+
+
+                            {{-- الجزء الذي نأخذ منه السعر و الكميه الخاصه بالمنتح --}}
                             <ul name="" class="select_price">
                                 @foreach ($product_data as $product )
                                 <li class="price_{{$product->id}} ">{{$product->sale_price}}</li>
@@ -121,22 +133,27 @@
                                 <li class="quantity_{{$product->id}} ">{{$product->quantity}}</li>
                                 @endforeach
                             </ul>
+                            {{-- الجزء الذي نأخذ منه السعر و الكميه الخاصه بالمنتح --}}
                         </div>
                         <div class="col-md-3">
-
+                            {{-- price --}}
                             <input type="number" id="price" class="form-control" placeholder="Price" readonly>
+                            {{-- price --}}
                         </div>
                         <div class="col-md-3 quantity_select">
+                            {{-- مسؤول عن إختيار الكميه من المنتج select --}}
                             <select class="form-control select2 " id="quantity">
                                 <option label="Choose product">
                                 </option>
-
-
                             </select>
+                            {{-- مسؤول عن إختيار الكميه من المنتج select --}}
                         </div>
                         <div class="col-md-3">
+                            {{-- إلى الجدول  input   الزرار لنقل المعلومات من ال --}}
                             <a href="#" class="btn btn-primary addVal">add</a>
+                            {{-- إلى الجدول  input   الزرار لنقل المعلومات من ال --}}
                         </div>
+                        {{-- يؤخذ منها المنتجات و الكميه و السعر ليوضع في الجدول input --}}
 
                     </div>
                 </div>
@@ -145,6 +162,7 @@
                         <label>Sub Total</label>
                         <input type="number" name="sub_total" id="subTotal" class="form-control" placeholder="sub total"
                             value="0" readonly>
+                        {{-- الجدول الذي تنقل إليه بيانات المنتج --}}
                         <table id="tableDel" class="table card-table table-striped table-vcenter text-nowrap mb-0">
                             <thead>
                                 <tr>
@@ -158,14 +176,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                {{-- هنا توضع البيانات الخاصه بالمنتج --}}
                             </tbody>
                         </table>
+                        {{-- الجدول الذي تنقل إليه بيانات المنتج --}}
                     </div>
+                    {{-- زرار للإضافه  --}}
                     <button class="btn btn-primary " type="submit">save</button>
+                    {{-- زرار للإضافه  --}}
                 </div>
 
             </form>
+            {{-- form خاصه بالأضافه  --}}
+
         </div>
     </div><!-- COL END -->
 </div>
@@ -198,8 +221,12 @@
 
 <script>
     $(document).ready(function () {
+        // إخفاء الجزء الذي يؤخذ منه سعر و كمية المنتج
         $('.select_price').hide();
+        // إخفاء الجزء الذي يؤخذ منه سعر و كمية المنتج
 		});
+
+    //   عند اختيار المنتج input  الجزء المسؤول عن نقل سعر المنتج و كمية المنتج إلى
         //get select value
         $('.product_div select').on('change',function(){
             $selectId=$(this).val();
@@ -211,11 +238,14 @@
                 for($i=1;$i<=$selectQuantity;$i++){
                     $('.quantity_select select').append('</option> <option  >'+$i+'</option>');
                 }
-
-
         })
-                // delete row start
+    //   عند اختيار المنتج input  الجزء المسؤول عن نقل سعر المنتج و كمية المنتج إلى
+        //get select value
 
+
+
+                 // delete row start
+        // الزرار المسؤول عن مسح المنتج من الجدول
 		$('#tableDel').on('click','.delRow',function(){
             $num=$(this).data('num');
 
@@ -228,24 +258,26 @@
 
 
 		})
+        // الزرار المسؤول عن مسح المنتج من الجدول
                 // delete row end
 
                 // update row start
-
+        // الزرار المسؤول عن إتاحة التعديل في  الجدول
 		$('#tableDel').on('click','.updateRow',function(){
-			$num=$(this).data('num');
+            $num=$(this).data('num');
 			$('.'+$num+' .quantity,.'+$num+' .price ').attr('type','text');
 			$('.'+$num+' span').hide();
 			$('.'+$num+' .doneUpdate').show();
 			$(this).hide();
 		})
+        // الزرار المسؤول عن إتاحة التعديل في  الجدول
                 // update row end
 
 
                 // done update row start
-
-		$('#tableDel').on('click','.doneUpdate',function(){
-            // this step to select Row(start)
+// الزرار المسؤول عن تأكيد التعديل على الجدول
+$('#tableDel').on('click','.doneUpdate',function(){
+    // this step to select Row(start)
 			$num=$(this).data('num');
             // this step to select Row(end)
 			$('.'+$num+' .quantity,.'+$num+' .price').attr('type','hidden');
@@ -275,10 +307,12 @@
 			$('.'+$num+' .updateRow').show();
 			$(this).hide();
 		})
-                // done update row end
+        // الزرار المسؤول عن تأكيد التعديل على الجدول
+        // done update row end
 
 
         // add button start
+        // الزرار المسؤول عن  إضافة بيانات المنتج إلى  الجدول
 		$i=0;
 		$('.addVal').click(function(e) {
             e.preventDefault();
@@ -311,7 +345,7 @@
 					}
 
 				});
-
+        // الزرار المسؤول عن  إضافة بيانات المنتج إلى  الجدول
                 // add button end
 
 

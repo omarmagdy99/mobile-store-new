@@ -140,7 +140,7 @@
                     <li><a class="slide-item" href="{{ url('/' . ($page = 'salesShow')) }}">Sales
                             Reports</a>
                     </li>
-                    <li><a class="slide-item" href="{{ url('/' . ($page = 'customersReports')) }}">purchases
+                    <li><a class="slide-item" href="{{ url('/' . ($page = 'PurchasesShow')) }}">purchases
                             Reports</a>
                     </li>
 

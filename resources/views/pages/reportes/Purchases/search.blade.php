@@ -7,7 +7,7 @@
     <div class="my-auto">
         <div class="d-flex">
             <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                Sales</span>
+                Purchases</span>
         </div>
     </div>
     <div class="d-flex my-xl-auto right-content">
@@ -47,11 +47,11 @@
         <div class=" main-content-body-invoice">
             <div class="card card-invoice">
                 <div class="card-body" style="height: 70vh">
-                    <form action="/salesShow" method="get">
+                    <form action="/PurchasesShow" method="get">
 
                         <div class="row">
                             <div class="col-12 ">
-                                @if (empty($id||$customer_name))
+                                @if (empty($id||$supplier_name))
                                 <div class="d-block ">
                                     <label for="from_date">from date</label>
                                     <input checked type="radio" name="search_to" id="from_date" value="from_date">
@@ -90,9 +90,9 @@
                                     value="{{$id}}">
                             </div>
                             <div class="col-6 invoice_div">
-                                <label for="">customer name</label>
-                                <input type="text" class="form-control" name="customer_name" placeholder="customer name"
-                                    value="{{$customer_name}}">
+                                <label for="">supplier name</label>
+                                <input type="text" class="form-control" name="supplier_name" placeholder="supplier name"
+                                    value="{{$supplier_name}}">
                             </div>
 
 
@@ -101,7 +101,7 @@
 
                             <div class="col-12 text-center">
                                 <input type="submit" class="btn btn-primary my-3" value="search">
-                                <a href="salesReportes/allInvoice" class="btn btn-primary my-3">all invoice</a>
+                                <a href="PurchasesReportes/allInvoice" class="btn btn-primary my-3">all invoice</a>
                             </div>
                         </div>
                     </form>
@@ -114,7 +114,7 @@
                                         <th class="border-bottom-0" style="width: 2%">invoice number</th>
                                         <th class="wd-lg-20p">sub total</th>
                                         <th class="wd-lg-20p">user name</th>
-                                        <th class="wd-lg-20p">customer name</th>
+                                        <th class="wd-lg-20p">supplier name</th>
                                         <th class="wd-lg-20p">invoice date</th>
 
 
@@ -124,7 +124,7 @@
                                     @php
                                     $c=1;
                                     @endphp
-                                @if (isset($invoice_data))
+                                    @if (isset($invoice_data))
 
                                     @if (isset($invoice_data[0][0]))
 
@@ -135,17 +135,17 @@
                                             echo $c++;
                                             @endphp</td>
                                         <td><a
-                                                href="salesReportes/{{$invoice_data[$i][0]->id}}">{{$invoice_data[$i][0]->id}}</a>
+                                                href="PurchasesReportes/{{$invoice_data[$i][0]->id}}">{{$invoice_data[$i][0]->id}}</a>
                                         </td>
                                         <td>{{$invoice_data[$i][0]->sub_total}}</td>
                                         <td>{{$invoice_data[$i][0]->user_id}}</td>
-                                        <td>{{$invoice_data[$i][0]->customerName->name}}</td>
+                                        <td>{{$invoice_data[$i][0]->supplierName->name}}</td>
                                         <td>{{$invoice_data[$i][0]->created_at}}</td>
                                         </tr>
                                         @endif
                                         @endfor
 
-                                    @else
+                                        @else
                                         @foreach ($invoice_data as $item)
                                         <tr>
                                             <td>@php
@@ -154,12 +154,12 @@
                                             <td><a href="productReportes/{{$item->id}}">{{$item->id}}</a></td>
                                             <td>{{$item->sub_total}}</td>
                                             <td>{{$item->user_id}}</td>
-                                            <td>{{$item->customerName->name}}</td>
+                                            <td>{{$item->supplierName->name}}</td>
                                             <td>{{$item->created_at}}</td>
                                         </tr>
                                         @endforeach
-                                    @endif
-                                @endif
+                                        @endif
+                                        @endif
 
 
                                 </tbody>
@@ -181,14 +181,14 @@
 @section('js')
 <script>
     $('input[name=id]').on('keypress',function(){
-        $('input[name=customer_name]').val('');
+        $('input[name=supplier_name]').val('');
     });
-    $('input[name=customer_name]').on('keypress',function(){
+    $('input[name=supplier_name]').on('keypress',function(){
         $('input[name=id]').val('');
     });
 
     $(document).ready(function () {
-        @if (empty($id||$customer_name))
+        @if (empty($id||$supplier_name))
         $('.invoice_div').hide();
         @else
         $('.date_div').hide();

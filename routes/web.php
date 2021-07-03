@@ -15,11 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-
-Route::get('/', function () {
-    return view('home');
-});
 // Sales Route
+Route::get('/signup', function () {
+    return view('auth.signup');
+});
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/', function () {
+        return view('home');
+    });
 
 Route::get('/Addsales', 'SalesInvoiceController@show');
  Route::resource('/sales', 'SalesInvoiceController');
@@ -49,6 +53,11 @@ Route::get('/salesReportes/{id}','SalesInvoiceController@showReport');
 Route::get('/salesShow','SalesInvoiceController@salesSearch');
 
 // report sales
+// report Purchases
+Route::get('/PurchasesReportes/{id}','PurchasesInvoiceController@showReport');
+Route::get('/PurchasesShow','PurchasesInvoiceController@PurchasesSearch');
+
+// report Purchases
 // report product
 Route::get('/productReportes/{id}','ProductController@showReport');
 Route::get('/productSearch','ProductController@productSearch');
@@ -95,7 +104,9 @@ Route::get('/addUsers', function () {
 
 Route::get('/updateUser/{id}', 'Auth\RegisterController@update_data');
 // ===============================================================
-
-
 Route::get('/{page}', 'AdminController@index');
+});
+
+
+
 // });

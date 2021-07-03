@@ -46,7 +46,7 @@ class PurchasesInvoiceController extends Controller
             'note' => ['required'],
             'supplier_id' => ['required'],
             'product_name' => ['required'],
-            'quantity' => 'required|integer|min:1',
+            'quantity' => 'required|min:1',
             'price' => ['required'],
 
         ], [
@@ -148,7 +148,7 @@ class PurchasesInvoiceController extends Controller
         for ($i = 0; $i < count($request->price); $i++) {
 
             if ($request->status[$i] == 'unDelete') {
-               
+
                 $Total = $request->price[$i] * $request->quantity[$i];
 
                 $subTotal += +$Total;
@@ -255,5 +255,68 @@ class PurchasesInvoiceController extends Controller
         $rowInvoice->delete();
         session()->flash('delete', 'deleted successfully');
         return back();
+    }
+    public function showReport($id)
+    {
+        if($id=='allInvoice'){
+            $d_Purchases_invoice=DB::select('select * from purchases_invoices ');
+            return view('pages.reportes.Purchases.allPurchasesReportes',compact('d_Purchases_invoice'));
+
+        }else{
+
+
+            $d_Purchases_invoice=purchases_invoice::where('id','=',$id)->get()->first();
+            $purchases_invoices_details=purchases_invoices_details::where('invoice_id','=',$id)->get();
+            return view('pages.reportes.Purchases.PurchasesReportes',compact(['d_Purchases_invoice','purchases_invoices_details']));
+        }
+
+    }
+
+
+
+    public function PurchasesSearch(Request $request)
+    {
+        $from=date($request->date_from);
+        $to=date($request->date_to);
+        $id=$request->id;
+        $supplier_name=$request->supplier_name;
+        if($request->search_to=='from_date'){
+            if(!empty($from &&$to)){
+
+                $invoice_data=purchases_invoice::whereBetween('created_at',[$from.'%',$to.'%'])->get();
+            }
+            else{
+                $invoice_data=purchases_invoice::where('created_at','like',"%$from%")->get();
+
+            }
+
+
+        }else{
+            if(isset($id)){
+
+                $invoice_data=purchases_invoice::where('id','like',"%$id%")->get();
+            }else{
+                $id_supplier=supplier::where('name','like',"%$supplier_name%")->get();
+                for($i=0;$i<count($id_supplier);$i++){
+                    $invoice_data[$i]=purchases_invoice::where('supplier_id','=',$id_supplier[$i]->id)->get();
+
+
+                }
+
+
+
+
+            }
+
+
+        }
+        if(empty($invoice_data)){
+
+            return view('pages.reportes.Purchases.search',compact('id','supplier_name','from','to'));
+        }else{
+
+            return view('pages.reportes.Purchases.search',compact('invoice_data','id','supplier_name','from','to'));
+        }
+
     }
 }

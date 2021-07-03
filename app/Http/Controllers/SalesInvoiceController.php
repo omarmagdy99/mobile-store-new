@@ -275,10 +275,17 @@ class SalesInvoiceController extends Controller
     }
     public function showReport($id)
     {
+        if($id=='allInvoice'){
+            $d_sales_invoice=DB::select('select * from sales_invoices ');
+            return view('pages.reportes.sales.allSalesReportes',compact('d_sales_invoice'));
 
-        $d_sales_invoice=sales_invoice::where('id','=',$id)->get()->first();
-        $sales_invoice_details=sales_invoice_details::where('sales_invoice_id','=',$id)->get();
-        return view('pages.reportes.sales.salesReportes',compact(['d_sales_invoice','sales_invoice_details']));
+        }else{
+
+
+            $d_sales_invoice=sales_invoice::where('id','=',$id)->get()->first();
+            $sales_invoice_details=sales_invoice_details::where('sales_invoice_id','=',$id)->get();
+            return view('pages.reportes.sales.salesReportes',compact(['d_sales_invoice','sales_invoice_details']));
+        }
 
     }
 
@@ -315,6 +322,7 @@ class SalesInvoiceController extends Controller
 
 
 
+                
             }
 
 

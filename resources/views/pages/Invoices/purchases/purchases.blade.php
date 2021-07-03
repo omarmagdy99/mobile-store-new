@@ -41,83 +41,105 @@
     window.location = '/addProducts';
 </script>
 @endif
-    <!--Row-->
-    <div class="row row-sm">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-            <div class="card">
-                <div class="card-header pb-0">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0"> purchases invoices TABLE</h4>
-                        <i class="mdi mdi-dots-horizontal text-gray"></i>
-                    </div>
-                    <a href="/Addpurchases" class="btn btn-primary my-2">Add Invoice</a>
+<!--Row-->
+<div class="row row-sm">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+        <div class="card">
+            <div class="card-header pb-0">
+                <div class="d-flex justify-content-between">
+                    <h4 class="card-title mg-b-0"> purchases invoices TABLE</h4>
+                    <i class="mdi mdi-dots-horizontal text-gray"></i>
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive border-top userlist-table">
-                        <table class="table card-table table-striped table-vcenter text-nowrap mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="border-bottom-0" style="width: 2%">#</th>
-                                    <th class="border-bottom-0" style="width: 2%">invoice number</th>
-                                    <th class="wd-lg-20p">Sub Total</th>
-                                    <th class="wd-lg-20p">Date</th>
-                                    
-                                    <th class="wd-lg-20p">note</th>
-                                    <th class="wd-lg-20p">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $i=1;
-                                @endphp
-                                @foreach ($purchases_invoice as $purchases)
+                <a href="/Addpurchases" class="btn btn-primary my-2">Add Invoice</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive border-top userlist-table">
 
-                                <tr>
-                                    <td>@php
-                                        echo $i++;
+                    {{-- الجدول الذي تعرض فيه البيانات --}}
+                    <table class="table card-table table-striped table-vcenter text-nowrap mb-0">
+                        <thead>
+                            <tr>
+                                <th class="border-bottom-0" style="width: 2%">#</th>
+                                <th class="border-bottom-0" style="width: 2%">invoice number</th>
+                                <th class="wd-lg-20p">Sub Total</th>
+                                <th class="wd-lg-20p">Date</th>
+
+                                <th class="wd-lg-20p">note</th>
+                                <th class="wd-lg-20p">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{-- purchases الجزء مسئول عن عرض المعلومات الخاصه ب --}}
+                            @php
+                            $i=1;
+                            @endphp
+                            @foreach ($purchases_invoice as $purchases)
+
+                            <tr>
+                                <td>@php
+                                    echo $i++;
                                     @endphp</td>
-                                    <td>{{ $purchases->id }}</td>
-                                    <td>{{ $purchases->sub_total }}</td>
-                                    <td>{{ $purchases->created_at }}</td>
+                                <td>{{ $purchases->id }}</td>
+                                <td>{{ $purchases->sub_total }}</td>
+                                <td>{{ $purchases->created_at }}</td>
 
-                                    <td>{{ $purchases->notes }}</td>
-                                    <td>
-                                        <a href="/purchasesDetails/{{ $purchases->id }}" class="btn btn-sm btn-primary">
-                                            <i class="las la-search"></i>
-                                        </a>
-                                        <a href="/purchasesShowUpdate/{{ $purchases->id }}" class="btn btn-sm btn-info" >
-                                            <i class="las la-pen"></i>
-                                        </a>
-                                        <a class="modal-effect btn btn-sm btn-danger btn_delete"
+                                <td>{{ $purchases->notes }}</td>
+                                <td>
+                                    {{-- زرار لعرض التفاصيل   --}}
+                                    <a href="/purchasesDetails/{{ $purchases->id }}" class="btn btn-sm btn-primary">
+                                        <i class="las la-search"></i>
+                                    </a>
+                                    {{-- زرار لعرض التفاصيل   --}}
+
+
+
+
+                                    {{-- update زرار ال  --}}
+                                    <a href="/purchasesShowUpdate/{{ $purchases->id }}" class="btn btn-sm btn-info">
+                                        <i class="las la-pen"></i>
+                                    </a>
+                                    {{-- update زرار ال  --}}
+
+
+
+                                    {{-- delete زرار ال  --}}
+                                    <a class="modal-effect btn btn-sm btn-danger btn_delete"
                                         data-effect="effect-slide-in-bottom" data-toggle="modal" href="#modaldemo7"
                                         title="Delete" data-invoice_number="{{ $purchases->id }}">
-                                            <i class="las la-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                        <i class="las la-trash"></i>
+                                    </a>
+                                    {{-- delete زرار ال  --}}
+                                </td>
+                            </tr>
+                            @endforeach
+                            {{-- purchases الجزء مسئول عن عرض المعلومات الخاصه ب --}}
 
-                            </tbody>
-                        </table>
-                    </div>
-                    <ul class="pagination mt-4 mb-0 float-left">
-                        <li class="page-item page-prev disabled">
-                            <a class="page-link" href="#" tabindex="-1">Prev</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item page-next">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
+
+                        </tbody>
+                    </table>
+                    {{-- الجدول الذي تعرض فيه البيانات --}}
+
+
+
                 </div>
+                <ul class="pagination mt-4 mb-0 float-left">
+                    <li class="page-item page-prev disabled">
+                        <a class="page-link" href="#" tabindex="-1">Prev</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item page-next">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
             </div>
-        </div><!-- COL END -->
-    </div>
-    <!-- row closed  -->
+        </div>
+    </div><!-- COL END -->
+</div>
+<!-- row closed  -->
 </div>
 <!-- Container closed -->
 </div>
@@ -129,6 +151,7 @@
 <!-- Container closed -->
 </div>
 {{-- model delete --}}
+{{-- purchases عن مسح ال model --}}
 <div class="modal" id="modaldemo7">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-demo">
@@ -144,7 +167,8 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="">invoice number</label>
-                        <input type="text" name="id" readonly class="form-control" id="d_invoice_id" placeholder="invoice name">
+                        <input type="text" name="id" readonly class="form-control" id="d_invoice_id"
+                            placeholder="invoice name">
                     </div>
 
                 </div>
@@ -156,11 +180,15 @@
         </div>
     </div>
 </div>
+{{-- purchases عن مسح ال model --}}
+{{-- model delete --}}
 
 
 @endsection
 @section('js')
 <script>
+    //    modal لوضع البيانات في ال  delete الجزء المسئول عن زر
+
     $('.btn_delete').click(function() {
             $invoice_number = $(this).data('invoice_number');
 
@@ -169,6 +197,8 @@
             alert($product_name)
 
         });
+                //    modal لوضع البيانات في ال  delete الجزء المسئول عن زر
+
 </script>
 
 <!-- Internal Data tables -->
@@ -201,25 +231,26 @@
 <script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
 
-@if (session()->has('delete'))
 
-<script>
-    notif({
-        msg: "<b>Success:</b> deleted successfully",
-        type: "success"
-    });
-</script>
-@endif
+
+
+
+{{-- update لل  Notification الجزء الخاص ب --}}
 @if (session()->has('update'))
-
 <script>
     notif({
-        msg: "<b>Success:</b> updated successfully",
-        type: "info"
-    });
+          msg: "<b>Success:</b> updated successfully",
+          type: "info"
+        });
 </script>
 
 @endif
+{{-- update لل  Notification الجزء الخاص ب --}}
+
+
+
+{{-- add لل  Notification الجزء الخاص ب --}}
+
 @if (session()->has('add'))
 
 <script>
@@ -230,6 +261,8 @@
 </script>
 
 @endif
+{{-- add لل  Notification الجزء الخاص ب --}}
+
 
 
 @endsection
