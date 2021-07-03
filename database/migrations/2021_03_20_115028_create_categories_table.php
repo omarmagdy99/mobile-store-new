@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
 
             $table->string('category_name');
+            
             //حقل الخاص ب وضع التاريخ و التوقيت الحالي في الجدول
             $table->timestamps();
         });

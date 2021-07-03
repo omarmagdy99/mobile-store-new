@@ -35,6 +35,8 @@ class CreateSalesInvoicesTable extends Migration
             //سطرين خاصيين بتعريف المفتاح الخارجي في الجدول
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            //onDelete Cascade 
+            //  متعلق بهForeignKeyعند مسح المفتاح الرئيسي يمسح كل 
             // ===================================
 
             //حقل الخاص ب وضع التاريخ و التوقيت الحالي في الجدول

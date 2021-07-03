@@ -15,46 +15,48 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // دالة خاصة باحضار البيانات المخزنة في قواعد البيانات لعرضها في الشاشة
     public function index()
     {
+        //ووضعها في متغيرModelسطر خاص باحضار جميع البيانات من ال 
         $product_data = product::all();
+        //سطر خاص بارسال البيانات الي الشاشة المراده
         return view('pages.products.products', compact('product_data'));
     }
+    // دالة خاصة باحضار البيانات المخزنة في قواعد البيانات لعرضها في الشاشة
+    // ========================================
+    //دالة خاصة باحضار جميع الفئات المخزنة في قواعد البيانات لعرضها في الشاشة
     public function cat()
     {
-
+        //ووضعها في متغيرModelسطر خاص باحضار جميع البيانات من ال 
         $category_data = category::all();
+        //سطر خاص بارسال البيانات الي الشاشة المراده
         return view('pages.products.AddProducts', ['category_data' => $category_data]);
     }
+    // =========================================================================
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    //ADDدالة الخاصة بالاضافة 
     public function store(Request $request)
     {
+        // ====================
+        // Validationالجزء الخاص بالتأمين علي الشاشة
         $request->validate([
-            'barcode' => ['required', 'unique:products'],
+
+            'barcode' => ['required', 'unique:products'], //الزامية ادخال هذا الحقل ويجب ان يكون مميز وغير متكرر
             'product_name' => ['required'],
             'brand_name' => ['required'],
             'category_id' => ['required'],
             'pic' => ['required'],
             'sales_price' => ['required'],
-            'quantity' => 'required|integer|min:1'
+            'quantity' => 'required|min:1' //الزامية ادخال الحقل وان لا يقل عن رقم1
 
         ]);
+
+        //==========================================
+
+        // Add productالجزء الخاص بال
+        //Modelوارسالها الي ال Formوهو عبارة عن وضع البيانات المرسلة من ال
         product::create([
             'barcode' => $request->barcode,
             'product_name' => $request->product_name,
@@ -64,44 +66,33 @@ class ProductController extends Controller
             'sale_price' => $request->sales_price,
             'quantity' => $request->quantity,
         ]);
+
+        //سطر خاص بظهور رسالة نجاح عملية الاضافة
         session()->flash('add', 'added successfully');
+
+        //Productsبعد نجاح العمليات السابقة يتم ارسالي الي شاشة ال
         return redirect('/products');
     }
+    //ADDدالة الخاصة بالاضافة 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(product $product)
-    {
-        //
-    }
+    // =================================================================================
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\product  $product
-     * @return \Illuminate\Http\Response
-     */
+    //Updateدالة خاصة بالرسال البيانات الي صفحة ال 
     public function edit($barcode)
     {
+        //احضار المنتج المراد تعدسلة ووضعة في متغير
         $product = product::where('barcode', $barcode)->first();
-
+        //احضار كل الفثات ووضعها في متغير
         $category_data = category::all();
+        //Updateارسال المنتج المراد تعديلة وجميع الفئات وارسالها الي صفحة ال 
         return view('pages.products.UpdateProducts', ['category_data' => $category_data, 'product' => $product]);
     }
+    //Updateدالة خاصة بالرسال البيانات الي صفحة ال 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\product  $product
-     * @return \Illuminate\Http\Response
-     */
+    //Updateالدالة الخاصة بالتعديل
     public function update(Request $request)
     {
+        //Update الجزء الخاص بالتأمين علي شاشة 
         $request->validate([
             'barcode' => ['required'],
             'product_name' => ['required'],
@@ -112,8 +103,10 @@ class ProductController extends Controller
             'quantity' => ['required'],
 
         ]);
+        //==================================================
         $id = $request->id;
         $p_data = product::where('id', $id)->first();
+
         if ($p_data->image != $request->pic) {
 
             $file = $request->file('pic')->store('productName', 'public');
@@ -131,16 +124,16 @@ class ProductController extends Controller
             'quantity' => $request->quantity,
             'image' => $file,
         ]);
+
+
         session()->flash('edit', 'edited successfully');
+
+
         return redirect('/products');
     }
+    //Updateالدالة الخاصة بالتعديل
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\product  $product
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Request $request)
     {
 

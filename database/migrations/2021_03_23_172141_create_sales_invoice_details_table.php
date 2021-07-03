@@ -25,6 +25,7 @@ class CreateSalesInvoiceDetailsTable extends Migration
             $table->unsignedBigInteger('sales_invoice_id');
             $table->unsignedBigInteger('product_id');
             // ==========================
+
             $table->integer('quantity');
 
             //حقول تقبل كسور
@@ -33,9 +34,12 @@ class CreateSalesInvoiceDetailsTable extends Migration
             // =========================
             //حقل الخاص ب وضع التاريخ و التوقيت الحالي في الجدول
             $table->timestamps();
+            
             //سطرين خاصيين بتعريف المفتاح الخارجي
             $table->foreign('sales_invoice_id')->references('id')->on('sales_invoices')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            //onDelete Cascade 
+            //  متعلق بهForeignKeyعند مسح المفتاح الرئيسي يمسح كل 
         });
     }
 

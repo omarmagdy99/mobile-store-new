@@ -31,8 +31,13 @@ class CreatePurchasesInvoicesDetailsTable extends Migration
             //حقول تقبل كسور
             $table->double('price');
             $table->double('total');
+            // =============================
 
+            //سطر خاص بتعريف المفتاح الخارجي
             $table->foreign('invoice_id')->references('id')->on('purchases_invoices')->onDelete('cascade');
+            //onDelete Cascade 
+            //  متعلق بهForeignKeyعند مسح المفتاح الرئيسي يمسح كل 
+            // =========================================================
             //حقل الخاص ب وضع التاريخ و التوقيت الحالي في الجدول
             $table->timestamps();
         });
