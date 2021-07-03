@@ -52,32 +52,47 @@
                         <div class="row">
                             <div class="col-4">
                                 <label for="">search for barcode</label>
-                                <input type="text" class="form-control" name="barcode" id="barcode"
-                                    placeholder="search for barcode">
+                              {{-- barcode   البحث عن  --}}
+                              <input type="text" class="form-control" name="barcode" id="barcode"
+                              placeholder="search for barcode">
+                              {{-- barcode   البحث عن  --}}
                             </div>
 
                             <div class="col-4">
                                 <label for="">search for product name</label>
+                                {{-- product name   البحث عن  --}}
                                 <input type="text" class="form-control" name="product_name" id="product_name"
-                                    placeholder="search for product name">
+                                placeholder="search for product name">
+                                {{-- product name   البحث عن  --}}
                             </div>
                             <div class="col-4">
                                 <label for="">search for brand name</label>
+                                {{-- brand name   البحث عن  --}}
                                 <input type="text" class="form-control" name="brand_name" id="brand_name"
-                                    placeholder="search for brand name">
+                                placeholder="search for brand name">
+                                {{-- brand name   البحث عن  --}}
                             </div>
 
                         </div>
                         <div class="row">
 
                             <div class="col-12 text-center">
+                                {{-- search  --}}
                                 <input type="submit" class="btn btn-primary my-3" value="search">
+                                {{-- search  --}}
+
+
+
+                                {{-- search for all product  --}}
                                 <a href="productReportes/allProduct"  class="btn btn-primary my-3" >all product</a>
+                                {{-- search for all product  --}}
                             </div>
                         </div>
                     </form>
                     <div class="card-body">
                         <div class="table-responsive border-top userlist-table">
+                    {{-- الجدول الذي تعرض فيه البيانات --}}
+
                             <table class="table card-table table-striped table-vcenter text-nowrap mb-0">
                                 <thead>
                                     <tr>
@@ -92,6 +107,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                            {{-- product الجزء مسئول عن عرض المعلومات الخاصه ب --}}
                                     @php
                                         $i=1;
                                     @endphp
@@ -114,9 +130,11 @@
                                     </tr>
                                     @endforeach
                                     @endif
+                            {{-- product الجزء مسئول عن عرض المعلومات الخاصه ب --}}
 
                                 </tbody>
                             </table>
+                    {{-- الجدول الذي تعرض فيه البيانات --}}
                         </div>
 
                     </div>

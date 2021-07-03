@@ -1,54 +1,53 @@
 @extends('layouts.master')
 @section('css')
-    <!-- Internal Select2 css -->
-    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
-    <!--Internal  Datetimepicker-slider css -->
-    <link href="{{ URL::asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css') }}"
-        rel="stylesheet">
-    <link href="{{ URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css') }}"
-        rel="stylesheet">
-    <link href="{{ URL::asset('assets/plugins/pickerjs/picker.min.css') }}" rel="stylesheet">
-    <!-- Internal Spectrum-colorpicker css -->
-    <link href="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.css') }}" rel="stylesheet">
+<!-- Internal Select2 css -->
+<link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+<!--Internal  Datetimepicker-slider css -->
+<link href="{{ URL::asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css') }}"
+    rel="stylesheet">
+<link href="{{ URL::asset('assets/plugins/pickerjs/picker.min.css') }}" rel="stylesheet">
+<!-- Internal Spectrum-colorpicker css -->
+<link href="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.css') }}" rel="stylesheet">
 @endsection
 @section('page-header')
-    <!-- breadcrumb -->
-    <div class="breadcrumb-header justify-content-between">
-        <div class="my-auto">
-            <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    Empty</span>
-            </div>
+<!-- breadcrumb -->
+<div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+        <div class="d-flex">
+            <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                Empty</span>
         </div>
-        <div class="d-flex my-xl-auto right-content">
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
-            </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
-            </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
-            </div>
-            <div class="mb-3 mb-xl-0">
-                <div class="btn-group dropdown">
-                    <button type="button" class="btn btn-primary">14 Aug 2019</button>
-                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                        id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate"
-                        data-x-placement="bottom-end">
-                        <a class="dropdown-item" href="#">2015</a>
-                        <a class="dropdown-item" href="#">2016</a>
-                        <a class="dropdown-item" href="#">2017</a>
-                        <a class="dropdown-item" href="#">2018</a>
-                    </div>
+    </div>
+    <div class="d-flex my-xl-auto right-content">
+        <div class="pr-1 mb-3 mb-xl-0">
+            <button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
+        </div>
+        <div class="pr-1 mb-3 mb-xl-0">
+            <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
+        </div>
+        <div class="pr-1 mb-3 mb-xl-0">
+            <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
+        </div>
+        <div class="mb-3 mb-xl-0">
+            <div class="btn-group dropdown">
+                <button type="button" class="btn btn-primary">14 Aug 2019</button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                    id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate"
+                    data-x-placement="bottom-end">
+                    <a class="dropdown-item" href="#">2015</a>
+                    <a class="dropdown-item" href="#">2016</a>
+                    <a class="dropdown-item" href="#">2017</a>
+                    <a class="dropdown-item" href="#">2018</a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- breadcrumb -->
+</div>
+<!-- breadcrumb -->
 @endsection
 @section('content')
 <!--Row-->
@@ -221,11 +220,12 @@
 
 
 <script>
+    
     $(document).ready(function () {
         // إخفاء الجزء الذي يؤخذ منه سعر و كمية المنتج
         $('.select_price').hide();
         // إخفاء الجزء الذي يؤخذ منه سعر و كمية المنتج
-		});
+    });
 
     //   عند اختيار المنتج input  الجزء المسؤول عن نقل سعر المنتج و كمية المنتج إلى
         //get select value
@@ -279,35 +279,35 @@
 // الزرار المسؤول عن تأكيد التعديل على الجدول
 $('#tableDel').on('click','.doneUpdate',function(){
     // this step to select Row(start)
-			$num=$(this).data('num');
-            // this step to select Row(end)
-            $('.' + $num + ' .quantity,.' + $num + ' .price').attr('type', 'hidden');
-            // select input to change val(start)
-            $priceUpdate = $('.' + $num + ' .price').val();
-            $quantityUpdate = $('.' + $num + ' .quantity').val();
-            // select input to change val(end)
-            // this step to change sub total (start)
-            $total = $quantityUpdate * $priceUpdate;
-            $UpdateSubTotal = parseInt($('#subTotal').val());
-            $oldTotal = parseInt($('.' + $num + ' .total').val());
-            if ($oldTotal > $total) {
-                $newTotal = $oldTotal - $total;
-                $UpdateNewSubTotal = $UpdateSubTotal - $newTotal;
-            } else {
-                $newTotal = $total - $oldTotal;
-                $UpdateNewSubTotal = $UpdateSubTotal + $newTotal;
-            }
-            // this step to change sub total (start)
-            $('.' + $num + ' .spanPrice').html($priceUpdate);
-            $('.' + $num + ' .spanQuantity').html($quantityUpdate);
-            $('.' + $num + ' .spanTotal').html($total);
-            $('.' + $num + ' .total').val($total);
+        $num=$(this).data('num');
+        // this step to select Row(end)
+        $('.' + $num + ' .quantity,.' + $num + ' .price').attr('type', 'hidden');
+        // select input to change val(start)
+        $priceUpdate = $('.' + $num + ' .price').val();
+        $quantityUpdate = $('.' + $num + ' .quantity').val();
+        // select input to change val(end)
+        // this step to change sub total (start)
+        $total = $quantityUpdate * $priceUpdate;
+        $UpdateSubTotal = parseInt($('#subTotal').val());
+        $oldTotal = parseInt($('.' + $num + ' .total').val());
+        if ($oldTotal > $total) {
+            $newTotal = $oldTotal - $total;
+            $UpdateNewSubTotal = $UpdateSubTotal - $newTotal;
+        } else {
+            $newTotal = $total - $oldTotal;
+            $UpdateNewSubTotal = $UpdateSubTotal + $newTotal;
+        }
+        // this step to change sub total (start)
+        $('.' + $num + ' .spanPrice').html($priceUpdate);
+        $('.' + $num + ' .spanQuantity').html($quantityUpdate);
+        $('.' + $num + ' .spanTotal').html($total);
+        $('.' + $num + ' .total').val($total);
 
-            $('#subTotal').val($UpdateNewSubTotal);
-			$('.'+$num+' span').show();
-			$('.'+$num+' .updateRow').show();
-			$(this).hide();
-		})
+        $('#subTotal').val($UpdateNewSubTotal);
+        $('.'+$num+' span').show();
+        $('.'+$num+' .updateRow').show();
+        $(this).hide();
+    })
         // الزرار المسؤول عن تأكيد التعديل على الجدول
         // done update row end
 
@@ -339,20 +339,20 @@ $('#tableDel').on('click','.doneUpdate',function(){
                         '<td><span class="spanTotal">'+$total+'</span><input type="hidden" value="'+$total+'" class="total" name="total[]"></td>' +
                         '<td><a href="#" class="btn btn-sm btn-danger delRow" data-num="td-'+$i+'"><i class="las la-trash "></i></a> <a href="#" class="btn btn-sm btn-info updateRow" data-num="td-'+$i+'" ><i class="las la-pen"></i></a> <a href="#" class="btn btn-sm btn-primary doneUpdate" data-num="td-'+$i+'" ><i class="las la-search" ></i></a></td>' +
                         '</tr>'
-						);
+				);
 						$('.doneUpdate').hide();
-					} else {
-                        alert('you mast inter data in all input');
-					}
+            } else {
+                alert('you mast inter data in all input');
+            }
 
-				});
-        // الزرار المسؤول عن  إضافة بيانات المنتج إلى  الجدول
+			});
+                // الزرار المسؤول عن  إضافة بيانات المنتج إلى  الجدول
                 // add button end
 
 
 
-        });
+
 
         // add button end
-    </script>
+</script>
 @endsection

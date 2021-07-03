@@ -51,48 +51,68 @@
 
                         <div class="row">
                             <div class="col-12 ">
+                                {{-- إذا لم يتم البحث عن اسم المورد او id  --}}
                                 @if (empty($id||$supplier_name))
+                                {{-- إذا لم يتم البحث عن اسم المورد او id  --}}
                                 <div class="d-block ">
                                     <label for="from_date">from date</label>
+                                    {{-- الجزء الخاص للبحث عن طريق التاريخ  --}}
+
                                     <input checked type="radio" name="search_to" id="from_date" value="from_date">
+                                    {{-- الجزء الخاص للبحث عن طريق التاريخ  --}}
+
                                 </div>
                                 <div>
                                     <label for="invoice_number">from invoice number</label>
+                                    {{--   الجزء الخاص للبحث عن طريق المورد --}}
 
                                     <input type="radio" name="search_to" id="invoice_number" value="invoice_number">
+                                    {{--   الجزء الخاص للبحث عن طريق المورد --}}
+
                                 </div>
 
                                 @else
                                 <div class="d-block ">
                                     <label for="from_date">from date</label>
+                                    {{-- الجزء الخاص للبحث عن طريق التاريخ  --}}
                                     <input type="radio" name="search_to" id="from_date" value="from_date">
+                                    {{-- الجزء الخاص للبحث عن طريق التاريخ  --}}
                                 </div>
                                 <div>
                                     <label for="invoice_number">from invoice number</label>
+                                    {{--   الجزء الخاص للبحث عن طريق المورد --}}
 
                                     <input checked type="radio" name="search_to" id="invoice_number"
                                         value="invoice_number">
+                                    {{--   الجزء الخاص للبحث عن طريق المورد --}}
                                 </div>
                                 @endif
                             </div>
                             <div class="col-6 date_div">
                                 <label for=""> from</label>
+                                {{-- date from   البحث عن  --}}
                                 <input type="date" class="form-control" name="date_from" value="{{$from}}">
+                                {{-- date from   البحث عن  --}}
                             </div>
 
                             <div class="col-6 date_div">
                                 <label for="">to</label>
+                                {{-- date to   البحث عن  --}}
                                 <input type="date" class="form-control" name="date_to" value="{{$to}}">
+                                {{-- date to   البحث عن  --}}
                             </div>
                             <div class="col-6 invoice_div">
                                 <label for="">invoice number</label>
+                                {{-- id   البحث عن  --}}
                                 <input type="text" class="form-control" name="id" placeholder="invoice number"
-                                    value="{{$id}}">
+                                    {{-- id   البحث عن  --}} value="{{$id}}">
                             </div>
                             <div class="col-6 invoice_div">
                                 <label for="">supplier name</label>
+                                {{-- supplier   البحث عن  --}}
                                 <input type="text" class="form-control" name="supplier_name" placeholder="supplier name"
                                     value="{{$supplier_name}}">
+                                {{-- supplier   البحث عن  --}}
                             </div>
 
 
@@ -107,6 +127,7 @@
                     </form>
                     <div class="card-body">
                         <div class="table-responsive border-top userlist-table">
+                            {{-- الجدول الذي تعرض فيه البيانات --}}
                             <table class="table card-table table-striped table-vcenter text-nowrap mb-0">
                                 <thead>
                                     <tr>
@@ -121,6 +142,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {{-- purchases الجزء مسئول عن عرض المعلومات الخاصه ب --}}
                                     @php
                                     $c=1;
                                     @endphp
@@ -143,10 +165,10 @@
                                         <td>{{$invoice_data[$i][0]->created_at}}</td>
                                         </tr>
                                         @endif
-                                        @endfor
+                                    @endfor
 
                                         @else
-                                        @foreach ($invoice_data as $item)
+                                    @foreach ($invoice_data as $item)
                                         <tr>
                                             <td>@php
                                                 echo $c++;
@@ -157,13 +179,15 @@
                                             <td>{{$item->supplierName->name}}</td>
                                             <td>{{$item->created_at}}</td>
                                         </tr>
-                                        @endforeach
+                                    @endforeach
                                         @endif
                                         @endif
+                                        {{-- purchases الجزء مسئول عن عرض المعلومات الخاصه ب --}}
 
 
                                 </tbody>
                             </table>
+                            {{-- الجدول الذي تعرض فيه البيانات --}}
                         </div>
 
                     </div>
@@ -180,10 +204,10 @@
 @endsection
 @section('js')
 <script>
-    $('input[name=id]').on('keypress',function(){
+    $('input[name=id]').on('change',function(){
         $('input[name=supplier_name]').val('');
     });
-    $('input[name=supplier_name]').on('keypress',function(){
+    $('input[name=supplier_name]').on('change',function(){
         $('input[name=id]').val('');
     });
 
@@ -196,6 +220,7 @@
         @endif
 
     });
+    // الجزء المسئول عن عرض و إخفاء اقسام البحث
     $('input[name=search_to]').change(function(){
         if($(this).val()=='from_date'){
             $('.invoice_div').hide('0.1s');
@@ -211,8 +236,7 @@
         }
 
     })
-    // $('#invoice_number').click(function (e) {
-    //     e.preventDefault();
-    // });
+    // الجزء المسئول عن عرض و إخفاء اقسام البحث
+    
 </script>
 @endsection

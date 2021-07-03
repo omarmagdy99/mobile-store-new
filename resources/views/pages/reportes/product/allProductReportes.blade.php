@@ -41,11 +41,13 @@
 <!-- breadcrumb -->
 @endsection
 @section('content')
+{{-- هذا الجزء مسئول عن إذا كانت لا توجد بيانات ان يرجعه إلى شاشة البحث --}}
 @if (empty($reportProduct))
-    @php
-        header('Location: /productSearch');
-    @endphp
+@php
+header('Location: /productSearch');
+@endphp
 @endif
+{{-- هذا الجزء مسئول عن إذا كانت لا توجد بيانات ان يرجعه إلى شاشة البحث --}}
 <!-- row -->
 <div class="row row-sm" id="div_print">
     <div class="col-md-12 col-xl-12">
@@ -75,6 +77,7 @@
                             <tbody>
 
                                 <span style="display: none">{{$subTotal=0}}{{$quantity=0}}</span>
+                                {{-- product الجزء مسئول عن عرض المعلومات الخاصه ب --}}
                                 @foreach ($reportProduct as $item)
                                 <tr>
 
@@ -85,16 +88,20 @@
                                     <td class="tx-right">
                                         $ {{number_format($item->quantity*$item->sale_price) }} </td>
                                 </tr>
-                                <span style="display: none">{{$total=$item->quantity*$item->sale_price}}{{$subTotal+=+$total}}{{$quantity+=+$item->quantity}}</span>
+                                {{-- هذه عملية حساب المجموع الجزئي و الكلي  --}}
+                                <span
+                                    style="display: none">{{$total=$item->quantity*$item->sale_price}}{{$subTotal+=+$total}}{{$quantity+=+$item->quantity}}</span>
+                                {{-- هذه عملية حساب المجموع الجزئي و الكلي  --}}
                                 @endforeach
+                                {{-- product الجزء مسئول عن عرض المعلومات الخاصه ب --}}
                                 <tr>
 
-                                    <td class="tx-right" >Sub-Total</td>
+                                    <td class="tx-right">Sub-Total</td>
                                     <td class="tx-right" colspan="4">${{number_format($subTotal)}}</td>
                                 </tr>
                                 <tr>
 
-                                    <td class="tx-right" >count All Product</td>
+                                    <td class="tx-right">count All Product</td>
                                     <td class="tx-right" colspan="4">{{$quantity}}</td>
                                 </tr>
 
@@ -102,7 +109,7 @@
                         </table>
                     </div>
                     <hr class="mg-b-40">
-                    <a  class="btn btn-danger float-left mt-3 mr-2 btn_print">
+                    <a class="btn btn-danger float-left mt-3 mr-2 btn_print">
                         <i class="mdi mdi-printer ml-1"></i>Print
                     </a>
                 </div>
@@ -120,6 +127,7 @@
 <!--Internal  Chart.bundle js -->
 <script src="{{URL::asset('assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>
 <script>
+    // الكود الخاص بالطباعه
     $('.btn_print').click(function(){
         $(this).hide();
         var mywindow=document.getElementById('div_print');
@@ -128,6 +136,7 @@
         window.print();
         location.reload();
     })
+    // الكود الخاص بالطباعه
 </script>
 
 @endsection
