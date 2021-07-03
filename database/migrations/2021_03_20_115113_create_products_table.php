@@ -14,16 +14,24 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
+            //unsignedBigIntegerحقل من نوع 
+            //Auto incrementلا يقبل القيم السالبة و 
+            //عدد الخانات المسموح بها 20
             $table->id();
+            //حقول تقبل نصوص
             $table->string('barcode');
             $table->string('product_name');
+            //حقل يقبل ارقام فقط
             $table->integer('quantity');
             $table->string('image');
             $table->integer('sale_price');
             $table->string('brand_name');
+            //عدد الخانات المسموح بها 20
             $table->unsignedBigInteger('category_id');
+            //حقل الخاص ب وضع التاريخ و التوقيت الحالي في الجدول
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            //السطر الخاص بتعريف المفتاح الخارجي للجدول
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade'); //onDelete Cascade يعني عند مسح الحقل
         });
     }
 

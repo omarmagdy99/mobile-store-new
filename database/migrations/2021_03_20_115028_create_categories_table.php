@@ -14,8 +14,13 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
+            //unsignedBigIntegerحقل من نوع 
+            //Auto incrementلا يقبل القيم السالبة و 
+            //عدد الخانات المسموح بها 20
             $table->id();
+
             $table->string('category_name');
+            //حقل الخاص ب وضع التاريخ و التوقيت الحالي في الجدول
             $table->timestamps();
         });
     }
