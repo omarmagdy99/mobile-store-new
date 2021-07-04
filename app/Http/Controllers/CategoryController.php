@@ -28,7 +28,6 @@ class CategoryController extends Controller
         ]);
         // جزء خاص بالاضافة 
         category::create([
-
             'category_name' => $request->category_name,
         ]);
         //سطر خاص باظهار رسالة نجاح هملية الاضافة
@@ -49,13 +48,19 @@ class CategoryController extends Controller
         //احضار الفئة اذا كان 
         //ID = ID
         $data = category::find($id);
+
+        //Validationالجزء الخاص بالتأمين علي الشاشة
         $request->validate([
-            'category_name' => ['required', 'unique:categories'],
+            'category_name' => ['required'],
 
         ]);
+
+        //Updateالجزء الخاص بال
         $data->update([
             'category_name' => $request->category_name,
         ]);
+
+        //الجزء الخاص باظهار رسالة نجاح التعديل
         session()->flash('update', 'updated successfully');
         return redirect('categories');
     }
@@ -65,8 +70,14 @@ class CategoryController extends Controller
     //Deleteدالة خاصة بال
     public function destroy(Request $request)
     {
+        // وحذفهاID = IDاحضار الفثة اذا كان ال 
+
         category::find($request->category_id)->delete();
+
+        //الجزء الخاص باظهار رسالة نجاح الحذف
         session()->flash('delete', 'deleted successfully');
+
+        // All Categoriesالرجوع الي شاشة 
         return redirect('categories');
     }
     //Deleteدالة خاصة بال

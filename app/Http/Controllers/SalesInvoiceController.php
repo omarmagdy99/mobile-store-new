@@ -13,61 +13,58 @@ use Illuminate\Http\Request;
 
 class SalesInvoiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // دالة خاصة باحضار البيانات المخزنة في قواعد البيانات لعرضها في الشاشة
     public function index()
     {
+        //ووضعها في متغيرDatabaseسطر خاص باحضار جميع البيانات من ال 
         $sales_invoice = DB::select('select * from sales_invoices ');
+
+        //All salesسطر خاص بارسال البيانات الي الشاشة 
         return view('pages.invoices.sales.sales', compact('sales_invoice'));
     }
+    // دالة خاصة باحضار البيانات المخزنة في قواعد البيانات لعرضها في الشاشة
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    //ADDدالة الخاصة بالاضافة
     public function store(Request $request)
     {
-        $request->validate([
 
-            'note' => ['required'],
+        // Validationالجزء الخاص بالتأمين علي الشاشة
+        $request->validate([
             'customer_id' => ['required'],
             'product_id' => ['required'],
             'quantity' => ['required'],
             'price' => ['required'],
 
         ], [
+            //تعديل رسالة الايرور
             'customer_id.required' => 'you must enter customer name'
         ]);
         $subTotal = 0;
+
+        //يتم حساب المجموع واضافتة الي المجموع الكليLoopمع كل 
         for ($i = 0; $i < count($request->price); $i++) {
             $total = $request->price[$i] * $request->quantity[$i];
             $subTotal += +$total;
         }
+
+        //لوضع تاريخ اليوم
         $data_naw = date("Y-m-d h:i:s");
+
+        //الخاص بالفاتورة التي تم اضافتهاIDمع احضار ADDالجزء الخاص بال
         $id_invoice = DB::table('sales_invoices')->insertGetID([
             'sub_total' => $subTotal,
             'notes' => $request->note,
-            'user_id' => Auth::user()->id,
+            'user_id' => Auth::user()->id, //المسخدم الحالي السي سجل الفاتورةIDوضع 
             'customer_id' => $request->customer_id,
             'created_at' => $data_naw
         ]);
+
+        //لاضافة اكثر من منتج داخل الفاتورة
         for ($i = 0; $i < count($request->price); $i++) {
             $details = sales_invoice_details::where('sales_invoice_id', '=', $id_invoice)->where('product_id', '=', $request->product_id[$i])->first();
+
+            //اذا كان المنتج غير مسجل فيتم اضافتة
             if (!isset($details)) {
 
                 $total = $request->price[$i] * $request->quantity[$i];
@@ -78,6 +75,7 @@ class SalesInvoiceController extends Controller
                     'price' => $request->price[$i],
                     'total' => $total
                 ]);
+
                 $product_quantity = product::where('id', '=', $request->product_id[$i])->first();
                 $quantity = $product_quantity->quantity;
                 $newQuantity = $quantity - $request->quantity[$i];
@@ -86,45 +84,49 @@ class SalesInvoiceController extends Controller
                 ]);
             }
         }
+        //خاص باظهار رسالة نجاح اضافة الفاتورة
         $request->session()->flash('add', 'adedd Successfully');
+
+        //All salesخاص بالعودة الي شاشة 
         return redirect('/sales');
     }
+    //الدالة الخاصة بالاضافة
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\sales_invoice  $sales_invoice
-     * @return \Illuminate\Http\Response
-     */
+    //========================================
+
+    //لارجاع بيانات المورد الي فاتورة المشتريات حتي اسجل الفاتورة باسمة
     public function show(Request $request)
     {
         $customer_data = customer::all();
         $product_data = product::all();
         return view('pages.Invoices.sales.AddSales', compact(['customer_data', 'product_data']));
     }
+    //لارجاع بيانات المورد الي فاتورة المشتريات حتي اسجل الفاتورة باسمة
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\sales_invoice  $sales_invoice
-     * @return \Illuminate\Http\Response
-     */
+    // ===================================================
+
+    //الدالة الخاصة بارسال البيانات الي شاشة التعديل
     public function edit($id)
     {
+        //ID = IDاحضار الفاتورة اذا كان ال
         $d_sales_invoice = sales_invoice::where('id', '=', $id)->get()->first();
+
+        //ID = IDاحضار  تفاصيل الفاتورة اذا كان ال
         $sales_invoices_details = sales_invoice_details::where('sales_invoice_id', '=', $id)->get();
+
+        //احضار بيانات العميل
         $customer_data = customer::get();
+
+        //احضار بيانات المنتجات
         $product_data = product::all();
+
+        //وارسال بيانات الفاتورة وتفاصيلها وبيانات العميل والمنتجاتUpdate Salesالرجوع الي شاشة 
         return view('pages.Invoices.sales.salesUpdate', compact(['product_data', 'd_sales_invoice', 'sales_invoices_details', 'customer_data']));
     }
+    //الدالة الخاصة بارسال البيانات الي شاشة التعديل
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\sales_invoice  $sales_invoice
-     * @return \Illuminate\Http\Response
-     */
+    //Updateألدالة الخاصة بال 
+
     public function update($id, Request $request)
     {
         $request->validate([
@@ -239,13 +241,9 @@ class SalesInvoiceController extends Controller
         $request->session()->flash('update', 'update successfully');
         return redirect('/sales');
     }
+    //Updateألدالة الخاصة بال 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\sales_invoice  $sales_invoice
-     * @return \Illuminate\Http\Response
-     */
+    //دالة الحذف Delete
     public function destroy(Request $request)
     {
         $d_sales_invoice = sales_invoice::where('id', '=', $request->id)->first();
@@ -263,6 +261,11 @@ class SalesInvoiceController extends Controller
         session()->flash('delete', 'deleted successfully');
         return back();
     }
+    //دالة الحذف Delete
+
+
+
+
     public function detials($id)
     {
         $d_sales_invoice = sales_invoice::where('id', '=', $id)->get()->first();

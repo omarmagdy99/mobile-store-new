@@ -155,7 +155,11 @@ class PurchasesInvoiceController extends Controller
 
 
 
+
+        //ID = IDاحضار الفاتورة اذا كان ال
         $purchases_invoice = purchases_invoice::where('id', $id)->first();
+
+        // Update الكود الخاص بال 
         $purchases_invoice->update([
             'sub_total' => $subTotal,
             'notes' => $request->note,
