@@ -49,7 +49,6 @@ class SupplierController extends Controller
 
 
     // دالة Update
-
     public function update(Request $request)
     {
         //Validationالجزء الخاص بالتأمين علي الشاشة

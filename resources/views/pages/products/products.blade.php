@@ -13,10 +13,10 @@
     <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
     <!--Internal  treeview -->
     <link href="{{ URL::asset('assets/plugins/treeview/treeview.css') }}" rel="stylesheet" type="text/css" />
-<!--Internal   Notify -->
-<link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet" />
-<!--Internal  treeview -->
-<link href="{{URL::asset('assets/plugins/treeview/treeview.css')}}" rel="stylesheet" type="text/css" />
+    <!--Internal   Notify -->
+    <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
+    <!--Internal  treeview -->
+    <link href="{{ URL::asset('assets/plugins/treeview/treeview.css') }}" rel="stylesheet" type="text/css" />
 
 @endsection
 @section('page-header')
@@ -50,7 +50,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive ">
-                    {{-- الجدول الذي تعرض فيه البيانات --}}
+                        {{-- الجدول الذي تعرض فيه البيانات --}}
                         <table id="example" class="table card-table  key-buttons text-md-nowrap ">
                             <thead>
                                 <tr>
@@ -64,7 +64,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            {{-- product الجزء مسئول عن عرض المعلومات الخاصه ب --}}
+                                {{-- product الجزء مسئول عن عرض المعلومات الخاصه ب --}}
                                 @foreach ($product_data as $item)
 
                                     <tr>
@@ -75,12 +75,12 @@
                                         <td>{{ $item->quantity }}</td>
                                         <td>
 
-                                            {{-- update زرار ال  --}}
+                                            {{-- update زرار ال --}}
                                             <a class=" btn btn-sm btn-info " href="/editProducts/{{ $item->barcode }}"
                                                 title="تعديل"><i class="las la-pen fa-2x"></i></a>
-                                    {{-- update زرار ال  --}}
+                                            {{-- update زرار ال --}}
 
-                                    {{-- delete زرار ال  --}}
+                                            {{-- delete زرار ال --}}
                                             <a class="modal-effect btn btn-sm btn-danger btn_delete"
                                                 data-effect="effect-slide-in-bottom" data-toggle="modal" href="#modaldemo7"
                                                 data-product_name="{{ $item->product_name }}"
@@ -88,23 +88,23 @@
                                                 data-product_pic="{{ $item->image }}" data-id="{{ $item->id }}"
                                                 title="Delete"><i class="las la-trash fa-2x"></i>
                                             </a>
-                                    {{-- delete زرار ال  --}}
+                                            {{-- delete زرار ال --}}
 
                                         </td>
                                         <td>
                                             {{-- عرض صورة المنتج --}}
                                             <img src="storage/{{ $item->image }}" alt="product Image" width="50">
-                                            {{-- عرض صورة المنتج  --}}
+                                            {{-- عرض صورة المنتج --}}
                                         </td>
 
 
 
                                     </tr>
                                 @endforeach
-                            {{-- product الجزء مسئول عن عرض المعلومات الخاصه ب --}}
+                                {{-- product الجزء مسئول عن عرض المعلومات الخاصه ب --}}
                             </tbody>
                         </table>
-                    {{-- الجدول الذي تعرض فيه البيانات --}}
+                        {{-- الجدول الذي تعرض فيه البيانات --}}
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@
     <!-- Container closed -->
     </div>
     {{-- model delete --}}
-{{--product مسئوله عن مسح ال model --}}
+    {{-- product مسئوله عن مسح ال model --}}
     <div class="modal" id="modaldemo7">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content modal-content-demo">
@@ -150,7 +150,7 @@
             </div>
         </div>
     </div>
-{{--product مسئوله عن مسح ال model --}}
+    {{-- product مسئوله عن مسح ال model --}}
 
 
 @endsection
@@ -158,7 +158,7 @@
 
 
     <script>
-    //    modal لوضع البيانات في ال  delete الجزء المسئول عن زر
+        //    modal لوضع البيانات في ال  delete الجزء المسئول عن زر
         $('.btn_delete').click(function() {
             $product_name = $(this).data('product_name');
             $product_barcode = $(this).data('product_barcode');
@@ -171,10 +171,7 @@
 
 
         });
-    //    modal لوضع البيانات في ال  delete الجزء المسئول عن زر
-
-
-
+        //    modal لوضع البيانات في ال  delete الجزء المسئول عن زر
     </script>
 
 
@@ -200,51 +197,51 @@
     <!-- Internal Modal js-->
     <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
     <!--Internal  Notify js -->
-    <script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
-    <script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
 
-       {{-- delete لل  Notification الجزء الخاص ب --}}
-@if (session()->has('delete'))
+    {{-- delete لل  Notification الجزء الخاص ب --}}
+    @if (session()->has('delete'))
 
-<script>
-    notif({
-        msg: "<b>Success:</b> deleted successfully",
-        type: "success"
-    });
-</script>
-@endif
-{{-- delete لل  Notification الجزء الخاص ب --}}
-
-
-
-
-{{-- update لل  Notification الجزء الخاص ب --}}
-@if (session()->has('update'))
-<script>
-    notif({
-          msg: "<b>Success:</b> updated successfully",
-          type: "info"
-        });
-</script>
-
-@endif
-{{-- update لل  Notification الجزء الخاص ب --}}
+        <script>
+            notif({
+                msg: "<b>Success:</b> deleted successfully",
+                type: "success"
+            });
+        </script>
+    @endif
+    {{-- delete لل  Notification الجزء الخاص ب --}}
 
 
 
-{{-- add لل  Notification الجزء الخاص ب --}}
 
-@if (session()->has('add'))
+    {{-- update لل  Notification الجزء الخاص ب --}}
+    @if (session()->has('update'))
+        <script>
+            notif({
+                msg: "<b>Success:</b> updated successfully",
+                type: "info"
+            });
+        </script>
 
-<script>
-    notif({
-        msg: "<b>Success:</b> Added successfully",
-        type: "success"
-    });
-</script>
+    @endif
+    {{-- update لل  Notification الجزء الخاص ب --}}
 
-@endif
-{{-- add لل  Notification الجزء الخاص ب --}}
+
+
+    {{-- add لل  Notification الجزء الخاص ب --}}
+
+    @if (session()->has('add'))
+
+        <script>
+            notif({
+                msg: "<b>Success:</b> Added successfully",
+                type: "success"
+            });
+        </script>
+
+    @endif
+    {{-- add لل  Notification الجزء الخاص ب --}}
 
 
 

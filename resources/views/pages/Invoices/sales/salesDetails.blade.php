@@ -49,8 +49,9 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="table-responsive border-top userlist-table">
-                                            {{-- الجدول الذي تعرض فيه بيانات الفاتورة --}}
-                                                <table class="table card-table table-striped table-vcenter text-nowrap mb-0">
+                                                {{-- الجدول الذي تعرض فيه بيانات الفاتورة --}}
+                                                <table
+                                                    class="table card-table table-striped table-vcenter text-nowrap mb-0">
                                                     <thead>
                                                         <tr>
                                                             <th class="wd-lg-10p"><span>id</span></th>
@@ -66,21 +67,21 @@
 
                                                         <tr>
 
-                                                        {{-- بيانات الفاتورة --}}
+                                                            {{-- بيانات الفاتورة --}}
                                                             <td>{{ $d_sales_invoice->id }}</td>
                                                             <td>{{ $d_sales_invoice->sub_total }}</td>
                                                             <td>{{ $d_sales_invoice->created_at }}</td>
                                                             <td>{{ $d_sales_invoice->customerName->name }}</td>
                                                             <td>{{ $d_sales_invoice->usersName->name }}</td>
                                                             <td>{{ $d_sales_invoice->notes }}</td>
-                                                        {{-- بيانات الفاتورة --}}
+                                                            {{-- بيانات الفاتورة --}}
 
 
                                                         </tr>
 
                                                     </tbody>
                                                 </table>
-                                            {{-- الجدول الذي تعرض فيه بيانات الفاتورة --}}
+                                                {{-- الجدول الذي تعرض فيه بيانات الفاتورة --}}
                                             </div>
 
                                         </div>
@@ -104,8 +105,9 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="table-responsive border-top userlist-table">
-                                            {{-- الجدول الذي تعرض فيه بيانات تفاصيل الفاتورة --}}
-                                                <table class="table card-table table-striped table-vcenter text-nowrap mb-0">
+                                                {{-- الجدول الذي تعرض فيه بيانات تفاصيل الفاتورة --}}
+                                                <table
+                                                    class="table card-table table-striped table-vcenter text-nowrap mb-0">
                                                     <thead>
                                                         <tr>
                                                             <th class="wd-lg-4p"><span>#</span></th>
@@ -117,7 +119,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                        {{-- sales derails الجزء مسئول عن عرض المعلومات الخاصه ب --}}
+                                                            {{-- sales derails الجزء مسئول عن عرض المعلومات الخاصه ب --}}
                                                             <?php $i = 1; ?>
                                                             @foreach ($sales_invoice_details as $salesDetails)
 
@@ -138,7 +140,7 @@
 
                                                     </tbody>
                                                 </table>
-                                            {{-- الجدول الذي تعرض فيه بيانات تفاصيل الفاتورة --}}
+                                                {{-- الجدول الذي تعرض فيه بيانات تفاصيل الفاتورة --}}
                                             </div>
                                             <ul class="pagination mt-4 mb-0 float-left">
                                                 <li class="page-item page-prev disabled">

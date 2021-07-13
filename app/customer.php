@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class customer extends Model
 {
-    protected $guarded=[];
-
+    // كود خاص بارسال البيانات الي قواعد البيانات 
+    protected $guarded = [];
 }
